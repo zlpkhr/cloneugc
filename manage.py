@@ -3,13 +3,11 @@
 
 import os
 import sys
-from pathlib import Path
 
 
 def main():
     """Run administrative tasks."""
-    BASE_DIR = Path(__file__).resolve().parent
-    sys.path.insert(0, str(BASE_DIR / "src"))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
