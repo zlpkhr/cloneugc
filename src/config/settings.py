@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 if os.getenv("DEBUG") is not None:
     DEBUG = True
 
-ALLOWED_HOSTS = ["cloneugc.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["www.cloneugc.com", "cloneugc.com", "127.0.0.1", "localhost"]
 
 
 # Application definition
