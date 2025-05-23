@@ -3,11 +3,11 @@
 {% block title %}Actors{% endblock %}
 
 {% block content %}
-<header class="flex items-center justify-between p-7">
+<header class="flex items-center justify-between px-7 pt-7">
   <h1 class="text-3xl font-bold">Available Actors</h1>
   <button class="h-11 shrink-0 rounded-full bg-pink-800 px-4 text-lg font-semibold text-white shadow-sm active:bg-pink-900">Create Actor</button>
 </header>
-<main class="p-7">
+<main class="mt-10 px-7 pb-10">
   <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
     {% for actor in actors %}
       <figure class="aspect-[9/16] rounded-xl bg-black">
