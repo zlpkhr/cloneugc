@@ -18,7 +18,7 @@ class ActorListView(ListView):
 
 class ActorListCreateView(View):
     def get(self, request: HttpRequest):
-        actors = Actor.objects.all()
+        actors = Actor.objects.all().order_by('-created_at')
 
         return render(request, "cloneugc/actor_list.html", {"actors": actors})
 
