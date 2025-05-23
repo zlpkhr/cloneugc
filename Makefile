@@ -13,3 +13,6 @@ dev-css:
 
 dev-js:
 	bun run dev:js > /dev/null 2>&1
+
+celery:
+	PYTHONPATH=src celery -A config worker -l INFO

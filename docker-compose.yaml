@@ -1,0 +1,6 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.1
+    container_name: cloneugc-rabbitmq
+    ports:
+      - 5672:5672
