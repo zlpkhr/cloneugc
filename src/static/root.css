@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: "Commissioner", var(--font-sans);
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0,
+      "FLAR" 0,
+      "VOLM" 0;
+  }
+}
