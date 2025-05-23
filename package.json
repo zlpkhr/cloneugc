@@ -3,14 +3,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "postcss ./src/static/root.css -u @tailwindcss/postcss -o ./src/static/dist/root.css -w",
-    "format": "prettier --write --no-error-on-unmatched-pattern ./src/**/*.{js,css}"
+    "dev:css": "postcss ./src/static/root.css -u @tailwindcss/postcss -o ./src/static/dist/root.css -w",
+    "dev:js": "rollup -i ./src/static/main.js -p @rollup/plugin-node-resolve -o ./src/static/dist/main.js -w",
+    "format": "prettier --write ./src/**/*.{js,css}"
+  },
+  "dependencies": {
+    "media-chrome": "^4.10.0"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "@tailwindcss/postcss": "^4.1.7",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.5.3",
+    "rollup": "^4.41.0",
     "tailwindcss": "^4.1.7"
   }
 }
