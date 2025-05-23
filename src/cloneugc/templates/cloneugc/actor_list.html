@@ -1,4 +1,9 @@
-<h1>Actors</h1>
+{% extends "base.html" %}
+
+{% block title %}Actors{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl">Actors</h1>
 <ul>
   {% for actor in actors %}
     <li>{{ actor.name }}</li>
@@ -6,3 +11,4 @@
     <li>No actors found.</li>
   {% endfor %}  
 </ul>
+{% endblock %}
