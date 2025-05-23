@@ -19,7 +19,7 @@
       close
     </button>
   </hgroup>
-  <form class="mt-4" method="post" action="{% url 'actor_create' %}">
+  <form class="mt-4" method="post" action="{% url 'actor_list' %}">
     {% csrf_token %}
     <input type="text" name="name" placeholder="Name" required class="w-full h-11 rounded-lg px-2.5 text-xl font-semibold focus:outline-pink-800 focus:outline-3 bg-stone-100"/>
     <button type="submit" class="btn w-full mt-7">Create</button>

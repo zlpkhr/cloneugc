@@ -16,10 +16,15 @@ class ActorListView(ListView):
     context_object_name = "actors"
 
 
-class ActorCreateView(View):
+class ActorListCreateView(View):
+    def get(self, request: HttpRequest):
+        actors = Actor.objects.all()
+
+        return render(request, "cloneugc/actor_list.html", {"actors": actors})
+
     def post(self, request: HttpRequest):
         form = ActorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse_lazy("actor_list"))
-        return render(request, "cloneugc/actor_list.html", {"form": form})
+
+        form.save()
+
+        return redirect(reverse_lazy("actor_list"))
