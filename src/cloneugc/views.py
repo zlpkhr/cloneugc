@@ -18,12 +18,12 @@ class ActorListView(ListView):
 
 class ActorListCreateView(View):
     def get(self, request: HttpRequest):
-        actors = Actor.objects.all().order_by('-created_at')
+        actors = Actor.objects.all().order_by("-created_at")
 
         return render(request, "cloneugc/actor_list.html", {"actors": actors})
 
     def post(self, request: HttpRequest):
-        form = ActorForm(request.POST)
+        form = ActorForm(request.POST, request.FILES)
 
         form.save()
 

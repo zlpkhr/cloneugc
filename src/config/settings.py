@@ -150,13 +150,19 @@ STATICFILES_DIRS = [
     BASE_DIR / "static" / "dist",
 ]
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 
 WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 
 # Storage
 
+MEDIA_ROOT = BASE_DIR.parent / "media"
+
 STORAGES = {
+    # For some reason it ignored the location option and I had to set it in MEDIA_ROOT.
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },

@@ -19,10 +19,13 @@
       close
     </button>
   </hgroup>
-  <form class="mt-4" method="post" action="{% url 'actor_list' %}">
+  <form class="mt-4" method="post" action="{% url 'actor_list' %}" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="name" placeholder="Name" required class="w-full h-11 rounded-lg px-2.5 text-xl font-semibold focus:outline-pink-800 focus:outline-3 bg-stone-100"/>
-    <button type="submit" class="btn w-full mt-7">Create</button>
+    <input type="file" name="video" accept="video/*" required class="mt-4 file:bg-white file:border file:border-stone-200 file:font-semibold file:text-lg file:px-3.5 file:h-11 file:rounded-full active:file:bg-stone-100 file:mr-4" />
+    <div class="mt-7 sm:flex sm:items-center sm:justify-end">
+      <button type="submit" class="btn w-full sm:w-auto">Create</button>
+    </div>
   </form>
 </dialog>
 <main class="mt-7 px-7 pb-10 sm:mt-10">
