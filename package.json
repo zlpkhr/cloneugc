@@ -3,8 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev:css": "postcss ./src/static/root.css -u @tailwindcss/postcss -o ./src/static/dist/root.css -w",
-    "dev:js": "rollup -i ./src/static/main.js -p @rollup/plugin-node-resolve -o ./src/static/dist/main.js -w",
+    "dev:css": "postcss ./src/static/*.css -u @tailwindcss/postcss -d ./src/static/dist -w",
+    "dev:js": "rollup -i ./src/static/*.js -p @rollup/plugin-node-resolve -d ./src/static/dist -w",
+    "build:css": "postcss ./src/static/*.css -u @tailwindcss/postcss -d ./src/static/dist",
+    "build:js": "rollup -i ./src/static/*.js -p @rollup/plugin-node-resolve -d ./src/static/dist",
     "format": "prettier --write ./src/**/*.{js,css}"
   },
   "dependencies": {
