@@ -3,12 +3,19 @@
 {% block title %}Actors{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl">Actors</h1>
-<ul>
-  {% for actor in actors %}
-    <li>{{ actor.name }}</li>
-  {% empty %}
-    <li>No actors found.</li>
-  {% endfor %}  
-</ul>
+<header class="flex items-center justify-between p-7">
+  <h1 class="text-3xl font-bold">Available Actors</h1>
+  <button class="h-11 shrink-0 rounded-full bg-pink-800 px-4 text-lg font-semibold text-white shadow-sm active:bg-pink-900">Create Actor</button>
+</header>
+<main class="p-7">
+  <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
+    {% for actor in actors %}
+      <figure class="aspect-[9/16] rounded-xl bg-black">
+        <figcaption class="p-3 text-lg font-medium text-white">{{ actor.name }}</figcaption>
+      </figure>
+    {% empty %}
+      <p>No actors found.</p>
+    {% endfor %}  
+  </section>
+</main>
 {% endblock %}
