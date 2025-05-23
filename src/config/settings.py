@@ -156,14 +156,8 @@ WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 
 # Storage
 
-MEDIA_ROOT = BASE_DIR.parent / "media"
-
 STORAGES = {
-    # For some reason it ignored the location option and I had to set it in MEDIA_ROOT.
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "s3": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {"bucket_name": os.getenv("S3_BUCKET_NAME")},
     },
