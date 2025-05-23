@@ -1,12 +1,30 @@
 {% extends "app.html" %}
+{% load static %}
 
 {% block title %}Actors{% endblock %}
+
+{% block head %}
+  <script type="module" src="{% static 'cloneugc/actor-list.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <header class="flex items-center justify-between px-7 pt-7">
   <h1 class="text-3xl font-bold">Available Actors</h1>
-  <button class="fixed right-5 bottom-7 h-11 shrink-0 rounded-full bg-pink-800 px-4 text-lg font-semibold text-white shadow-sm active:bg-pink-900 sm:static">Create Actor</button>
+  <button id="create-actor-trigger" class="fixed right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
 </header>
+<dialog id="create-actor" class="rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none mt-auto min-w-full sm:mt-0 sm:min-w-sm sm:fixed sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-b-xl bg-white p-5 backdrop:bg-black/30 relative">
+  <hgroup class="flex gap-x-2 items-center justify-between">
+    <h4 class="text-xl font-bold">Create Actor</h4>
+    <button id="close" type="button" class="material-symbols-rounded rounded-full size-10 active:bg-stone-100 flex items-center justify-center">
+      close
+    </button>
+  </hgroup>
+  <form class="mt-4" method="post" action="{% url 'actor_create' %}">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name" required class="w-full h-11 rounded-lg px-2.5 text-xl font-semibold focus:outline-pink-800 focus:outline-3 bg-stone-100"/>
+    <button type="submit" class="btn w-full mt-7">Create</button>
+  </form>
+</dialog>
 <main class="mt-7 px-7 pb-10 sm:mt-10">
   <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
     {% for actor in actors %}

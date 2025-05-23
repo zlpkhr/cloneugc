@@ -33,6 +33,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.getenv("DEBUG") is not None:
     DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = [
     "www.cloneugc.com",

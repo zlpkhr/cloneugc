@@ -10,3 +10,28 @@
       "VOLM" 0;
   }
 }
+
+@layer components {
+  .btn {
+    height: --spacing(11);
+    padding: 0 --spacing(3.5);
+    border-radius: calc(infinity * 1px);
+    background-color: var(--color-pink-800);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-white);
+
+    &:active {
+      background-color: var(--color-pink-900);
+    }
+  }
+}
+
+.material-symbols-rounded {
+  font-size: 20px;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 600,
+    "GRAD" 0,
+    "opsz" 20;
+}
