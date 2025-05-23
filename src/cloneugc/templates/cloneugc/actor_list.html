@@ -1,0 +1,8 @@
+<h1>Actors</h1>
+<ul>
+  {% for actor in actors %}
+    <li>{{ actor.name }}</li>
+  {% empty %}
+    <li>No actors found.</li>
+  {% endfor %}  
+</ul>
