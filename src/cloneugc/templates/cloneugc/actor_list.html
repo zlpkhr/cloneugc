@@ -5,13 +5,13 @@
 {% block content %}
 <header class="flex items-center justify-between px-7 pt-7">
   <h1 class="text-3xl font-bold">Available Actors</h1>
-  <button class="h-11 shrink-0 rounded-full bg-pink-800 px-4 text-lg font-semibold text-white shadow-sm active:bg-pink-900">Create Actor</button>
+  <button class="fixed right-5 bottom-7 h-11 shrink-0 rounded-full bg-pink-800 px-4 text-lg font-semibold text-white shadow-sm active:bg-pink-900 sm:static">Create Actor</button>
 </header>
-<main class="mt-10 px-7 pb-10">
+<main class="mt-7 px-7 pb-10 sm:mt-10">
   <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
     {% for actor in actors %}
       <figure class="aspect-[9/16] rounded-xl bg-black">
-        <figcaption class="p-3 text-lg font-medium text-white">{{ actor.name }}</figcaption>
+        <figcaption class="p-4 text-xl font-semibold text-white">{{ actor.name }}</figcaption>
       </figure>
     {% empty %}
       <p>No actors found.</p>
