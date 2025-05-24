@@ -39,7 +39,9 @@
       <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
         {% for actor in actors %}
           <figure class="relative">
-            <figcaption class="p-4 bg-linear-to-b z-10 from-black/20 text-shadow-xs to-black/0 rounded-t-xl text-xl font-semibold text-white absolute top-0 inset-x-0">{{ actor.name }}</figcaption>
+            <figcaption class="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4">
+              <a href="#" class=" text-xl font-semibold text-white text-shadow-xs hover:underline">{{ actor.name }}</a>
+            </figcaption>
             <media-controller class="size-full rounded-xl aspect-[9/16]">
               <video
                 slot="media"
