@@ -154,6 +154,7 @@ STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 
 WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 
+
 # Storage
 
 STORAGES = {
@@ -166,7 +167,13 @@ STORAGES = {
     },
 }
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Cartesia
+
+CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")

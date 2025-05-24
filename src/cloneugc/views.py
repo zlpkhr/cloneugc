@@ -1,10 +1,11 @@
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, View
 
 from cloneugc.forms import ActorForm, VideoForm
 from cloneugc.models import Actor
+from cloneugc.tasks import clone_actor
 
 
 def index(request: HttpRequest):
@@ -56,10 +57,8 @@ class CreateVideoView(View):
         form = VideoForm(request.POST)
 
         if form.is_valid():
-            pass
+            clone_actor.delay(actor.id, form.cleaned_data["script"])
 
-            return JsonResponse({
-                "script": form.cleaned_data["script"],
-            })
+            return redirect("actor_list")
 
-        return JsonResponse({"error": "Invalid form"}, status=400)
+        return HttpResponse("Unprocessable Entity", status=422)

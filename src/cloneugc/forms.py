@@ -8,5 +8,6 @@ class ActorForm(forms.ModelForm):
         model = Actor
         fields = ["name", "video"]
 
+
 class VideoForm(forms.Form):
     script = forms.CharField(required=True)

@@ -14,6 +14,11 @@ class Actor(models.Model):
     name = models.CharField(max_length=100)
     video = models.FileField(upload_to=video_path)
     created_at = models.DateTimeField(auto_now_add=True)
+    voice_id = models.TextField(null=True)
 
     def __str__(self):
         return self.name
+
+    @property
+    def voice_cloned(self) -> bool:
+        return self.voice_id is not None
