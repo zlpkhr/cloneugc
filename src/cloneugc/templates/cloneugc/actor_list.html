@@ -44,16 +44,21 @@
       <button id="create-actor-trigger" class="fixed z-20 right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
     </header>
     <dialog id="create-actor" class="mx-auto mt-auto w-full max-w-md rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none bg-white p-5 backdrop:bg-black/30 min-[28rem]:mb-auto min-[28rem]:rounded-b-xl">
-      <hgroup class="flex gap-x-2 items-center justify-between">
-        <h4 class="text-2xl font-bold">Create Actor</h4>
-        <button id="close" type="button" class="material-symbols-rounded rounded-full size-10 active:bg-stone-100 flex items-center justify-center">
-          close
-        </button>
-      </hgroup>
+      <header>
+        <hgroup class="flex gap-x-2 items-center justify-between">
+          <h4 class="text-2xl font-bold">Create Actor</h4>
+          <button id="close" type="button" class="material-symbols-rounded rounded-full size-10 active:bg-stone-100 flex items-center justify-center">
+            close
+          </button>
+        </hgroup>
+        <p class="text-lg font-medium text-stone-500 mt-2">
+          For best results, center the face and ensure that the torso is visible.
+        </p>
+      </header>
       <form class="mt-6" method="post" action="{% url 'actor_list' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="name" placeholder="Name" required class="w-full h-11 rounded-lg px-2.5 text-xl font-semibold focus:outline-pink-800 focus:outline-3 bg-stone-100"/>
-        <input type="file" name="video" accept="video/*" required class="mt-5 file:bg-white file:border file:border-stone-200 file:font-semibold file:text-lg file:px-3.5 file:h-11 file:rounded-full active:file:bg-stone-100 file:mr-4 w-full" />
+        <input type="file" name="video" accept="video/*" required class="mt-5 file:bg-white file:border file:border-stone-200 file:font-semibold file:text-lg file:px-3.5 file:h-11 file:rounded-full active:file:bg-stone-100 file:mr-4 w-full" capture="user"/>
         <div class="mt-8 sm:flex sm:items-center sm:justify-end">
           <button type="submit" class="btn w-full sm:w-auto">Create</button>
         </div>
