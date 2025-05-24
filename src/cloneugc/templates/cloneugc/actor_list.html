@@ -10,7 +10,7 @@
 {% block content %}
 <header class="flex items-center justify-between px-7 pt-7">
   <h1 class="text-3xl font-bold">Available Actors</h1>
-  <button id="create-actor-trigger" class="fixed right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
+  <button id="create-actor-trigger" class="fixed z-10 right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
 </header>
 <dialog id="create-actor" class="rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none mt-auto min-w-full sm:mt-0 sm:min-w-sm sm:fixed sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-b-xl bg-white p-5 backdrop:bg-black/30 relative">
   <hgroup class="flex gap-x-2 items-center justify-between">
@@ -31,8 +31,21 @@
 <main class="mt-7 px-7 pb-10 sm:mt-10">
   <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
     {% for actor in actors %}
-      <figure class="aspect-[9/16] rounded-xl bg-black">
-        <figcaption class="p-4 text-xl font-semibold text-white">{{ actor.name }}</figcaption>
+      <figure class="relative">
+        <figcaption class="p-4 bg-linear-to-b z-10 from-black/20 text-shadow-xs to-black/0 rounded-t-xl text-xl font-semibold text-white absolute top-0 inset-x-0">{{ actor.name }}</figcaption>
+        <media-controller class="size-full rounded-xl aspect-[9/16]">
+          <video
+            slot="media"
+            class="size-full rounded-xl object-cover"
+            src="{{ actor.video.url }}"
+          ></video>
+          <media-control-bar class="p-4">
+            <media-play-button class="rounded-full p-2.5">
+              <span slot="play" class="material-symbols-rounded">play_arrow</span>
+              <span slot="pause" class="material-symbols-rounded">pause</span>
+            </media-play-button>
+          </media-control-bar>
+        </media-controller>
       </figure>
     {% empty %}
       <p>No actors found.</p>
