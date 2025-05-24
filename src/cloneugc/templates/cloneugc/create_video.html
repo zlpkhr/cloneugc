@@ -1,0 +1,45 @@
+{% extends "app.html" %}
+
+{% block title %}Create Video with {{ actor.name }}{% endblock %}
+
+{% block content %}
+  <div class="flex h-screen">
+    <aside class="contents relative">
+      <a href="{% url 'actor_list' %}" class="absolute top-4 left-4 size-11 flex items-center justify-center rounded-full z-10 bg-media-control hover:bg-media-control-hover">
+        <span class="material-symbols-rounded text-media-text">arrow_back</span>
+      </a>
+      <media-controller class="size-full aspect-square flex-1">
+        <video
+          slot="media"
+          class="size-full object-contain"
+          src="{{ actor.video.url }}"
+        ></video>
+        <media-control-bar class="p-4">
+          <media-play-button class="rounded-full p-2.5">
+            <span slot="play" class="material-symbols-rounded">play_arrow</span>
+            <span slot="pause" class="material-symbols-rounded">pause</span>
+          </media-play-button>
+        </media-control-bar>
+      </media-controller>
+    </aside>
+    <main class="bg-white w-lg p-7">
+      <hgroup>
+        <h2 class="text-2xl font-bold">
+          {{ actor.name }}
+        </h2>
+        <p class="text-lg font-medium text-stone-500">
+          Created {{ actor.created_at|date:"M d, Y" }}
+        </p>
+      </hgroup>
+      <form action="#" method="post" class="mt-6">
+        {% csrf_token %}
+        <textarea name="script" id="script" class="w-full font-semibold p-4 text-xl bg-stone-100 focus:outline-3 focus:outline-pink-800 rounded-lg" placeholder="Enter your script here..." rows="8"></textarea>
+        <div class="mt-8 flex justify-end">
+          <button type="submit" class="bg-pink-800 text-white font-semibold text-lg px-3.5 h-11 rounded-full">
+            Create Video
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+{% endblock %}

@@ -33,8 +33,13 @@ class ActorListCreateView(View):
 
         return redirect(reverse_lazy("actor_list"))
 
-class CloneActorView(View):
-    def get(self, request: HttpRequest, id: str):
-        actor = Actor.objects.get(id=id)
+class CreateVideoView(View):
+    def get(self, request: HttpRequest):
+        actor_id = request.GET.get("actor_id")
 
-        return render(request, "cloneugc/clone_actor.html", {"actor": actor})
+        if not actor_id:
+            return HttpResponse("Bad Request", status=400)
+
+        actor = Actor.objects.get(id=actor_id)
+
+        return render(request, "cloneugc/create_video.html", {"actor": actor})
