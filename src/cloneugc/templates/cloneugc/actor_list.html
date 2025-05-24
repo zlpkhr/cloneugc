@@ -10,7 +10,7 @@
 {% block content %}
 <header class="flex items-center justify-between px-7 pt-7">
   <h1 class="text-3xl font-bold">Available Actors</h1>
-  <button id="create-actor-trigger" class="fixed z-10 right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
+  <button id="create-actor-trigger" class="fixed z-20 right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
 </header>
 <dialog id="create-actor" class="rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none mt-auto min-w-full sm:mt-0 sm:min-w-sm sm:fixed sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-b-xl bg-white p-5 backdrop:bg-black/30 relative">
   <hgroup class="flex gap-x-2 items-center justify-between">
@@ -19,11 +19,11 @@
       close
     </button>
   </hgroup>
-  <form class="mt-4" method="post" action="{% url 'actor_list' %}" enctype="multipart/form-data">
+  <form class="mt-6" method="post" action="{% url 'actor_list' %}" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="name" placeholder="Name" required class="w-full h-11 rounded-lg px-2.5 text-xl font-semibold focus:outline-pink-800 focus:outline-3 bg-stone-100"/>
-    <input type="file" name="video" accept="video/*" required class="mt-4 file:bg-white file:border file:border-stone-200 file:font-semibold file:text-lg file:px-3.5 file:h-11 file:rounded-full active:file:bg-stone-100 file:mr-4" />
-    <div class="mt-7 sm:flex sm:items-center sm:justify-end">
+    <input type="file" name="video" accept="video/*" required class="mt-5 file:bg-white file:border file:border-stone-200 file:font-semibold file:text-lg file:px-3.5 file:h-11 file:rounded-full active:file:bg-stone-100 file:mr-4" />
+    <div class="mt-8 sm:flex sm:items-center sm:justify-end">
       <button type="submit" class="btn w-full sm:w-auto">Create</button>
     </div>
   </form>
