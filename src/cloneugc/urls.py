@@ -5,4 +5,5 @@ from cloneugc import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("actors/", views.ActorListCreateView.as_view(), name="actor_list"),
+    path("actors/<str:id>/", views.CloneActorView.as_view(), name="clone_actor"),
 ]

@@ -32,3 +32,9 @@ class ActorListCreateView(View):
         form.save()
 
         return redirect(reverse_lazy("actor_list"))
+
+class CloneActorView(View):
+    def get(self, request: HttpRequest, id: str):
+        actor = Actor.objects.get(id=id)
+
+        return render(request, "cloneugc/clone_actor.html", {"actor": actor})
