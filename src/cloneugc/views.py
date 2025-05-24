@@ -1,9 +1,9 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, View
 
-from cloneugc.forms import ActorForm
+from cloneugc.forms import ActorForm, VideoForm
 from cloneugc.models import Actor
 
 
@@ -33,6 +33,7 @@ class ActorListCreateView(View):
 
         return redirect(reverse_lazy("actor_list"))
 
+
 class CreateVideoView(View):
     def get(self, request: HttpRequest):
         actor_id = request.GET.get("actor_id")
@@ -40,6 +41,25 @@ class CreateVideoView(View):
         if not actor_id:
             return HttpResponse("Bad Request", status=400)
 
-        actor = Actor.objects.get(id=actor_id)
+        actor = get_object_or_404(Actor, id=actor_id)
 
         return render(request, "cloneugc/create_video.html", {"actor": actor})
+
+    def post(self, request: HttpRequest):
+        actor_id = request.GET.get("actor_id")
+
+        if not actor_id:
+            return HttpResponse("Bad Request", status=400)
+
+        actor = get_object_or_404(Actor, id=actor_id)
+
+        form = VideoForm(request.POST)
+
+        if form.is_valid():
+            pass
+
+            return JsonResponse({
+                "script": form.cleaned_data["script"],
+            })
+
+        return JsonResponse({"error": "Invalid form"}, status=400)

@@ -31,9 +31,9 @@
           Created {{ actor.created_at|date:"M d, Y" }}
         </p>
       </hgroup>
-      <form action="#" method="post" class="mt-6">
+      <form action="{% url 'create_video' %}?actor_id={{ actor.id }}" method="post" class="mt-6">
         {% csrf_token %}
-        <textarea name="script" id="script" class="w-full font-semibold p-4 text-xl bg-stone-100 focus:outline-3 focus:outline-pink-800 rounded-lg" placeholder="Enter your script here..." rows="8"></textarea>
+        <textarea name="script" id="script" class="w-full font-semibold p-4 text-xl bg-stone-100 focus:outline-3 focus:outline-pink-800 rounded-lg" placeholder="Enter your script here..." rows="8" required></textarea>
         <div class="mt-8 flex justify-end">
           <button type="submit" class="bg-pink-800 text-white font-semibold text-lg px-3.5 h-11 rounded-full">
             Create Video
