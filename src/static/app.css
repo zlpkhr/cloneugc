@@ -2,6 +2,7 @@
 
 @layer base {
   body {
+    color: var(--color-stone-950);
     font-family: "Commissioner", var(--font-sans);
     font-optical-sizing: auto;
     font-variation-settings:
