@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, View
 
 from cloneugc.forms import ActorForm, VideoForm
-from cloneugc.models import Actor
+from cloneugc.models import Actor, Generation
 from cloneugc.tasks import clone_actor
 
 
@@ -57,7 +57,11 @@ class CreateVideoView(View):
         form = VideoForm(request.POST)
 
         if form.is_valid():
-            clone_actor.delay(actor.id, form.cleaned_data["script"])
+            gen = Generation.objects.create(
+                actor=actor, status="Waiting for processing"
+            )
+
+            clone_actor.delay(gen.id, form.cleaned_data["script"])
 
             return redirect("actor_list")
 

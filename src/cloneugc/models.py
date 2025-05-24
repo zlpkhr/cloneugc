@@ -3,8 +3,8 @@ from django.db import models
 from cloneugc.utils import shortid
 
 
-def video_path(instance: "Actor", filename: str):
-    return f"{instance.id}-{filename}"
+def instance_path(instance, filename: str):
+    return f"{instance.pk}-{filename}"
 
 
 class Actor(models.Model):
@@ -12,7 +12,7 @@ class Actor(models.Model):
         primary_key=True, max_length=6, default=shortid, editable=False
     )
     name = models.CharField(max_length=100)
-    video = models.FileField(upload_to=video_path)
+    video = models.FileField(upload_to=instance_path)
     created_at = models.DateTimeField(auto_now_add=True)
     voice_id = models.TextField(null=True)
 
@@ -22,3 +22,17 @@ class Actor(models.Model):
     @property
     def voice_cloned(self) -> bool:
         return self.voice_id is not None
+
+
+class Generation(models.Model):
+    id = models.CharField(
+        primary_key=True, max_length=6, default=shortid, editable=False
+    )
+    actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
+    audio = models.FileField(upload_to=instance_path, null=True)
+    status = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.actor.name} - {self.status}"

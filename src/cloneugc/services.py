@@ -24,5 +24,29 @@ class Cartesia:
 
         return response.json()["id"]
 
+    def tts(self, voice_id: str, text: str):
+        response = requests.post(
+            "https://api.cartesia.ai/tts/bytes",
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Cartesia-Version": self.version,
+                "Content-Type": "application/json",
+            },
+            json={
+                "model_id": "sonic-2",
+                "transcript": text,
+                "language": "en",
+                "voice": {"id": voice_id},
+                "output_format": {
+                    "container": "mp3",
+                    "bit_rate": 128000,
+                    "sample_rate": 44100,
+                },
+            },
+        )
+        response.raise_for_status()
+
+        return response.content
+
 
 voice_cloner = Cartesia(settings.CARTESIA_API_KEY)
