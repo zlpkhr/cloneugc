@@ -9,12 +9,15 @@
 
 {% block content %}
 <div class="flex">
-  <aside class="w-60 py-3.5 px-4 h-screen bg-stone-50">
+  <aside class="p-7 h-screen bg-stone-100">
     <nav class="flex flex-col">
-      <a href="{% url 'actor_list' %}" class="font-semibold px-3 py-3.5 w-full text-xl">Actors</a>
+      <a data-active="{% if url_name == 'actor_list' %}true{% else %}false{% endif %}" href="{% url 'actor_list' %}" class="w-full flex flex-col items-center justify-center gap-y-1 group">
+        <span class="material-symbols-rounded rounded-full group-data-[active=true]:bg-pink-200 group-data-[active=true]:text-pink-800 py-1 px-3 group-hover:bg-stone-200">comedy_mask</span>
+        <span class="text-xl font-semibold group-data-[active=true]:text-pink-800">Actors</span>
+      </a>
     </nav>
   </aside>
-  <div class="flex-1 border-l border-black/10 bg-white shadow-2xs">
+  <div class="flex-1">
     <header class="flex items-center justify-between px-7 pt-7">
       <h1 class="text-3xl font-bold">Available Actors</h1>
       <button id="create-actor-trigger" class="fixed z-20 right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>

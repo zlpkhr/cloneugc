@@ -14,9 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="actor",
             name="video",
-            field=models.FileField(
-                default="", upload_to=cloneugc.models.video_path
-            ),
+            field=models.FileField(default="", upload_to=cloneugc.models.video_path),
             preserve_default=False,
         ),
     ]

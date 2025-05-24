@@ -20,7 +20,11 @@ class ActorListCreateView(View):
     def get(self, request: HttpRequest):
         actors = Actor.objects.all().order_by("-created_at")
 
-        return render(request, "cloneugc/actor_list.html", {"actors": actors})
+        return render(
+            request,
+            "cloneugc/actor_list.html",
+            {"actors": actors, "url_name": request.resolver_match.url_name},
+        )
 
     def post(self, request: HttpRequest):
         form = ActorForm(request.POST, request.FILES)
