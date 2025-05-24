@@ -1,3 +1,5 @@
+from django.http import HttpRequest
+import json
 import requests
 from django.conf import settings
 
@@ -50,3 +52,34 @@ class Cartesia:
 
 
 voice_cloner = Cartesia(settings.CARTESIA_API_KEY)
+
+
+class FalSync:
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+
+    def lipsync(self, video_url: str, audio_url: str, callback_url: str):
+        response = requests.post(
+            f"https://queue.fal.run/fal-ai/sync-lipsync/v2?fal_webhook={callback_url}",
+            headers={
+                "Authorization": f"Key {self.api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "video_url": video_url,
+                "audio_url": audio_url,
+                "callback_url": callback_url,
+            },
+        )
+
+        response.raise_for_status()
+
+        return response.json()["request_id"]
+
+    def callback_reader(self, request: HttpRequest):
+        payload = json.loads(request.body)["payload"]
+
+        return payload["video"]["url"]
+
+
+lipsyncer = FalSync(settings.FAL_API_KEY)

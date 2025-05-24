@@ -177,3 +177,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Cartesia
 
 CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")
+
+
+# Fal
+
+FAL_API_KEY = os.getenv("FAL_API_KEY")
