@@ -1,15 +1,10 @@
 const triggerBtn = document.querySelector("button#create-actor-trigger");
 const dialog = document.querySelector("dialog#create-actor");
-const closeBtn = document.querySelector("dialog#create-actor button#close");
 
 let initBodyOverflow;
 let initHtmlOverflow;
 
 let initTriggerVisibility;
-
-closeBtn.addEventListener("click", () => {
-  dialog.close();
-});
 
 triggerBtn.addEventListener("click", () => {
   initBodyOverflow = document.body.style.overflow;
@@ -37,12 +32,20 @@ dialog.addEventListener("click", (event) => {
 
   if (outside) {
     dialog.close();
-
-    document.body.style.overflow = initBodyOverflow;
-    document.documentElement.style.overflow = initHtmlOverflow;
-
-    if (window.matchMedia("(max-width: 640px)").matches) {
-      triggerBtn.style.visibility = initTriggerVisibility;
-    }
   }
+});
+
+dialog.addEventListener("close", () => {
+  document.body.style.overflow = initBodyOverflow;
+  document.documentElement.style.overflow = initHtmlOverflow;
+
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    triggerBtn.style.visibility = initTriggerVisibility;
+  }
+});
+
+const closeBtn = document.querySelector("dialog#create-actor button#close");
+
+closeBtn.addEventListener("click", () => {
+  dialog.close();
 });
