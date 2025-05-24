@@ -8,48 +8,57 @@
 {% endblock %}
 
 {% block content %}
-<header class="flex items-center justify-between px-7 pt-7">
-  <h1 class="text-3xl font-bold">Available Actors</h1>
-  <button id="create-actor-trigger" class="fixed z-20 right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
-</header>
-<dialog id="create-actor" class="mx-auto mt-auto w-full max-w-md rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none bg-white p-5 backdrop:bg-black/30 min-sm:mb-auto sm:rounded-b-xl">
-  <hgroup class="flex gap-x-2 items-center justify-between">
-    <h4 class="text-xl font-bold">Create Actor</h4>
-    <button id="close" type="button" class="material-symbols-rounded rounded-full size-10 active:bg-stone-100 flex items-center justify-center">
-      close
-    </button>
-  </hgroup>
-  <form class="mt-6" method="post" action="{% url 'actor_list' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="text" name="name" placeholder="Name" required class="w-full h-11 rounded-lg px-2.5 text-xl font-semibold focus:outline-pink-800 focus:outline-3 bg-stone-100"/>
-    <input type="file" name="video" accept="video/*" required class="mt-5 file:bg-white file:border file:border-stone-200 file:font-semibold file:text-lg file:px-3.5 file:h-11 file:rounded-full active:file:bg-stone-100 file:mr-4 w-full" />
-    <div class="mt-8 sm:flex sm:items-center sm:justify-end">
-      <button type="submit" class="btn w-full sm:w-auto">Create</button>
-    </div>
-  </form>
-</dialog>
-<main class="mt-7 px-7 pb-10 sm:mt-10">
-  <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
-    {% for actor in actors %}
-      <figure class="relative">
-        <figcaption class="p-4 bg-linear-to-b z-10 from-black/20 text-shadow-xs to-black/0 rounded-t-xl text-xl font-semibold text-white absolute top-0 inset-x-0">{{ actor.name }}</figcaption>
-        <media-controller class="size-full rounded-xl aspect-[9/16]">
-          <video
-            slot="media"
-            class="size-full rounded-xl object-cover"
-            src="{{ actor.video.url }}"
-          ></video>
-          <media-control-bar class="p-4">
-            <media-play-button class="rounded-full p-2.5">
-              <span slot="play" class="material-symbols-rounded">play_arrow</span>
-              <span slot="pause" class="material-symbols-rounded">pause</span>
-            </media-play-button>
-          </media-control-bar>
-        </media-controller>
-      </figure>
-    {% empty %}
-      <p>No actors found.</p>
-    {% endfor %}  
-  </section>
-</main>
+<div class="flex">
+  <aside class="w-60 py-3.5 px-4 h-screen bg-stone-50">
+    <nav class="flex flex-col">
+      <a href="{% url 'actor_list' %}" class="font-semibold px-3 py-3.5 w-full text-xl">Actors</a>
+    </nav>
+  </aside>
+  <div class="flex-1 border-l border-black/10 bg-white shadow-2xs">
+    <header class="flex items-center justify-between px-7 pt-7">
+      <h1 class="text-3xl font-bold">Available Actors</h1>
+      <button id="create-actor-trigger" class="fixed z-20 right-5 bottom-7 shrink-0 btn shadow-lg sm:shadow-none sm:static">Create Actor</button>
+    </header>
+    <dialog id="create-actor" class="mx-auto mt-auto w-full max-w-md rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none bg-white p-5 backdrop:bg-black/30 min-sm:mb-auto sm:rounded-b-xl">
+      <hgroup class="flex gap-x-2 items-center justify-between">
+        <h4 class="text-xl font-bold">Create Actor</h4>
+        <button id="close" type="button" class="material-symbols-rounded rounded-full size-10 active:bg-stone-100 flex items-center justify-center">
+          close
+        </button>
+      </hgroup>
+      <form class="mt-6" method="post" action="{% url 'actor_list' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Name" required class="w-full h-11 rounded-lg px-2.5 text-xl font-semibold focus:outline-pink-800 focus:outline-3 bg-stone-100"/>
+        <input type="file" name="video" accept="video/*" required class="mt-5 file:bg-white file:border file:border-stone-200 file:font-semibold file:text-lg file:px-3.5 file:h-11 file:rounded-full active:file:bg-stone-100 file:mr-4 w-full" />
+        <div class="mt-8 sm:flex sm:items-center sm:justify-end">
+          <button type="submit" class="btn w-full sm:w-auto">Create</button>
+        </div>
+      </form>
+    </dialog>
+    <main class="mt-7 px-7 pb-10 sm:mt-10">
+      <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
+        {% for actor in actors %}
+          <figure class="relative">
+            <figcaption class="p-4 bg-linear-to-b z-10 from-black/20 text-shadow-xs to-black/0 rounded-t-xl text-xl font-semibold text-white absolute top-0 inset-x-0">{{ actor.name }}</figcaption>
+            <media-controller class="size-full rounded-xl aspect-[9/16]">
+              <video
+                slot="media"
+                class="size-full rounded-xl object-cover"
+                src="{{ actor.video.url }}"
+              ></video>
+              <media-control-bar class="p-4">
+                <media-play-button class="rounded-full p-2.5">
+                  <span slot="play" class="material-symbols-rounded">play_arrow</span>
+                  <span slot="pause" class="material-symbols-rounded">pause</span>
+                </media-play-button>
+              </media-control-bar>
+            </media-controller>
+          </figure>
+        {% empty %}
+          <p>No actors found.</p>
+        {% endfor %}
+      </section>
+    </main>
+  </div>
+</div>
 {% endblock %}
