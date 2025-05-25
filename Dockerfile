@@ -25,6 +25,8 @@ EXPOSE 8000
 
 RUN uv run --no-sync manage.py collectstatic --clear --noinput
 
+RUN uv run --no-sync manage.py migrate
+
 CMD ["uv", "run", "--no-sync", "gunicorn", \
      "--chdir", "/cloneugc/src", \
      "--bind", "0.0.0.0:8000", \
