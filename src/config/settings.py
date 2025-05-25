@@ -188,3 +188,8 @@ CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")
 # Fal
 
 FAL_API_KEY = os.getenv("FAL_API_KEY")
+
+
+# Celery
+
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL") or os.getenv("REDIS_URL")
