@@ -52,6 +52,9 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
 ]
 
+if os.getenv("ALLOWED_HOSTS") is not None:
+    ALLOWED_HOSTS.extend(os.getenv("ALLOWED_HOSTS").split(","))
+
 
 # Application definition
 
