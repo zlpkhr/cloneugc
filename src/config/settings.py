@@ -98,20 +98,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+DATABASE_URL = urlparse(os.getenv("DATABASE_URL"))
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR.parent / "db.sqlite3",
-        "OPTIONS": {
-            "init_command": """
-                PRAGMA journal_mode=WAL2;
-                PRAGMA synchronous=NORMAL;
-                PRAGMA cache_size=10000;
-                PRAGMA mmap_size=268435456;
-            """,
-            "transaction_mode": "IMMEDIATE",
-            "timeout": 5,
-        },
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": DATABASE_URL.path[1:],
+        "USER": DATABASE_URL.username,
+        "PASSWORD": DATABASE_URL.password,
+        "HOST": DATABASE_URL.hostname,
+        "PORT": DATABASE_URL.port,
     }
 }
 
