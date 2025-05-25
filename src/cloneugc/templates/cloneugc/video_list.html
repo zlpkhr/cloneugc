@@ -1,0 +1,13 @@
+{% extends "app.html" %}
+
+{% block title %}Videos{% endblock %}
+
+{% block content %}
+<h1>Videos</h1>
+
+<ul>
+  {% for gen in generations %}
+    <li>{{ gen.id }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

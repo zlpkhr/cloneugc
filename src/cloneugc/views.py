@@ -107,3 +107,8 @@ def generation(request: HttpRequest, id: str):
             "lipsync_request_id": gen.lipsync_request_id,
         }
     )
+
+class VideoListView(ListView):
+    model = Generation
+    context_object_name = "generations"
+    template_name = "cloneugc/video_list.html"

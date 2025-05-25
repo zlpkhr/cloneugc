@@ -8,4 +8,5 @@ urlpatterns = [
     path("videos/create", views.CreateVideoView.as_view(), name="create_video"),
     path("lipsyncer/callback", views.lipsyncer_callback, name="lipsyncer_callback"),
     path("generations/<str:id>", views.generation, name="generation"),
+    path("videos/", views.VideoListView.as_view(), name="video_list"),
 ]
