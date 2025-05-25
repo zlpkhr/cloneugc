@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import importlib
 import os
 from pathlib import Path
+from socket import gethostbyname, gethostname
 from urllib.parse import urlparse
 
 if importlib.util.find_spec("dotenv"):
@@ -42,6 +43,7 @@ APP_URL = os.getenv("APP_URL")
 APP_HOST = urlparse(APP_URL).netloc
 
 ALLOWED_HOSTS = [
+    gethostbyname(gethostname()),
     APP_HOST,
     "www.cloneugc.com",
     "cloneugc.com",
