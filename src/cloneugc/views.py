@@ -17,11 +17,6 @@ def index(request: HttpRequest):
     return HttpResponse("Hello, World!")
 
 
-class ActorListView(ListView):
-    model = Actor
-    context_object_name = "actors"
-
-
 class ActorListCreateView(View):
     def get(self, request: HttpRequest):
         actors = Actor.objects.all().order_by("-created_at")
@@ -108,7 +103,15 @@ def generation(request: HttpRequest, id: str):
         }
     )
 
+
 class VideoListView(ListView):
     model = Generation
     context_object_name = "generations"
     template_name = "cloneugc/video_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["url_name"] = self.request.resolver_match.url_name
+
+        return context
