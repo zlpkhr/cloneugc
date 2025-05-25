@@ -1,8 +1,10 @@
 import requests
 from django.core.files.base import ContentFile
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, View
 
 from cloneugc.forms import ActorForm, VideoForm
@@ -66,11 +68,13 @@ class CreateVideoView(View):
 
             clone_actor.delay(gen.id, form.cleaned_data["script"])
 
-            return redirect("actor_list")
+            return redirect("generation", id=gen.id)
 
         return HttpResponse("Unprocessable Entity", status=422)
 
 
+@require_POST
+@csrf_exempt
 def lipsyncer_callback(request: HttpRequest):
     result = lipsyncer.callback_reader(request)
 
@@ -81,6 +85,22 @@ def lipsyncer_callback(request: HttpRequest):
 
     response = requests.get(result["video_url"])
 
+    # TODO: It might not be a mp4, but we don't care
     gen.video.save(f"{gen.actor.name}.mp4", ContentFile(response.content))
 
     return HttpResponse(status=204)
+
+
+def generation(request: HttpRequest, id: str):
+    gen = get_object_or_404(Generation, id=id)
+
+    return JsonResponse(
+        {
+            "id": gen.id,
+            "actor": gen.actor.name,
+            "status": gen.status,
+            "video": gen.video.url if gen.video else None,
+            "audio": gen.audio.url if gen.audio else None,
+            "lipsync_request_id": gen.lipsync_request_id,
+        }
+    )

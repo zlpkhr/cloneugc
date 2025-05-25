@@ -78,14 +78,14 @@ class FalSync:
         return response.json()["request_id"]
 
     def callback_reader(self, request: HttpRequest) -> str:
-        payload = json.loads(request.body)
+        data = json.loads(request.body)
 
-        if payload["status"] != "OK":
-            raise Exception(payload["error"])
+        if data["status"] != "OK":
+            raise Exception(data["error"])
 
         return {
-            "id": payload["request_id"],
-            "video_url": payload["video"]["url"],
+            "id": data["request_id"],
+            "video_url": data["payload"]["video"]["url"],
         }
 
 
