@@ -88,6 +88,9 @@ def lipsyncer_callback(request: HttpRequest):
     # TODO: It might not be a mp4, but we don't care
     gen.video.save(f"{gen.actor.name}.mp4", ContentFile(response.content))
 
+    gen.status = "Done"
+    gen.save()
+
     return HttpResponse(status=204)
 
 
