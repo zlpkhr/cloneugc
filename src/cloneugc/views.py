@@ -1,3 +1,5 @@
+import requests
+from django.core.files.base import ContentFile
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
@@ -5,6 +7,7 @@ from django.views.generic import ListView, View
 
 from cloneugc.forms import ActorForm, VideoForm
 from cloneugc.models import Actor, Generation
+from cloneugc.services import lipsyncer
 from cloneugc.tasks import clone_actor
 
 
@@ -66,3 +69,18 @@ class CreateVideoView(View):
             return redirect("actor_list")
 
         return HttpResponse("Unprocessable Entity", status=422)
+
+
+def lipsyncer_callback(request: HttpRequest):
+    result = lipsyncer.callback_reader(request)
+
+    gen = Generation.objects.get(lipsync_request_id=result["id"])
+
+    gen.status = "Finishing touches"
+    gen.save()
+
+    response = requests.get(result["video_url"])
+
+    gen.video.save(f"{gen.actor.name}.mp4", ContentFile(response.content))
+
+    return HttpResponse(status=204)

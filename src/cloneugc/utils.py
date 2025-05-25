@@ -1,6 +1,10 @@
 import secrets
 import subprocess
 import tempfile
+import urllib.parse
+
+from django.conf import settings
+from django.urls import reverse
 
 
 def shortid(length=6):
@@ -44,3 +48,7 @@ def extract_audio(video_url: str) -> str:
         cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
     )
     return audio_temp.name
+
+
+def reverse_absolute(*args, **kwargs):
+    return urllib.parse.urljoin(settings.APP_URL, reverse(*args, **kwargs))

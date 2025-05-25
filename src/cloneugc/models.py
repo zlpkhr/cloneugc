@@ -30,7 +30,9 @@ class Generation(models.Model):
     )
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
     audio = models.FileField(upload_to=instance_path, null=True)
+    video = models.FileField(upload_to=instance_path, null=True)
     status = models.TextField()
+    lipsync_request_id = models.TextField(null=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -59,7 +59,7 @@ class FalSync:
     def __init__(self, api_key: str):
         self.api_key = api_key
 
-    def lipsync(self, video_url: str, audio_url: str, callback_url: str):
+    def lipsync(self, video_url: str, audio_url: str, callback_url: str) -> str:
         response = requests.post(
             f"https://queue.fal.run/fal-ai/sync-lipsync/v2?fal_webhook={callback_url}",
             headers={
@@ -77,10 +77,16 @@ class FalSync:
 
         return response.json()["request_id"]
 
-    def callback_reader(self, request: HttpRequest):
-        payload = json.loads(request.body)["payload"]
+    def callback_reader(self, request: HttpRequest) -> str:
+        payload = json.loads(request.body)
 
-        return payload["video"]["url"]
+        if payload["status"] != "OK":
+            raise Exception(payload["error"])
+
+        return {
+            "id": payload["request_id"],
+            "video_url": payload["video"]["url"],
+        }
 
 
 lipsyncer = FalSync(settings.FAL_API_KEY)
