@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+    "graphene_django",
     "cloneugc",
 ]
 
@@ -217,3 +218,5 @@ FAL_API_KEY = os.getenv("FAL_API_KEY")
 # Celery
 
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL") or os.getenv("REDIS_URL")
+
+GRAPHENE = {"SCHEMA": "config.schema.schema"}
