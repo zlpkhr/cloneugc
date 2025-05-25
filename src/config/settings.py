@@ -176,7 +176,21 @@ WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": {"bucket_name": os.getenv("S3_BUCKET_NAME")},
+        "OPTIONS": {
+            "bucket_name": os.getenv("S3_BUCKET_NAME"),
+            "region_name": "us-east-1",
+            "max_memory_size": 128 * 1024 * 1024,
+            "file_overwrite": False,
+            "gzip": True,
+            "gzip_content_types": [
+                "video/mp4",
+                "video/webm",
+                "video/ogg",
+                "video/avi",
+                "video/mpeg",
+                "video/quicktime",
+            ],
+        },
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
