@@ -103,9 +103,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 # CSRF
 
 CSRF_TRUSTED_ORIGINS = [
-    "www.cloneugc.com",
-    "cloneugc.com",
-    "d1ywpr9trlaols.cloudfront.net",
+    "https://www.cloneugc.com",
+    "https://cloneugc.com",
+    "https://d1ywpr9trlaols.cloudfront.net",
 ]
 
 
