@@ -100,6 +100,15 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
+# CSRF
+
+CSRF_TRUSTED_ORIGINS = [
+    "www.cloneugc.com",
+    "cloneugc.com",
+    "d1ywpr9trlaols.cloudfront.net",
+]
+
+
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
