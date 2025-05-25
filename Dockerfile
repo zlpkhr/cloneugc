@@ -27,4 +27,4 @@ RUN uv run --no-sync manage.py collectstatic --clear --noinput
 
 RUN uv run --no-sync manage.py migrate
 
-CMD ["uv", "run", "--no-sync", "gunicorn", "--chdir", "/cloneugc/src", "--workers", "3", "--bind", "0.0.0.0:8000", "--timeout", "60", "config.wsgi:application"]
+CMD ["uv", "run", "--no-sync", "gunicorn", "--chdir", "/cloneugc/src", "--workers", "3", "--bind", "0.0.0.0:8000", "--timeout", "120", "config.wsgi:application"]
