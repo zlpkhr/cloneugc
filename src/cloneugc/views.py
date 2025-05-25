@@ -63,7 +63,7 @@ class CreateVideoView(View):
 
             clone_actor.delay(gen.id, form.cleaned_data["script"])
 
-            return redirect("generation", id=gen.id)
+            return redirect("video_list")
 
         return HttpResponse("Unprocessable Entity", status=422)
 

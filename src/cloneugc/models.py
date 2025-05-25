@@ -39,6 +39,3 @@ class Generation(models.Model):
     def __str__(self):
         return f"{self.actor.name} - {self.status}"
 
-    @property
-    def done(self):
-        return self.video.name is not None

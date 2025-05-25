@@ -51,7 +51,7 @@
     <main class="mt-7 px-7 pb-10 sm:mt-10">
       <section class="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
         {% for gen in generations %}
-          {% if gen.done %}
+          {% if gen.video %}
             <figure class="relative">
               <figcaption class="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4 text-xl font-semibold text-white text-shadow-xs">
                 {{ gen.created_at|date:"M d" }}
