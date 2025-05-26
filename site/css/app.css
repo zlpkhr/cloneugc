@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-media-text: #eeeeee;
+  --color-media-control: rgba(20, 20, 30, 0.7);
+  --color-media-control-hover: rgba(50, 50, 50, 0.7);
+}
+
+@layer base {
+  body {
+    color: var(--color-stone-950);
+    font-family: "Commissioner", var(--font-sans);
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0,
+      "FLAR" 0,
+      "VOLM" 0;
+  }
+}
+
+@layer components {
+  .btn {
+    height: --spacing(11);
+    padding: 0 --spacing(3.5);
+    border-radius: calc(infinity * 1px);
+    background-color: var(--color-pink-800);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-white);
+
+    &:active {
+      background-color: var(--color-pink-900);
+    }
+  }
+}
+
+.material-symbols-rounded {
+  font-size: 24px;
+  line-height: 1;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 600,
+    "GRAD" 0,
+    "opsz" 24;
+}

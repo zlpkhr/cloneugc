@@ -10,6 +10,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "sourceMap": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "vike-react"]
+    "types": ["vite/client", "vike-react"],
+    "verbatimModuleSyntax": true
   }
 }
