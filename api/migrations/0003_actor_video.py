@@ -2,19 +2,19 @@
 
 from django.db import migrations, models
 
-import cloneugc.models
+import api.models
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cloneugc", "0002_actor_created_at"),
+        ("api", "0002_actor_created_at"),
     ]
 
     operations = [
         migrations.AddField(
             model_name="actor",
             name="video",
-            field=models.FileField(default="", upload_to=cloneugc.models.instance_path),
+            field=models.FileField(default="", upload_to=api.models.instance_path),
             preserve_default=False,
         ),
     ]

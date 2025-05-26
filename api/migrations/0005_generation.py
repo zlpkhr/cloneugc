@@ -3,12 +3,12 @@
 import django.db.models.deletion
 from django.db import migrations, models
 
-import cloneugc.utils
+import api.utils
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cloneugc", "0004_actor_voice_id"),
+        ("api", "0004_actor_voice_id"),
     ]
 
     operations = [
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.CharField(
-                        default=cloneugc.utils.shortid,
+                        default=api.utils.shortid,
                         editable=False,
                         max_length=6,
                         primary_key=True,
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 (
                     "actor",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="cloneugc.actor"
+                        on_delete=django.db.models.deletion.CASCADE, to="api.actor"
                     ),
                 ),
             ],

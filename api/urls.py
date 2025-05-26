@@ -1,6 +1,6 @@
 from django.urls import path
 
-from cloneugc import views
+from api import views
 
 urlpatterns = [
     path("actors/", views.ActorListCreateView.as_view(), name="actor_list"),

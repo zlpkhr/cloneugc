@@ -2,18 +2,18 @@
 
 from django.db import migrations, models
 
-import cloneugc.models
+import api.models
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cloneugc", "0005_generation"),
+        ("api", "0005_generation"),
     ]
 
     operations = [
         migrations.AddField(
             model_name="generation",
             name="audio",
-            field=models.FileField(null=True, upload_to=cloneugc.models.instance_path),
+            field=models.FileField(null=True, upload_to=api.models.instance_path),
         ),
     ]

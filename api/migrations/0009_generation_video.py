@@ -2,18 +2,18 @@
 
 from django.db import migrations, models
 
-import cloneugc.models
+import api.models
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cloneugc", "0008_alter_generation_lipsync_request_id"),
+        ("api", "0008_alter_generation_lipsync_request_id"),
     ]
 
     operations = [
         migrations.AddField(
             model_name="generation",
             name="video",
-            field=models.FileField(null=True, upload_to=cloneugc.models.instance_path),
+            field=models.FileField(null=True, upload_to=api.models.instance_path),
         ),
     ]

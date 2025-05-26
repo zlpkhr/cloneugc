@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cloneugc", "0009_generation_video"),
+        ("api", "0009_generation_video"),
     ]
 
     operations = [

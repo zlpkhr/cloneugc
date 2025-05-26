@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cloneugc", "0007_generation_lipsync_request_id"),
+        ("api", "0007_generation_lipsync_request_id"),
     ]
 
     operations = [

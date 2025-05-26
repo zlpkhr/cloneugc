@@ -1,6 +1,6 @@
 from django import forms
 
-from cloneugc.models import Actor
+from api.models import Actor
 
 
 class ActorForm(forms.ModelForm):

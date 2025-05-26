@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("cloneugc", "0006_generation_audio"),
+        ("api", "0006_generation_audio"),
     ]
 
     operations = [

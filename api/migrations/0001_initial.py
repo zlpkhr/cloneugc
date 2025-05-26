@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 
-import cloneugc.utils
+import api.utils
 
 
 class Migration(migrations.Migration):
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.CharField(
-                        default=cloneugc.utils.shortid,
+                        default=api.utils.shortid,
                         editable=False,
                         max_length=6,
                         primary_key=True,
