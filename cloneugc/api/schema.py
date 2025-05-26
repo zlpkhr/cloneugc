@@ -28,21 +28,25 @@ class Query(graphene.ObjectType):
         return Generation.objects.all()
 
 
+class GenerationInput(graphene.InputObjectType):
+    actor_id = graphene.String(required=True)
+    script = graphene.String(required=True)
+
+
 class CreateGenerationMutation(graphene.Mutation):
     class Arguments:
-        actor_id = graphene.String(required=True)
-        script = graphene.String(required=True)
+        input = GenerationInput(required=True)
 
-    generation = graphene.Field(GenerationType)
+    Output = GenerationType
 
     @classmethod
-    def mutate(self, root, info, actor_id: str, script: str):
-        actor = Actor.objects.get(id=actor_id)
+    def mutate(self, root, info, input: GenerationInput):
+        actor = Actor.objects.get(id=input.actor_id)
         generation = Generation.objects.create(actor=actor)
 
-        clone_actor.delay(generation.id, script)
+        clone_actor.delay(generation.id, input.script)
 
-        return CreateGenerationMutation(generation=generation)
+        return generation
 
 
 class Mutation(graphene.ObjectType):
