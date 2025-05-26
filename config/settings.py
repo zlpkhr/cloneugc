@@ -30,15 +30,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.getenv("DEBUG") is not None:
+if os.getenv("DJANGO_DEBUG") is not None:
     DEBUG = True
 else:
     DEBUG = False
 
-APP_URL = os.getenv("APP_URL")
+APP_URL = os.getenv("DJANGO_APP_URL")
 
 APP_HOST = urlparse(APP_URL).netloc
 
