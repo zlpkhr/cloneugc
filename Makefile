@@ -12,3 +12,6 @@ dev-css:
 
 celery:
 	uv run celery -A config worker -l INFO
+
+ngrok:
+	ngrok http --url=main-flounder-genuine.ngrok-free.app 8000
