@@ -1,16 +1,15 @@
 FROM python:3.13-slim
+COPY --from=ghcr.io/astral-sh/uv:0.7.7 /uv /uvx /bin/
+WORKDIR /cloneugc
 
 RUN apt update && apt install -y --no-install-recommends ffmpeg
 
-COPY --from=ghcr.io/astral-sh/uv:0.7.7 /uv /uvx /bin/
+COPY pyproject.toml uv.lock ./
 
-WORKDIR /cloneugc
-
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --locked --no-dev
+RUN uv sync --locked --no-dev
 
 COPY . .
 
-CMD ["uv", "run", "--no-sync", "celery", "-A", "config", "worker", "--loglevel=info"]
+ENV UV_NO_SYNC=1
+
+CMD ["uv", "run", "celery", "-A", "config", "worker", "--loglevel=info"]
