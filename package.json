@@ -2,6 +2,9 @@
   "name": "cloneugc",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "site"
+  ],
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.7",
     "postcss": "^8.5.3",
