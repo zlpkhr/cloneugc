@@ -1,5 +1,9 @@
 .PHONY: dev shell celery ngrok fmt
 
+install:
+	uv sync --frozen
+	bun install --frozen-lockfile
+
 dev:
 	bun run postcss ./static/*.css -u @tailwindcss/postcss -d ./static/dist -w > /dev/null 2>&1 & \
 	uv run manage.py runserver

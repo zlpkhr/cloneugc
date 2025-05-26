@@ -6,7 +6,7 @@ RUN apt update && apt install -y --no-install-recommends ffmpeg
 
 COPY pyproject.toml uv.lock ./
 
-RUN uv sync --locked --no-dev
+RUN uv sync --frozen --no-dev
 
 COPY . .
 
