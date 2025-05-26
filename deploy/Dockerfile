@@ -23,4 +23,4 @@ RUN uv run manage.py collectstatic
 
 EXPOSE 8000
 
-CMD ["uv", "run", "gunicorn", "--workers", "5", "--bind", "0.0.0.0:8000", "--timeout", "120", "config.wsgi:application"]
+CMD ["uv", "run", "gunicorn", "--workers", "5", "--bind", "0.0.0.0:8000", "--timeout", "120", "cloneugc.wsgi:application"]

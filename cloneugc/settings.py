@@ -67,7 +67,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "cloneugc.urls"
 
 TEMPLATES = [
     {
@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "cloneugc.wsgi.application"
 
 
 # CSRF
@@ -190,7 +190,7 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {
 # Graphene
 
 GRAPHENE = {
-    "SCHEMA": "config.schema.schema",
+    "SCHEMA": "cloneugc.schema.schema",
     "CAMELCASE_ERRORS": True,
 }
 

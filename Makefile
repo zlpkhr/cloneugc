@@ -13,7 +13,7 @@ shell:
 	uv run manage.py shell
 
 celery:
-	uv run celery -A config worker -l INFO
+	uv run celery -A cloneugc worker -l INFO
 
 fmt:
 	bun run prettier --write ./**/*.{js,css}
