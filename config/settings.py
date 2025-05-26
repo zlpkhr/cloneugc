@@ -202,6 +202,14 @@ FAL_API_KEY = os.getenv("FAL_API_KEY")
 
 # Celery
 
-CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL") or os.getenv("REDIS_URL")
+CELERY_BROKER_TRANSPORT_OPTIONS = {
+    "predefined_queues": {
+        "celery": {
+            "url": os.getenv("SQS_CELERY_QUEUE_URL"),
+        }
+    }
+}
+
+# Graphene
 
 GRAPHENE = {"SCHEMA": "config.schema.schema"}

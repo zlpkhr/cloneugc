@@ -29,3 +29,13 @@ output "media_bucket_name" {
   value       = aws_s3_bucket.media_bucket.bucket
   description = "The name of the media S3 bucket."
 }
+
+resource "aws_sqs_queue" "celery_queue" {
+  name_prefix                = "cloneugc-celery-"
+  visibility_timeout_seconds = 3600
+}
+
+output "celery_queue_url" {
+  value       = aws_sqs_queue.celery_queue.url
+  description = "The URL of the created SQS queue for Celery."
+}
