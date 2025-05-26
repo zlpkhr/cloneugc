@@ -113,16 +113,14 @@ CSRF_TRUSTED_ORIGINS = [
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASE_URL = urlparse(os.getenv("DATABASE_URL"))
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": DATABASE_URL.path[1:],
-        "USER": DATABASE_URL.username,
-        "PASSWORD": DATABASE_URL.password,
-        "HOST": DATABASE_URL.hostname,
-        "PORT": DATABASE_URL.port,
+        "USER": os.getenv("PG_USER"),
+        "PASSWORD": os.getenv("PG_PASSWORD"),
+        "HOST": os.getenv("PG_HOST"),
+        "PORT": os.getenv("PG_PORT"),
+        "NAME": os.getenv("PG_DB"),
     }
 }
 
