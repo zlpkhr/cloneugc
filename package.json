@@ -2,11 +2,6 @@
   "name": "cloneugc",
   "type": "module",
   "private": true,
-  "scripts": {
-    "dev:css": "postcss ./static/*.css -u @tailwindcss/postcss -d ./static/dist -w",
-    "build:css": "postcss ./static/*.css -u @tailwindcss/postcss -d ./static/dist",
-    "format": "prettier --write ./**/*.{js,css}"
-  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.7",
     "postcss": "^8.5.3",

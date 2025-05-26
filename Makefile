@@ -1,17 +1,16 @@
-.PHONY: dev dev-django dev-css
+.PHONY: dev celery ngrok fmt
 
 dev:
-	@make dev-css & \
-	make dev-django
-
-dev-django:
+	bun run postcss ./static/*.css -u @tailwindcss/postcss -d ./static/dist -w > /dev/null 2>&1 & \
 	uv run manage.py runserver
-
-dev-css:
-	bun run dev:css > /dev/null 2>&1
 
 celery:
 	uv run celery -A config worker -l INFO
 
 ngrok:
 	ngrok http --url=main-flounder-genuine.ngrok-free.app 8000
+
+fmt:
+	bun run prettier --write ./**/*.{js,css}
+	uv run ruff format
+	uv run ruff check --fix
