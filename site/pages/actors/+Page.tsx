@@ -4,9 +4,128 @@ import {
   MediaController,
   MediaPlayButton
 } from "media-chrome/react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ActorsPage() {
   const actors: { id: number; name: string; video: { url: string } }[] = [];
+
+  // Dialog state
+  const [isCreateActorOpen, setCreateActorOpen] = useState(false);
+  const [isNavOpen, setNavOpen] = useState(false);
+  const createActorDialogRef = useRef<HTMLDialogElement>(null);
+  const navDialogRef = useRef<HTMLDialogElement>(null);
+  const createActorTriggerRef = useRef<HTMLButtonElement>(null);
+
+  // Overflow lock helpers
+  useEffect(() => {
+    if (isCreateActorOpen || isNavOpen) {
+      const prevBody = document.body.style.overflow;
+      const prevHtml = document.documentElement.style.overflow;
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prevBody;
+        document.documentElement.style.overflow = prevHtml;
+      };
+    }
+  }, [isCreateActorOpen, isNavOpen]);
+
+  // Show/hide dialogs
+  useEffect(() => {
+    const dialog = createActorDialogRef.current;
+    if (!dialog) return;
+    if (isCreateActorOpen) {
+      if (!dialog.open) dialog.showModal();
+      // Hide trigger on mobile
+      if (
+        window.matchMedia("(max-width: 640px)").matches &&
+        createActorTriggerRef.current
+      ) {
+        createActorTriggerRef.current.style.visibility = "hidden";
+      }
+    } else {
+      if (dialog.open) dialog.close();
+      if (createActorTriggerRef.current) {
+        createActorTriggerRef.current.style.visibility = "";
+      }
+    }
+  }, [isCreateActorOpen]);
+
+  useEffect(() => {
+    const dialog = navDialogRef.current;
+    if (!dialog) return;
+    if (isNavOpen) {
+      if (!dialog.open) dialog.showModal();
+    } else {
+      if (dialog.open) dialog.close();
+    }
+  }, [isNavOpen]);
+
+  // Click outside to close for dialogs
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    if (isCreateActorOpen || isNavOpen) {
+      window.addEventListener(
+        "mousedown",
+        (event) => {
+          if (isCreateActorOpen && createActorDialogRef.current) {
+            const rect = createActorDialogRef.current.getBoundingClientRect();
+            if (
+              event.target instanceof Node &&
+              createActorDialogRef.current.open &&
+              (event.clientX < rect.left ||
+                event.clientX > rect.right ||
+                event.clientY < rect.top ||
+                event.clientY > rect.bottom)
+            ) {
+              setCreateActorOpen(false);
+            }
+          }
+          if (isNavOpen && navDialogRef.current) {
+            const rect = navDialogRef.current.getBoundingClientRect();
+            if (
+              event.target instanceof Node &&
+              navDialogRef.current.open &&
+              (event.clientX < rect.left ||
+                event.clientX > rect.right ||
+                event.clientY < rect.top ||
+                event.clientY > rect.bottom)
+            ) {
+              setNavOpen(false);
+            }
+          }
+        },
+        { signal: abortController.signal }
+      );
+    }
+
+    return () => {
+      abortController.abort();
+    };
+  }, [isCreateActorOpen, isNavOpen]);
+
+  // Dialog close event (esc, etc)
+  useEffect(() => {
+    const createDialog = createActorDialogRef.current;
+    const navDialog = navDialogRef.current;
+
+    const abortController = new AbortController();
+
+    if (createDialog) {
+      createDialog.addEventListener("close", () => setCreateActorOpen(false), {
+        signal: abortController.signal
+      });
+    }
+    if (navDialog) {
+      navDialog.addEventListener("close", () => setNavOpen(false), {
+        signal: abortController.signal
+      });
+    }
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
   return (
     <div className="flex">
@@ -43,18 +162,21 @@ export default function ActorsPage() {
           <button
             id="nav-trigger"
             className="material-symbols-rounded flex size-10 items-center justify-center rounded-full active:bg-stone-100"
+            onClick={() => setNavOpen(true)}
           >
             menu
           </button>
         </header>
         <dialog
           id="nav"
+          ref={navDialogRef}
           className="h-full max-h-full w-full max-w-xs bg-white backdrop:bg-black/30"
         >
           <header className="flex h-16 items-center justify-between px-4">
             <button
               id="close"
               className="material-symbols-rounded flex size-10 items-center justify-center rounded-full active:bg-stone-100"
+              onClick={() => setNavOpen(false)}
             >
               menu_open
             </button>
@@ -87,13 +209,16 @@ export default function ActorsPage() {
           </hgroup>
           <button
             id="create-actor-trigger"
+            ref={createActorTriggerRef}
             className="btn fixed right-5 bottom-7 z-20 shrink-0 shadow-lg sm:static sm:shadow-none"
+            onClick={() => setCreateActorOpen(true)}
           >
             Create Actor
           </button>
         </header>
         <dialog
           id="create-actor"
+          ref={createActorDialogRef}
           className="mx-auto mt-auto w-full max-w-md rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none bg-white p-5 backdrop:bg-black/30 min-[28rem]:mb-auto min-[28rem]:rounded-b-xl"
         >
           <header>
@@ -103,6 +228,7 @@ export default function ActorsPage() {
                 id="close"
                 type="button"
                 className="material-symbols-rounded flex size-10 items-center justify-center rounded-full active:bg-stone-100"
+                onClick={() => setCreateActorOpen(false)}
               >
                 close
               </button>
