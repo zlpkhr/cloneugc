@@ -51,4 +51,4 @@ def extract_audio(video_url: str) -> str:
 
 
 def reverse_absolute(*args, **kwargs):
-    return urllib.parse.urljoin(settings.APP_URL, reverse(*args, **kwargs))
+    return urllib.parse.urljoin(settings.BASE_URL, reverse(*args, **kwargs))

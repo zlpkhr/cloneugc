@@ -14,7 +14,6 @@ import importlib
 import os
 from pathlib import Path
 from socket import gethostbyname, gethostname
-from urllib.parse import urlparse
 
 if importlib.util.find_spec("dotenv"):
     from dotenv import load_dotenv
@@ -29,31 +28,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-if os.getenv("DJANGO_DEBUG") is not None:
-    DEBUG = True
-else:
-    DEBUG = False
+DEBUG = os.getenv("DJANGO_DEBUG") is not None
 
-APP_URL = os.getenv("DJANGO_APP_URL")
-
-APP_HOST = urlparse(APP_URL).netloc
+BASE_URL = os.getenv("DJANGO_BASE_URL")
 
 ALLOWED_HOSTS = [
     gethostbyname(gethostname()),
-    APP_HOST,
-    "www.cloneugc.com",
-    "cloneugc.com",
     "127.0.0.1",
     "localhost",
     "0.0.0.0",
+    "main-flounder-genuine.ngrok-free.app",
+    "cloneugc.com",
 ]
-
-if os.getenv("ALLOWED_HOSTS") is not None:
-    ALLOWED_HOSTS.extend(os.getenv("ALLOWED_HOSTS").split(","))
 
 
 # Application definition
@@ -102,9 +90,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # CSRF
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://www.cloneugc.com",
     "https://cloneugc.com",
-    "https://d1ywpr9trlaols.cloudfront.net",
 ]
 
 
@@ -163,8 +149,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static" / "dist",
 ]
 
-STATIC_ROOT = BASE_DIR.parent / "staticfiles"
-
 
 # Storage
 
@@ -172,8 +156,8 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            "bucket_name": os.getenv("S3_BUCKET_NAME"),
             "region_name": "us-east-1",
+            "bucket_name": os.getenv("S3_BUCKET_NAME"),
             "max_memory_size": 128 * 1024 * 1024,
             "file_overwrite": False,
         },
@@ -190,16 +174,6 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# Cartesia
-
-CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")
-
-
-# Fal
-
-FAL_API_KEY = os.getenv("FAL_API_KEY")
-
-
 # Celery
 
 CELERY_BROKER_TRANSPORT_OPTIONS = {
@@ -210,6 +184,17 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {
     }
 }
 
+
 # Graphene
 
 GRAPHENE = {"SCHEMA": "config.schema.schema"}
+
+
+# Cartesia
+
+CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")
+
+
+# Fal
+
+FAL_API_KEY = os.getenv("FAL_API_KEY")
