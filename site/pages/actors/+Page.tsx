@@ -1,12 +1,17 @@
-import "media-chrome";
-import {
-  MediaControlBar,
-  MediaController,
-  MediaPlayButton
-} from "media-chrome/react";
 import { useEffect, useRef, useState } from "react";
 import { useData } from "vike-react/useData";
 import type { ActorsData } from "./+data";
+import { clientOnly } from "vike-react/clientOnly";
+
+const MediaControlBar = clientOnly(() =>
+  import("media-chrome/react").then((m) => m.MediaControlBar)
+);
+const MediaController = clientOnly(() =>
+  import("media-chrome/react").then((m) => m.MediaController)
+);
+const MediaPlayButton = clientOnly(() =>
+  import("media-chrome/react").then((m) => m.MediaPlayButton)
+);
 
 export default function ActorsPage() {
   const { actors } = useData<ActorsData>();
@@ -181,7 +186,7 @@ export default function ActorsPage() {
                     slot="media"
                     className="size-full rounded-xl object-cover"
                     src={actor.videoUrl}
-                  ></video>
+                  />
                   <MediaControlBar className="p-4">
                     <MediaPlayButton className="rounded-full p-2.5">
                       <span slot="play" className="material-symbols-rounded">
