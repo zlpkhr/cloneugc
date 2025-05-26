@@ -187,7 +187,12 @@ CELERY_BROKER_TRANSPORT_OPTIONS = {
 
 # Graphene
 
-GRAPHENE = {"SCHEMA": "config.schema.schema"}
+GRAPHENE = {
+    "SCHEMA": "config.schema.schema",
+    "CAMELCASE_ERRORS": True,
+}
+
+GRAPHIQL = DEBUG
 
 
 # Cartesia
