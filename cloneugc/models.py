@@ -3,7 +3,7 @@ from django.db import models
 from cloneugc.utils import shortid
 
 
-def instance_path(instance, filename: str):
+def instance_path(instance: models.Model, filename: str):
     return f"{instance.pk}-{filename}"
 
 
