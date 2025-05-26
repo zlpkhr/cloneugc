@@ -19,7 +19,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-dev
 
 COPY . .
-COPY --from=build /cloneugc/src/static/dist/ ./src/static/dist/
+COPY --from=build /cloneugc/static/dist/ ./static/dist/
 
 EXPOSE 8000
 
@@ -27,4 +27,4 @@ RUN uv run --no-sync manage.py collectstatic --clear --noinput
 
 RUN uv run --no-sync manage.py migrate
 
-CMD ["uv", "run", "--no-sync", "gunicorn", "--chdir", "/cloneugc/src", "--workers", "3", "--bind", "0.0.0.0:8000", "--timeout", "120", "config.wsgi:application"]
+CMD ["uv", "run", "--no-sync", "gunicorn", "--workers", "3", "--bind", "0.0.0.0:8000", "--timeout", "120", "config.wsgi:application"]

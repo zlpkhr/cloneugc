@@ -13,6 +13,4 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 COPY . .
 
-ENV PYTHONPATH=src
-
 CMD ["uv", "run", "--no-sync", "celery", "-A", "config", "worker", "--loglevel=info"]
