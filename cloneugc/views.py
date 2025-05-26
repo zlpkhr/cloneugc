@@ -13,10 +13,6 @@ from cloneugc.services import lipsyncer
 from cloneugc.tasks import clone_actor
 
 
-def index(request: HttpRequest):
-    return HttpResponse("Hello, World!")
-
-
 class ActorListCreateView(View):
     def get(self, request: HttpRequest):
         actors = Actor.objects.all().order_by("-created_at")

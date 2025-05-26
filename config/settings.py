@@ -176,15 +176,6 @@ STORAGES = {
             "region_name": "us-east-1",
             "max_memory_size": 128 * 1024 * 1024,
             "file_overwrite": False,
-            "gzip": True,
-            "gzip_content_types": [
-                "video/mp4",
-                "video/webm",
-                "video/ogg",
-                "video/avi",
-                "video/mpeg",
-                "video/quicktime",
-            ],
         },
     },
     "staticfiles": {

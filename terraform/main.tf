@@ -1,10 +1,7 @@
 terraform {
-  backend "s3" {
-    bucket       = "cloneugc-terraform-state"
-    key          = "terraform.tfstate"
-    region       = "us-east-1"
-    use_lockfile = true
-  }
+
+  required_version = ">= 1.2.0"
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -12,7 +9,12 @@ terraform {
     }
   }
 
-  required_version = ">= 1.2.0"
+  backend "s3" {
+    region       = "us-east-1"
+    bucket       = "cloneugc-terraform-state"
+    key          = "terraform.tfstate"
+    use_lockfile = true
+  }
 }
 
 provider "aws" {
@@ -22,10 +24,6 @@ provider "aws" {
 resource "aws_s3_bucket" "media_bucket" {
   bucket_prefix = "cloneugc-media-"
   force_destroy = true
-
-  tags = {
-    Name = "cloneugc-media"
-  }
 }
 
 output "media_bucket_name" {

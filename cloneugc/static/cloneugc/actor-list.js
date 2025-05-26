@@ -90,5 +90,5 @@ closeBtn.addEventListener("click", () => {
 
   closeBtn.addEventListener("click", () => {
     nav.close();
-});
+  });
 }
