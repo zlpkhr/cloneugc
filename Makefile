@@ -5,6 +5,7 @@ install:
 	bun install --frozen-lockfile
 
 dev:
+	docker compose up -d
 	bun run postcss ./static/*.css -u @tailwindcss/postcss -d ./static/dist -w > /dev/null 2>&1 & \
 	uv run manage.py runserver
 
