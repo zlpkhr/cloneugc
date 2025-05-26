@@ -21,6 +21,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "media_bucket" {
   bucket_prefix = "cloneugc-media-"
+  force_destroy = true
 
   tags = {
     Name = "cloneugc-media"
