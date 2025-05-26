@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import ListView, View
 
 from cloneugc.forms import ActorForm, VideoForm
-from cloneugc.models import Actor, Generation
+from cloneugc.models import Actor, Generation, GenerationStatus
 from cloneugc.services import lipsyncer
 from cloneugc.tasks import clone_actor
 
@@ -53,9 +53,7 @@ class CreateVideoView(View):
         form = VideoForm(request.POST)
 
         if form.is_valid():
-            gen = Generation.objects.create(
-                actor=actor, status="Waiting for processing"
-            )
+            gen = Generation.objects.create(actor=actor)
 
             clone_actor.delay(gen.id, form.cleaned_data["script"])
 
@@ -71,7 +69,7 @@ def lipsyncer_callback(request: HttpRequest):
 
     gen = Generation.objects.get(lipsync_request_id=result["id"])
 
-    gen.status = "Finishing touches"
+    gen.status = GenerationStatus.SAVING_VIDEO
     gen.save()
 
     response = requests.get(result["video_url"])
@@ -79,7 +77,7 @@ def lipsyncer_callback(request: HttpRequest):
     # TODO: It might not be a mp4, but we don't care
     gen.video.save(f"{gen.actor.name}.mp4", ContentFile(response.content))
 
-    gen.status = "Done"
+    gen.status = GenerationStatus.COMPLETED
     gen.save()
 
     return HttpResponse(status=204)

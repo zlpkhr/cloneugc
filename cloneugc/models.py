@@ -24,6 +24,15 @@ class Actor(models.Model):
         return self.voice_id is not None
 
 
+class GenerationStatus(models.TextChoices):
+    WAITING_PROCESSING = "waiting_processing", "Waiting Processing"
+    CLONING_VOICE = "cloning_voice", "Cloning Voice"
+    GENERATING_AUDIO = "generating_audio", "Generating Audio"
+    SYNCING_LIPS = "syncing_lips", "Syncing Lips"
+    SAVING_VIDEO = "saving_video", "Saving Video"
+    COMPLETED = "completed", "Completed"
+
+
 class Generation(models.Model):
     id = models.CharField(
         primary_key=True, max_length=6, default=shortid, editable=False
@@ -31,7 +40,11 @@ class Generation(models.Model):
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
     audio = models.FileField(upload_to=instance_path, null=True)
     video = models.FileField(upload_to=instance_path, null=True)
-    status = models.TextField()
+    status = models.CharField(
+        max_length=20,
+        choices=GenerationStatus.choices,
+        default=GenerationStatus.WAITING_PROCESSING,
+    )
     lipsync_request_id = models.TextField(null=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

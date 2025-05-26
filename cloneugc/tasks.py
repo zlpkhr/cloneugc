@@ -1,7 +1,7 @@
 from celery import shared_task
 from django.core.files.base import ContentFile
 
-from cloneugc.models import Generation
+from cloneugc.models import Generation, GenerationStatus
 from cloneugc.services import lipsyncer, voice_cloner
 from cloneugc.utils import extract_audio, reverse_absolute
 
@@ -11,7 +11,7 @@ def clone_actor(gen_id: str, script: str):
     gen = Generation.objects.get(id=gen_id)
 
     if not gen.actor.voice_cloned:
-        gen.status = "First generation: cloning voice"
+        gen.status = GenerationStatus.CLONING_VOICE
         gen.save()
 
         temp_audio = extract_audio(gen.actor.video.url)
@@ -20,14 +20,14 @@ def clone_actor(gen_id: str, script: str):
             gen.actor.voice_id = voice_cloner.clone_voice(gen.actor.name, audio_file)
             gen.actor.save()
 
-    gen.status = "Generating audio from script"
+    gen.status = GenerationStatus.GENERATING_AUDIO
     gen.save()
 
     audio = voice_cloner.tts(gen.actor.voice_id, script)
 
     gen.audio.save(f"{gen.actor.name}.mp3", ContentFile(audio))
 
-    gen.status = "Syncing lips"
+    gen.status = GenerationStatus.SYNCING_LIPS
     gen.save()
 
     request_id = lipsyncer.lipsync(
