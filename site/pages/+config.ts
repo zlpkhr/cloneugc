@@ -3,5 +3,6 @@ import type { Config } from "vike/types";
 
 export default {
   extends: vikeReact,
-  prerender: true
+  prerender: true,
+  title: "CloneUGC",
 } satisfies Config;
