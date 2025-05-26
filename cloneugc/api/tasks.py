@@ -1,9 +1,9 @@
 from celery import shared_task
 from django.core.files.base import ContentFile
 
-from api.models import Generation, GenerationStatus
-from api.services import lipsyncer, voice_cloner
-from api.utils import extract_audio, reverse_absolute
+from cloneugc.api.models import Generation, GenerationStatus
+from cloneugc.api.services import lipsyncer, voice_cloner
+from cloneugc.api.utils import extract_audio, reverse_absolute
 
 
 @shared_task

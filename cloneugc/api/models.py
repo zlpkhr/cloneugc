@@ -1,6 +1,6 @@
 from django.db import models
 
-from api.utils import shortid
+from cloneugc.api.utils import shortid
 
 
 def instance_path(instance: models.Model, filename: str):

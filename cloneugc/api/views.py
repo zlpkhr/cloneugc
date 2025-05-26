@@ -7,10 +7,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView, View
 
-from api.forms import ActorForm, VideoForm
-from api.models import Actor, Generation, GenerationStatus
-from api.services import lipsyncer
-from api.tasks import clone_actor
+from cloneugc.api.forms import ActorForm, VideoForm
+from cloneugc.api.models import Actor, Generation, GenerationStatus
+from cloneugc.api.services import lipsyncer
+from cloneugc.api.tasks import clone_actor
 
 
 class ActorListCreateView(View):
