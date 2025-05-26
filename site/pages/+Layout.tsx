@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
-type ActorsLayoutProps = {
+type LayoutProps = {
   children: ReactNode;
 };
 
-export default function ActorsLayout(props: ActorsLayoutProps) {
+export default function Layout(props: LayoutProps) {
   // Dialog state for navigation
   const [isNavOpen, setNavOpen] = useState(false);
   const navDialogRef = useRef<HTMLDialogElement>(null);
