@@ -6,9 +6,14 @@ from cloneugc.api.tasks import clone_actor
 
 
 class ActorType(DjangoObjectType):
+    video_url = graphene.String()
+
     class Meta:
         model = Actor
-        fields = "__all__"
+        fields = ("id", "name")
+
+    def resolve_video_url(self, info):
+        return self.video.url
 
 
 class GenerationType(DjangoObjectType):

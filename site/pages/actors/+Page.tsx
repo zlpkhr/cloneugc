@@ -5,9 +5,11 @@ import {
   MediaPlayButton
 } from "media-chrome/react";
 import { useEffect, useRef, useState } from "react";
+import { useData } from "vike-react/useData";
+import type { ActorsData } from "./+data";
 
 export default function ActorsPage() {
-  const actors: { id: number; name: string; video: { url: string } }[] = [];
+  const { actors } = useData<ActorsData>();
 
   // Dialog state
   const [isCreateActorOpen, setCreateActorOpen] = useState(false);
@@ -178,7 +180,7 @@ export default function ActorsPage() {
                   <video
                     slot="media"
                     className="size-full rounded-xl object-cover"
-                    src={actor.video.url}
+                    src={actor.videoUrl}
                   ></video>
                   <MediaControlBar className="p-4">
                     <MediaPlayButton className="rounded-full p-2.5">

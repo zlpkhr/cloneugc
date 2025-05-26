@@ -11,5 +11,8 @@
     "postcss-cli": "^11.0.1",
     "prettier": "^3.5.3",
     "tailwindcss": "^4.1.7"
+  },
+  "graphql": {
+    "schema": "http://localhost:8000/graphql/"
   }
 }
