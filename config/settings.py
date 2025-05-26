@@ -176,6 +176,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Celery
 
+CELERY_BROKER_URL = "sqs://"
+
 CELERY_BROKER_TRANSPORT_OPTIONS = {
     "predefined_queues": {
         "celery": {
