@@ -6,6 +6,15 @@ import {
   MediaPlayButton
 } from "../../components/media-chrome";
 
+const friendlyStatus: Record<string, string> = {
+  WAITING_PROCESSING: "Waiting Processing",
+  CLONING_VOICE: "Cloning Voice",
+  GENERATING_AUDIO: "Generating Audio",
+  SYNCING_LIPS: "Syncing Lips",
+  SAVING_VIDEO: "Saving Video",
+  COMPLETED: "Completed"
+};
+
 export default function VideosPage() {
   const data = useData<VideosData>() ?? { generations: [] };
 
@@ -61,7 +70,7 @@ export default function VideosPage() {
             ) : (
               <div className="flex aspect-[9/16] items-center justify-center rounded-xl border-2 border-dashed border-stone-200 bg-stone-100 p-4">
                 <span className="text-center text-xl font-semibold text-stone-500">
-                  {gen.status}
+                  {friendlyStatus[gen.status]}
                 </span>
               </div>
             )

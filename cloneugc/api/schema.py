@@ -48,7 +48,7 @@ class Query(graphene.ObjectType):
     actor = graphene.Field(ActorType, id=graphene.String())
 
     def resolve_actors(self, info):
-        return Actor.objects.all()
+        return Actor.objects.all().order_by('-created_at')
 
     def resolve_generations(self, info):
         return Generation.objects.all()
