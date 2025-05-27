@@ -90,3 +90,23 @@ output "server_public_ip" {
   value       = aws_instance.server.public_ip
   description = "The public IP of the server."
 }
+
+resource "aws_route53_zone" "cloneugc_zone" {
+  name = "cloneugc.com."
+}
+
+resource "aws_route53_record" "cloneugc_com" {
+  zone_id = aws_route53_zone.cloneugc_zone.zone_id
+  name    = "cloneugc.com"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.server.public_ip]
+}
+
+resource "aws_route53_record" "www_cloneugc_com" {
+  zone_id = aws_route53_zone.cloneugc_zone.zone_id
+  name    = "www.cloneugc.com"
+  type    = "CNAME"
+  ttl     = 300
+  records = ["cloneugc.com"]
+}
