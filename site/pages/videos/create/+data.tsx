@@ -29,7 +29,7 @@ export async function data(pageContext: PageContext) {
   const { data } = (await response.json()) as {
     data: {
       actor: {
-        id: number;
+        id: string;
         name: string;
         videoUrl: string;
         createdAt: string;

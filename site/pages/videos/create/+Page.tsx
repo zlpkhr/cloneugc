@@ -1,6 +1,8 @@
 import { useData } from "vike-react/useData";
 import type { CreateVideoData } from "./+data";
 import { clientOnly } from "vike-react/clientOnly";
+import type { FormEventHandler } from "react";
+import { navigate } from "vike/client/router";
 
 const MediaControlBar = clientOnly(() =>
   import("media-chrome/react").then((m) => m.MediaControlBar)
@@ -12,8 +14,54 @@ const MediaPlayButton = clientOnly(() =>
   import("media-chrome/react").then((m) => m.MediaPlayButton)
 );
 
+async function createGeneration(input: { actorId: string; script: string }) {
+  const response = await fetch("/graphql/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      query: /* GraphQL */ `
+        mutation CreateGeneration($input: GenerationInput!) {
+          createGeneration(input: $input) {
+            id
+          }
+        }
+      `,
+      variables: {
+        input
+      }
+    })
+  });
+
+  const { data } = (await response.json()) as {
+    data: {
+      createGeneration: {
+        id: string;
+      };
+    };
+  };
+
+  return data.createGeneration.id;
+}
 export default function CreateVideoPage() {
   const { actor } = useData<CreateVideoData>();
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const script = formData.get("script");
+
+    if (!script) {
+      throw new Error("Script is required");
+    }
+
+    await createGeneration({ actorId: actor.id, script: script.toString() });
+
+    navigate("/videos");
+  };
 
   return (
     <div className="flex h-screen">
@@ -51,11 +99,7 @@ export default function CreateVideoPage() {
             Created {actor.createdAt}
           </p>
         </hgroup>
-        <form
-          action={`/videos/create?actor_id=${actor.id}`}
-          method="post"
-          className="mt-6"
-        >
+        <form onSubmit={handleSubmit} method="post" className="mt-6">
           <textarea
             name="script"
             id="script"
@@ -63,7 +107,7 @@ export default function CreateVideoPage() {
             placeholder="Enter your script here..."
             rows={8}
             required
-          ></textarea>
+          />
           <div className="mt-8 flex justify-end">
             <button
               type="submit"
