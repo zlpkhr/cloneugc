@@ -30,21 +30,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG") is not None
 
-SECRET_KEY = "inecure-secret-key-please-change-it-or-you-will-be-fired"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-BASE_URL = (
-    "https://main-flounder-genuine.ngrok-free.app" if DEBUG else "https://cloneugc.com"
-)
+BASE_URL = os.getenv("BASE_URL")
 
 ALLOWED_HOSTS = [
     gethostbyname(gethostname()),
     "127.0.0.1",
     "localhost",
     "0.0.0.0",
-    "main-flounder-genuine.ngrok-free.app",
     "cloneugc.com",
+    "main-flounder-genuine.ngrok-free.app",
 ]
 
 
@@ -94,6 +92,7 @@ WSGI_APPLICATION = "cloneugc.wsgi.application"
 # CSRF
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://main-flounder-genuine.ngrok-free.app",
     "https://cloneugc.com",
 ]
 
@@ -104,11 +103,11 @@ CSRF_TRUSTED_ORIGINS = [
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "USER": "cloneugc",
-        "PASSWORD": "p@ssw0rd",
-        "HOST": "localhost",
-        "PORT": 5432,
-        "NAME": "cloneugc",
+        "USER": os.getenv("PG_USER", "cloneugc"),
+        "PASSWORD": os.getenv("PG_PASSWORD", "p@ssw0rd"),
+        "HOST": os.getenv("PG_HOST", "localhost"),
+        "PORT": os.getenv("PG_PORT", 5432),
+        "NAME": os.getenv("PG_NAME", "cloneugc"),
     }
 }
 
@@ -187,13 +186,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CELERY_BROKER_URL = "sqs://"
 
-CELERY_BROKER_TRANSPORT_OPTIONS = {
-    "predefined_queues": {
-        "celery": {
-            "url": os.getenv("SQS_CELERY_QUEUE_URL"),
+SQS_CELERY_QUEUE_URL = os.getenv("SQS_CELERY_QUEUE_URL")
+
+if SQS_CELERY_QUEUE_URL is not None:
+    CELERY_BROKER_TRANSPORT_OPTIONS = {
+        "predefined_queues": {
+            "celery": {
+                "url": SQS_CELERY_QUEUE_URL,
+            }
         }
     }
-}
 
 
 # Graphene

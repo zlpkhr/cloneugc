@@ -62,7 +62,7 @@ export default function CreateVideoPage() {
 
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
-      <aside className="relative flex-1 bg-black shrink">
+      <aside className="relative flex-1 shrink bg-black">
         <a
           href="/actors"
           className="bg-media-control hover:bg-media-control-hover absolute top-4 left-4 z-10 flex size-11 items-center justify-center rounded-full"
@@ -71,7 +71,7 @@ export default function CreateVideoPage() {
             arrow_back
           </span>
         </a>
-        <MediaController className="aspect-square absolute inset-0 size-full bg-black">
+        <MediaController className="absolute inset-0 aspect-square size-full bg-black">
           <video
             slot="media"
             className="size-full bg-black object-contain"
@@ -89,7 +89,7 @@ export default function CreateVideoPage() {
           </MediaControlBar>
         </MediaController>
       </aside>
-      <main className="max-w-lg w-full bg-white p-7 shrink-0">
+      <main className="w-full max-w-lg shrink-0 bg-white p-7">
         <hgroup>
           <h2 className="text-2xl font-bold">{data.actor.name}</h2>
           <p className="text-lg font-medium text-stone-500">
