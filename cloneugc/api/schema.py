@@ -1,4 +1,5 @@
 import graphene
+from django.core.cache import cache
 from graphene_django import DjangoObjectType
 
 from cloneugc.api.models import Actor, Generation
@@ -13,7 +14,14 @@ class ActorType(DjangoObjectType):
         fields = ("id", "name", "created_at")
 
     def resolve_video_url(self, info):
-        return self.video.url
+        cache_key = f"actor_video_url_{self.id}"
+        url = cache.get(cache_key)
+
+        if url is None:
+            url = self.video.url
+            cache.set(cache_key, url, 600)
+
+        return url
 
 
 class GenerationType(DjangoObjectType):
@@ -24,7 +32,14 @@ class GenerationType(DjangoObjectType):
         fields = ("id", "status", "created_at")
 
     def resolve_video_url(self, info):
-        return self.video.url
+        cache_key = f"generation_video_url_{self.id}"
+        url = cache.get(cache_key)
+
+        if url is None:
+            url = self.video.url
+            cache.set(cache_key, url, 600)
+
+        return url
 
 
 class Query(graphene.ObjectType):
