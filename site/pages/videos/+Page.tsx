@@ -21,7 +21,7 @@ export default function VideosPage() {
         <section className="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
           {data.generations.map((gen) =>
             gen.videoUrl ? (
-              <figure className="relative" key={gen.id}>
+              <figure className="relative aspect-[9/16] bg-black rounded-xl" key={gen.id}>
                 <figcaption className="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4 text-xl font-semibold text-white text-shadow-xs">
                   {gen.createdAt.toLocaleDateString("en-US", {
                     month: "short",
