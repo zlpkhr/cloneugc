@@ -1,5 +1,5 @@
 export async function data() {
-  const response = await fetch("http://localhost:8000/graphql/", {
+  const response = await fetch("/graphql/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,4 +38,4 @@ export async function data() {
   };
 }
 
-export type VideosData = Awaited<ReturnType<typeof data>>;
+export type VideosData = Awaited<ReturnType<typeof data> | undefined>;

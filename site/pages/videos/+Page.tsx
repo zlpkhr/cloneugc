@@ -1,6 +1,6 @@
 import { clientOnly } from "vike-react/clientOnly";
 import { useData } from "vike-react/useData";
-import type { VideosData } from "./+data";
+import type { VideosData } from "./+data.client";
 
 const MediaControlBar = clientOnly(() =>
   import("media-chrome/react").then((m) => m.MediaControlBar)
@@ -13,7 +13,11 @@ const MediaPlayButton = clientOnly(() =>
 );
 
 export default function VideosPage() {
-  const { generations } = useData<VideosData>();
+  const data = useData<VideosData>();
+
+  if (!data) {
+    return <div>No videos found</div>;
+  }
 
   return (
     <div className="flex-1">
@@ -25,7 +29,7 @@ export default function VideosPage() {
       </hgroup>
       <main className="mt-7 px-7 pb-10 sm:mt-10">
         <section className="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
-          {generations.map((gen) =>
+          {data.generations.map((gen) =>
             gen.videoUrl ? (
               <figure className="relative" key={gen.id}>
                 <figcaption className="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4 text-xl font-semibold text-white text-shadow-xs">

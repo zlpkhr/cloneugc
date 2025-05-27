@@ -1,5 +1,5 @@
 import { useData } from "vike-react/useData";
-import type { CreateVideoData } from "./+data";
+import type { CreateVideoData } from "./+data.client";
 import { clientOnly } from "vike-react/clientOnly";
 import type { FormEventHandler } from "react";
 import { navigate } from "vike/client/router";
@@ -46,7 +46,11 @@ async function createGeneration(input: { actorId: string; script: string }) {
   return data.createGeneration.id;
 }
 export default function CreateVideoPage() {
-  const { actor } = useData<CreateVideoData>();
+  const data = useData<CreateVideoData>();
+
+  if (!data) {
+    return <div>Actor not found</div>;
+  }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -58,7 +62,10 @@ export default function CreateVideoPage() {
       throw new Error("Script is required");
     }
 
-    await createGeneration({ actorId: actor.id, script: script.toString() });
+    await createGeneration({
+      actorId: data.actor.id,
+      script: script.toString()
+    });
 
     navigate("/videos");
   };
@@ -78,7 +85,7 @@ export default function CreateVideoPage() {
           <video
             slot="media"
             className="size-full object-contain"
-            src={actor.videoUrl}
+            src={data.actor.videoUrl}
           />
           <MediaControlBar className="p-4">
             <MediaPlayButton className="rounded-full p-2.5">
@@ -94,9 +101,9 @@ export default function CreateVideoPage() {
       </aside>
       <main className="w-lg bg-white p-7">
         <hgroup>
-          <h2 className="text-2xl font-bold">{actor.name}</h2>
+          <h2 className="text-2xl font-bold">{data.actor.name}</h2>
           <p className="text-lg font-medium text-stone-500">
-            Created {actor.createdAt}
+            Created {data.actor.createdAt}
           </p>
         </hgroup>
         <form onSubmit={handleSubmit} method="post" className="mt-6">

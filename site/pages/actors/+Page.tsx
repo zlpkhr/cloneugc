@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useData } from "vike-react/useData";
-import type { ActorsData } from "./+data";
+import type { ActorsData } from "./+data.client";
 import { clientOnly } from "vike-react/clientOnly";
 
 const MediaControlBar = clientOnly(() =>
@@ -14,7 +14,11 @@ const MediaPlayButton = clientOnly(() =>
 );
 
 export default function ActorsPage() {
-  const { actors } = useData<ActorsData>();
+  const data = useData<ActorsData>();
+
+  if (!data) {
+    return <div>No actors found</div>;
+  }
 
   // Dialog state
   const [isCreateActorOpen, setCreateActorOpen] = useState(false);
@@ -167,8 +171,8 @@ export default function ActorsPage() {
       </dialog>
       <main className="mt-7 px-7 pb-10 sm:mt-10">
         <section className="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
-          {actors.length > 0 ? (
-            actors.map((actor) => (
+          {data.actors.length > 0 ? (
+            data.actors.map((actor) => (
               <figure className="relative" key={actor.id}>
                 <figcaption className="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4">
                   <a
