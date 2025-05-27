@@ -1,18 +1,12 @@
 import { useEffect, useRef, useState, type FormEventHandler } from "react";
 import { useData } from "vike-react/useData";
-import type { ActorsData } from "./+data.client";
-import { clientOnly } from "vike-react/clientOnly";
 import { reload } from "vike/client/router";
-
-const MediaControlBar = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaControlBar)
-);
-const MediaController = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaController)
-);
-const MediaPlayButton = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaPlayButton)
-);
+import {
+  MediaControlBar,
+  MediaController,
+  MediaPlayButton
+} from "../../components/media-chrome";
+import type { ActorsData } from "./+data.shared";
 
 async function createActor(name: string, video: File) {
   const formData = new FormData();
@@ -33,10 +27,6 @@ async function createActor(name: string, video: File) {
 
 export default function ActorsPage() {
   const data = useData<ActorsData>();
-
-  if (!data) {
-    return <div>No actors found</div>;
-  }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -213,10 +203,10 @@ export default function ActorsPage() {
                     {actor.name}
                   </a>
                 </figcaption>
-                <MediaController className="aspect-[9/16] size-full rounded-xl">
+                <MediaController className="aspect-[9/16] size-full rounded-xl bg-black">
                   <video
                     slot="media"
-                    className="size-full rounded-xl object-cover"
+                    className="size-full rounded-xl bg-black object-cover"
                     src={actor.videoUrl}
                   />
                   <MediaControlBar className="p-4">

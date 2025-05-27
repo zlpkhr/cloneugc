@@ -1,23 +1,13 @@
-import { clientOnly } from "vike-react/clientOnly";
 import { useData } from "vike-react/useData";
-import type { VideosData } from "./+data.client";
-
-const MediaControlBar = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaControlBar)
-);
-const MediaController = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaController)
-);
-const MediaPlayButton = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaPlayButton)
-);
+import type { VideosData } from "./+data.shared";
+import {
+  MediaControlBar,
+  MediaController,
+  MediaPlayButton
+} from "../../components/media-chrome";
 
 export default function VideosPage() {
   const data = useData<VideosData>();
-
-  if (!data) {
-    return <div>No videos found</div>;
-  }
 
   return (
     <div className="flex-1">
@@ -47,10 +37,10 @@ export default function VideosPage() {
                     download
                   </span>
                 </a>
-                <MediaController className="aspect-[9/16] size-full rounded-xl">
+                <MediaController className="aspect-[9/16] size-full rounded-xl bg-black">
                   <video
                     slot="media"
-                    className="size-full rounded-xl object-cover"
+                    className="size-full rounded-xl bg-black object-cover"
                     src={gen.videoUrl}
                   />
                   <MediaControlBar className="p-4">

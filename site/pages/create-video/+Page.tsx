@@ -1,18 +1,12 @@
 import { useData } from "vike-react/useData";
-import type { CreateVideoData } from "./+data.client";
-import { clientOnly } from "vike-react/clientOnly";
+import type { CreateVideoData } from "./+data.shared";
 import type { FormEventHandler } from "react";
 import { navigate } from "vike/client/router";
-
-const MediaControlBar = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaControlBar)
-);
-const MediaController = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaController)
-);
-const MediaPlayButton = clientOnly(() =>
-  import("media-chrome/react").then((m) => m.MediaPlayButton)
-);
+import {
+  MediaControlBar,
+  MediaController,
+  MediaPlayButton
+} from "../../components/media-chrome";
 
 async function createGeneration(input: { actorId: string; script: string }) {
   const response = await fetch("/graphql/", {
@@ -48,10 +42,6 @@ async function createGeneration(input: { actorId: string; script: string }) {
 export default function CreateVideoPage() {
   const data = useData<CreateVideoData>();
 
-  if (!data) {
-    return <div>Actor not found</div>;
-  }
-
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
@@ -81,10 +71,10 @@ export default function CreateVideoPage() {
             arrow_back
           </span>
         </a>
-        <MediaController className="aspect-square size-full flex-1">
+        <MediaController className="aspect-square size-full flex-1 bg-black">
           <video
             slot="media"
-            className="size-full object-contain"
+            className="size-full bg-black object-contain"
             src={data.actor.videoUrl}
           />
           <MediaControlBar className="p-4">

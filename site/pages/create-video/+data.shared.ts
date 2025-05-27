@@ -3,7 +3,7 @@ import type { PageContext } from "vike/types";
 export async function data(pageContext: PageContext) {
   const actorId = pageContext.urlParsed.search["actor_id"];
 
-  const response = await fetch("/graphql/", {
+  const response = await fetch("http://localhost:3000/graphql/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,4 +49,4 @@ export async function data(pageContext: PageContext) {
   };
 }
 
-export type CreateVideoData = Awaited<ReturnType<typeof data> | undefined>;
+export type CreateVideoData = Awaited<ReturnType<typeof data>>;
