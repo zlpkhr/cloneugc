@@ -110,3 +110,60 @@ resource "aws_route53_record" "www_cloneugc_com" {
   ttl     = 300
   records = ["cloneugc.com"]
 }
+
+resource "random_password" "db_password" {
+  length  = 32
+  special = false
+}
+
+resource "aws_secretsmanager_secret" "db_password" {
+  name = "cloneugc-db-password"
+}
+
+resource "aws_secretsmanager_secret_version" "db_password_version" {
+  secret_id     = aws_secretsmanager_secret.db_password.id
+  secret_string = random_password.db_password.result
+}
+
+resource "aws_security_group" "rds_sg" {
+  name_prefix = "cloneugc-rds-sg-"
+  description = "Allow PostgreSQL from app server"
+
+  ingress {
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+    security_groups = [aws_security_group.server_sg.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_db_instance" "cloneugc_db" {
+  identifier             = "cloneugc-db"
+  allocated_storage      = 20
+  engine                 = "postgres"
+  engine_version         = "17.5"
+  instance_class         = "db.t3.micro"
+  username               = "cloneugc"
+  password               = random_password.db_password.result
+  db_name                = "cloneugc"
+  skip_final_snapshot    = false
+  publicly_accessible    = false
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+}
+
+output "rds_endpoint" {
+  value       = aws_db_instance.cloneugc_db.endpoint
+  description = "The endpoint of the RDS instance."
+}
+
+output "rds_secret_arn" {
+  value       = aws_secretsmanager_secret.db_password.arn
+  description = "The ARN of the RDS password secret in Secrets Manager."
+}
