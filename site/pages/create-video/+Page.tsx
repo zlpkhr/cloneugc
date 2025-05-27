@@ -9,7 +9,7 @@ import {
 } from "../../components/media-chrome";
 
 async function createGeneration(input: { actorId: string; script: string }) {
-  const response = await fetch("/graphql/", {
+  const response = await fetch("http://localhost:3000/graphql/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,8 +61,8 @@ export default function CreateVideoPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col sm:flex-row">
-      <aside className="relative flex-1">
+    <div className="flex min-h-screen flex-col lg:flex-row">
+      <aside className="relative flex-1 bg-black shrink">
         <a
           href="/actors"
           className="bg-media-control hover:bg-media-control-hover absolute top-4 left-4 z-10 flex size-11 items-center justify-center rounded-full"
@@ -71,7 +71,7 @@ export default function CreateVideoPage() {
             arrow_back
           </span>
         </a>
-        <MediaController className="aspect-square size-full flex-1 bg-black">
+        <MediaController className="aspect-square absolute inset-0 size-full bg-black">
           <video
             slot="media"
             className="size-full bg-black object-contain"
