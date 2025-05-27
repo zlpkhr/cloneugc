@@ -1,11 +1,13 @@
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
+import { usePageContext } from "vike-react/usePageContext";
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 export default function Layout(props: LayoutProps) {
+  const pageContext = usePageContext();
   // Dialog state for navigation
   const [isNavOpen, setNavOpen] = useState(false);
   const navDialogRef = useRef<HTMLDialogElement>(null);
@@ -84,6 +86,7 @@ export default function Layout(props: LayoutProps) {
         <nav className="flex flex-col gap-y-4">
           <a
             href="/actors"
+            data-active={pageContext.urlPathname === "/actors"}
             className="group flex w-full flex-col items-center justify-center gap-y-1"
           >
             <span className="material-symbols-rounded rounded-full px-3 py-1 group-hover:bg-stone-200 group-data-[active=true]:bg-pink-200 group-data-[active=true]:text-pink-800">
@@ -95,6 +98,7 @@ export default function Layout(props: LayoutProps) {
           </a>
           <a
             href="/videos"
+            data-active={pageContext.urlPathname === "/videos"}
             className="group flex w-full flex-col items-center justify-center gap-y-1"
           >
             <span className="material-symbols-rounded rounded-full px-3 py-1 group-hover:bg-stone-200 group-data-[active=true]:bg-pink-200 group-data-[active=true]:text-pink-800">
