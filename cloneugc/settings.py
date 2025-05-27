@@ -30,11 +30,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
-
 DEBUG = os.getenv("DJANGO_DEBUG") is not None
 
-BASE_URL = os.getenv("DJANGO_BASE_URL")
+SECRET_KEY = (
+    "inecure-secret-key-please-change-it-or-you-will-be-fired"
+    if DEBUG
+    else get_aws_secret("cloneugc-django-secret-key", "us-east-1")
+)
+
+BASE_URL = (
+    "https://main-flounder-genuine.ngrok-free.app" if DEBUG else "https://cloneugc.com"
+)
 
 ALLOWED_HOSTS = [
     gethostbyname(gethostname()),
