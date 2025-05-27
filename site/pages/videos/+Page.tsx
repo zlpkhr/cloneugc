@@ -37,7 +37,7 @@ export default function VideosPage() {
                     download
                   </span>
                 </a>
-                <MediaController className="aspect-[9/16] size-full rounded-xl bg-black">
+                <MediaController className="aspect-[9/16] size-full rounded-xl bg-black absolute inset-0">
                   <video
                     slot="media"
                     className="size-full rounded-xl bg-black object-cover"

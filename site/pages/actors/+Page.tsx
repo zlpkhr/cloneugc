@@ -194,7 +194,7 @@ export default function ActorsPage() {
         <section className="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
           {data.actors.length > 0 ? (
             data.actors.map((actor) => (
-              <figure className="relative" key={actor.id}>
+              <figure className="relative aspect-[9/16] bg-black rounded-xl" key={actor.id}>
                 <figcaption className="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4">
                   <a
                     href={`/create-video?actor_id=${actor.id}`}
@@ -203,7 +203,7 @@ export default function ActorsPage() {
                     {actor.name}
                   </a>
                 </figcaption>
-                <MediaController className="aspect-[9/16] size-full rounded-xl bg-black">
+                <MediaController className="aspect-[9/16] absolute inset-0 size-full rounded-xl bg-black">
                   <video
                     slot="media"
                     className="size-full rounded-xl bg-black object-cover"
