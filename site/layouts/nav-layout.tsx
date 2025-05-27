@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { usePageContext } from "vike-react/usePageContext";
 
-type LayoutProps = {
+type NavLayoutProps = {
   children: ReactNode;
 };
 
-export default function Layout(props: LayoutProps) {
+export function NavLayout(props: NavLayoutProps) {
   const pageContext = usePageContext();
   // Dialog state for navigation
   const [isNavOpen, setNavOpen] = useState(false);
