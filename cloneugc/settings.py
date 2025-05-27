@@ -30,13 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-DEBUG = os.getenv("DJANGO_DEBUG") is not None
+DEBUG = True
 
-SECRET_KEY = (
-    "inecure-secret-key-please-change-it-or-you-will-be-fired"
-    if DEBUG
-    else get_aws_secret("cloneugc-django-secret-key", "us-east-1")
-)
+SECRET_KEY = "inecure-secret-key-please-change-it-or-you-will-be-fired"
 
 BASE_URL = (
     "https://main-flounder-genuine.ngrok-free.app" if DEBUG else "https://cloneugc.com"
@@ -109,8 +105,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "USER": "cloneugc",
-        "PASSWORD": os.getenv("PG_PASSWORD"),
-        "HOST": os.getenv("PG_HOST"),
+        "PASSWORD": "p@ssw0rd",
+        "HOST": "localhost",
         "PORT": 5432,
         "NAME": "cloneugc",
     }
@@ -203,11 +199,9 @@ GRAPHIQL = DEBUG
 
 # Cartesia
 
-CARTESIA_API_KEY = get_aws_secret("cartesia-api-key", "us-east-1").get(
-    "CARTESIA_API_KEY"
-)
+CARTESIA_API_KEY = get_aws_secret("cartesia-api-key", "us-east-1")
 
 
 # Fal
 
-FAL_API_KEY = get_aws_secret("fal_api_key", "us-east-1").get("FAL_API_KEY")
+FAL_API_KEY = get_aws_secret("fal-api-key", "us-east-1")
