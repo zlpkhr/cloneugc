@@ -17,9 +17,14 @@ class ActorType(DjangoObjectType):
 
 
 class GenerationType(DjangoObjectType):
+    video_url = graphene.String()
+
     class Meta:
         model = Generation
-        fields = "__all__"
+        fields = ("id", "status", "created_at")
+
+    def resolve_video_url(self, info):
+        return self.video.url
 
 
 class Query(graphene.ObjectType):

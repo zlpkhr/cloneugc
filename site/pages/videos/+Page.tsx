@@ -1,4 +1,6 @@
 import { clientOnly } from "vike-react/clientOnly";
+import { useData } from "vike-react/useData";
+import type { VideosData } from "./+data";
 
 const MediaControlBar = clientOnly(() =>
   import("media-chrome/react").then((m) => m.MediaControlBar)
@@ -11,14 +13,7 @@ const MediaPlayButton = clientOnly(() =>
 );
 
 export default function VideosPage() {
-  const generations = [] as {
-    id: string;
-    video: {
-      url: string;
-    };
-    created_at: string;
-    status: string;
-  }[];
+  const { generations } = useData<VideosData>();
 
   return (
     <div className="flex-1">
@@ -31,13 +26,17 @@ export default function VideosPage() {
       <main className="mt-7 px-7 pb-10 sm:mt-10">
         <section className="grid grid-cols-[repeat(auto-fit,minmax(--spacing(60),1fr))] gap-5">
           {generations.map((gen) =>
-            gen.video ? (
-              <figure className="relative">
+            gen.videoUrl ? (
+              <figure className="relative" key={gen.id}>
                 <figcaption className="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4 text-xl font-semibold text-white text-shadow-xs">
-                  {gen.created_at}
+                  {gen.createdAt.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric"
+                  })}
                 </figcaption>
                 <a
-                  href={gen.video.url}
+                  target="_blank"
+                  href={gen.videoUrl}
                   className="bg-media-control hover:bg-media-control-hover absolute right-4 bottom-4 z-10 flex size-11 items-center justify-center rounded-full"
                 >
                   <span className="material-symbols-rounded text-media-text">
@@ -48,8 +47,8 @@ export default function VideosPage() {
                   <video
                     slot="media"
                     className="size-full rounded-xl object-cover"
-                    src={gen.video.url}
-                  ></video>
+                    src={gen.videoUrl}
+                  />
                   <MediaControlBar className="p-4">
                     <MediaPlayButton className="rounded-full p-2.5">
                       <span slot="play" className="material-symbols-rounded">
