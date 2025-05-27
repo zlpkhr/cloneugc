@@ -6,7 +6,8 @@ const icons = [
   "close",
   "play_arrow",
   "pause",
-  "download"
+  "download",
+  "arrow_back"
 ].toSorted((a, b) => a.localeCompare(b));
 
 export default function Head() {

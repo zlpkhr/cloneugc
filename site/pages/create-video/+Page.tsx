@@ -61,8 +61,8 @@ export default function CreateVideoPage() {
   };
 
   return (
-    <div className="flex h-screen">
-      <aside className="relative contents">
+    <div className="flex h-screen flex-col sm:flex-row">
+      <aside className="relative flex-1">
         <a
           href="/actors"
           className="bg-media-control hover:bg-media-control-hover absolute top-4 left-4 z-10 flex size-11 items-center justify-center rounded-full"
@@ -89,7 +89,7 @@ export default function CreateVideoPage() {
           </MediaControlBar>
         </MediaController>
       </aside>
-      <main className="w-lg bg-white p-7">
+      <main className="max-w-lg w-full bg-white p-7 shrink-0">
         <hgroup>
           <h2 className="text-2xl font-bold">{data.actor.name}</h2>
           <p className="text-lg font-medium text-stone-500">
