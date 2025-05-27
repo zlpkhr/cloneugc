@@ -10,7 +10,7 @@ class ActorType(DjangoObjectType):
 
     class Meta:
         model = Actor
-        fields = ("id", "name")
+        fields = ("id", "name", "created_at")
 
     def resolve_video_url(self, info):
         return self.video.url
@@ -30,12 +30,16 @@ class GenerationType(DjangoObjectType):
 class Query(graphene.ObjectType):
     actors = graphene.List(ActorType)
     generations = graphene.List(GenerationType)
+    actor = graphene.Field(ActorType, id=graphene.String())
 
     def resolve_actors(self, info):
         return Actor.objects.all()
 
     def resolve_generations(self, info):
         return Generation.objects.all()
+
+    def resolve_actor(self, info, id):
+        return Actor.objects.get(id=id)
 
 
 class GenerationInput(graphene.InputObjectType):
