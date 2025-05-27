@@ -172,7 +172,7 @@ export default function ActorsPage() {
               <figure className="relative" key={actor.id}>
                 <figcaption className="absolute inset-x-0 top-0 z-10 rounded-t-xl bg-linear-to-b from-black/20 to-black/0 p-4">
                   <a
-                    href={`#?actor_id=${actor.id}`}
+                    href={`/videos/create?actor_id=${actor.id}`}
                     className="text-xl font-semibold text-white text-shadow-xs hover:underline"
                   >
                     {actor.name}
