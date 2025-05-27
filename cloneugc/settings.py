@@ -15,6 +15,8 @@ import os
 from pathlib import Path
 from socket import gethostbyname, gethostname
 
+from .utils import get_aws_secret
+
 if importlib.util.find_spec("dotenv"):
     from dotenv import load_dotenv
 
@@ -100,11 +102,11 @@ CSRF_TRUSTED_ORIGINS = [
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "USER": os.getenv("PG_USER"),
+        "USER": "cloneugc",
         "PASSWORD": os.getenv("PG_PASSWORD"),
         "HOST": os.getenv("PG_HOST"),
-        "PORT": os.getenv("PG_PORT"),
-        "NAME": os.getenv("PG_DB"),
+        "PORT": 5432,
+        "NAME": "cloneugc",
     }
 }
 
@@ -199,9 +201,11 @@ GRAPHIQL = DEBUG
 
 # Cartesia
 
-CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")
+CARTESIA_API_KEY = get_aws_secret("cartesia-api-key", "us-east-1").get(
+    "CARTESIA_API_KEY"
+)
 
 
 # Fal
 
-FAL_API_KEY = os.getenv("FAL_API_KEY")
+FAL_API_KEY = get_aws_secret("fal_api_key", "us-east-1").get("FAL_API_KEY")
