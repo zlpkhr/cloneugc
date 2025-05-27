@@ -9,7 +9,7 @@ COPY . .
 
 ENV UV_NO_SYNC=1
 
-RUN uv run manage.py collectstatic
+RUN uv run manage.py collectstatic --clear --noinput
 
 EXPOSE 8000
 
