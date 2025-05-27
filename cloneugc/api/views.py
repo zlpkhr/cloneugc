@@ -109,3 +109,16 @@ class VideoListView(ListView):
         context["url_name"] = self.request.resolver_match.url_name
 
         return context
+
+
+@csrf_exempt
+@require_POST
+def create_actor(request: HttpRequest):
+    form = ActorForm(request.POST, request.FILES)
+
+    if form.is_valid():
+        form.save()
+
+        return JsonResponse({"id": form.instance.id})
+
+    return HttpResponse("Unprocessable Entity", status=422)

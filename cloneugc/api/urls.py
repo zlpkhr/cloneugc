@@ -8,4 +8,5 @@ urlpatterns = [
     path("lipsyncer/callback", views.lipsyncer_callback, name="lipsyncer_callback"),
     path("generations/<str:id>", views.generation, name="generation"),
     path("videos/", views.VideoListView.as_view(), name="video_list"),
+    path("api/actors/create/", views.create_actor, name="create_actor"),
 ]

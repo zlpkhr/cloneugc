@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEventHandler } from "react";
 import { useData } from "vike-react/useData";
 import type { ActorsData } from "./+data.client";
 import { clientOnly } from "vike-react/clientOnly";
+import { reload } from "vike/client/router";
 
 const MediaControlBar = clientOnly(() =>
   import("media-chrome/react").then((m) => m.MediaControlBar)
@@ -13,12 +14,42 @@ const MediaPlayButton = clientOnly(() =>
   import("media-chrome/react").then((m) => m.MediaPlayButton)
 );
 
+async function createActor(name: string, video: File) {
+  const formData = new FormData();
+
+  formData.append("name", name);
+  formData.append("video", video);
+
+  console.log(name, video);
+  const response = await fetch("/api/actors/create/", {
+    method: "POST",
+    body: formData
+  });
+
+  const { id } = (await response.json()) as { id: string };
+
+  return id;
+}
+
 export default function ActorsPage() {
   const data = useData<ActorsData>();
 
   if (!data) {
     return <div>No actors found</div>;
   }
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const name = formData.get("name") as string;
+    const video = formData.get("video") as File;
+
+    await createActor(name, video);
+
+    reload();
+  };
 
   // Dialog state
   const [isCreateActorOpen, setCreateActorOpen] = useState(false);
@@ -143,7 +174,7 @@ export default function ActorsPage() {
         <form
           className="mt-6"
           method="post"
-          action="#"
+          onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
           {/* CSRF token not needed in React; handle in logic if needed */}

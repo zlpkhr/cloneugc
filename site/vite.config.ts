@@ -10,6 +10,11 @@ export default defineConfig({
       "/graphql/": {
         target: "http://127.0.0.1:8000",
         changeOrigin: true
+      },
+      "/api/actors/create/": {
+        target: "http://127.0.0.1:8000",
+        changeOrigin: true,
+        timeout: 120 * 1000
       }
     }
   }
