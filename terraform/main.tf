@@ -153,7 +153,7 @@ resource "aws_db_instance" "cloneugc_db" {
   username               = "cloneugc"
   password               = random_password.db_password.result
   db_name                = "cloneugc"
-  skip_final_snapshot    = false
+  skip_final_snapshot    = true
   publicly_accessible    = false
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 }
