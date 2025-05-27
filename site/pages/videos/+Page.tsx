@@ -1,5 +1,5 @@
 import { useData } from "vike-react/useData";
-import type { VideosData } from "./+data.shared";
+import type { VideosData } from "./+data.client";
 import {
   MediaControlBar,
   MediaController,
@@ -7,7 +7,7 @@ import {
 } from "../../components/media-chrome";
 
 export default function VideosPage() {
-  const data = useData<VideosData>();
+  const data = useData<VideosData>() ?? { generations: [] };
 
   return (
     <div className="flex-1">

@@ -1,5 +1,5 @@
 import { useData } from "vike-react/useData";
-import type { CreateVideoData } from "./+data.shared";
+import type { CreateVideoData } from "./+data.client";
 import type { FormEventHandler } from "react";
 import { navigate } from "vike/client/router";
 import {
@@ -9,7 +9,7 @@ import {
 } from "../../components/media-chrome";
 
 async function createGeneration(input: { actorId: string; script: string }) {
-  const response = await fetch("http://localhost:3000/graphql/", {
+  const response = await fetch("/graphql/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,9 @@ async function createGeneration(input: { actorId: string; script: string }) {
   return data.createGeneration.id;
 }
 export default function CreateVideoPage() {
-  const data = useData<CreateVideoData>();
+  const data = useData<CreateVideoData>() ?? {
+    actor: { id: "", name: "", videoUrl: "", createdAt: "" }
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();

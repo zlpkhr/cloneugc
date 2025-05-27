@@ -1,5 +1,5 @@
 export async function data() {
-  const response = await fetch(`${import.meta.env.VITE_APP_URL}/graphql/`, {
+  const response = await fetch("/graphql/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,4 +38,4 @@ export async function data() {
   };
 }
 
-export type VideosData = Awaited<ReturnType<typeof data>>;
+export type VideosData = Awaited<ReturnType<typeof data> | undefined>;

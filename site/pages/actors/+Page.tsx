@@ -6,7 +6,7 @@ import {
   MediaController,
   MediaPlayButton
 } from "../../components/media-chrome";
-import type { ActorsData } from "./+data.shared";
+import type { ActorsData } from "./+data.client";
 
 async function createActor(name: string, video: File) {
   const formData = new FormData();
@@ -26,7 +26,7 @@ async function createActor(name: string, video: File) {
 }
 
 export default function ActorsPage() {
-  const data = useData<ActorsData>();
+  const data = useData<ActorsData>() ?? { actors: [] };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
