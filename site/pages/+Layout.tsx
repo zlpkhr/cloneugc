@@ -83,8 +83,7 @@ export default function Layout(props: LayoutProps) {
       <aside className="sticky top-0 hidden h-screen bg-stone-100 p-7 sm:block">
         <nav className="flex flex-col gap-y-4">
           <a
-            data-active="true"
-            href="#"
+            href="/actors"
             className="group flex w-full flex-col items-center justify-center gap-y-1"
           >
             <span className="material-symbols-rounded rounded-full px-3 py-1 group-hover:bg-stone-200 group-data-[active=true]:bg-pink-200 group-data-[active=true]:text-pink-800">
@@ -95,8 +94,7 @@ export default function Layout(props: LayoutProps) {
             </span>
           </a>
           <a
-            data-active="false"
-            href="#"
+            href="/videos"
             className="group flex w-full flex-col items-center justify-center gap-y-1"
           >
             <span className="material-symbols-rounded rounded-full px-3 py-1 group-hover:bg-stone-200 group-data-[active=true]:bg-pink-200 group-data-[active=true]:text-pink-800">
@@ -111,7 +109,6 @@ export default function Layout(props: LayoutProps) {
       <div className="flex-1">
         <header className="sticky top-0 z-30 flex h-16 items-center justify-between bg-white px-4 shadow-sm sm:hidden">
           <button
-            id="nav-trigger"
             className="material-symbols-rounded flex size-10 items-center justify-center rounded-full active:bg-stone-100"
             onClick={() => setNavOpen(true)}
           >
@@ -119,13 +116,11 @@ export default function Layout(props: LayoutProps) {
           </button>
         </header>
         <dialog
-          id="nav"
           ref={navDialogRef}
           className="h-full max-h-full w-full max-w-xs bg-white backdrop:bg-black/30"
         >
           <header className="flex h-16 items-center justify-between px-4">
             <button
-              id="close"
               className="material-symbols-rounded flex size-10 items-center justify-center rounded-full active:bg-stone-100"
               onClick={() => setNavOpen(false)}
             >

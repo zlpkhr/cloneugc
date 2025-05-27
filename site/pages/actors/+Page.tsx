@@ -109,7 +109,6 @@ export default function ActorsPage() {
           </p>
         </hgroup>
         <button
-          id="create-actor-trigger"
           ref={createActorTriggerRef}
           className="btn fixed right-5 bottom-7 z-20 shrink-0 shadow-lg sm:static sm:shadow-none"
           onClick={() => setCreateActorOpen(true)}
@@ -118,7 +117,6 @@ export default function ActorsPage() {
         </button>
       </header>
       <dialog
-        id="create-actor"
         ref={createActorDialogRef}
         className="mx-auto mt-auto w-full max-w-md rounded-t-xl rounded-l-xl rounded-r-xl rounded-b-none bg-white p-5 backdrop:bg-black/30 min-[28rem]:mb-auto min-[28rem]:rounded-b-xl"
       >
@@ -126,7 +124,6 @@ export default function ActorsPage() {
           <hgroup className="flex items-center justify-between gap-x-2">
             <h4 className="text-2xl font-bold">Create Actor</h4>
             <button
-              id="close"
               type="button"
               className="material-symbols-rounded flex size-10 items-center justify-center rounded-full active:bg-stone-100"
               onClick={() => setCreateActorOpen(false)}
