@@ -12,4 +12,4 @@ COPY . .
 
 ENV UV_NO_SYNC=1
 
-CMD ["uv", "run", "celery", "-A", "cloneugc", "worker", "--loglevel=info"]
+CMD ["uv", "run", "celery", "--app", "cloneugc", "worker", "--loglevel=info"]
