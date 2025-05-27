@@ -3,7 +3,7 @@ import type { PageContext } from "vike/types";
 export async function data(pageContext: PageContext) {
   const actorId = pageContext.urlParsed.search["actor_id"];
 
-  const response = await fetch("http://localhost:3000/graphql/", {
+  const response = await fetch(`${import.meta.env.VITE_APP_URL}/graphql/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
