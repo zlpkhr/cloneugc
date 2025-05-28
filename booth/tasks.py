@@ -23,7 +23,7 @@ def convert_video_to_mp4(creator_id: str):
         "ffmpeg",
         "-y",
         "-i",
-        creator.video_url,
+        creator.video.url,
         "-c:v",
         "libx264",
         "-preset",
