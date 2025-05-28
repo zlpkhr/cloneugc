@@ -1,8 +1,17 @@
 {% extends "admin/change_form.html" %}
 
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'admin/booth/creator/preview-audio.css' %}">
+    <script type="module" src="{% static 'admin/booth/creator/preview-audio.js' %}"></script>
+{% endblock %}
+
 {% block object-tools-items %}
     <li>
-        <a href="#" onclick="alert('Preview Audio clicked!'); return false;">Preview Audio</a>
+        <button id="preview-audio" class="preview-audio-button" data-creator-id="{{ original.id }}"
+            data-language="{{ original.language }}">Preview Audio</button>
     </li>
     {{ block.super }}
 {% endblock %}
