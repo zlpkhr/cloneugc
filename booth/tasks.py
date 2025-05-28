@@ -81,3 +81,7 @@ def convert_video_to_mp4(creator_id: str):
         logger.debug(
             f"Removed temporary file {output_video_path} for creator {creator.name} ({creator.id})."
         )
+
+
+def create_voice_clone(creator_id: str):
+    pass

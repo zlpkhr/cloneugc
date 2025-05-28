@@ -6,8 +6,8 @@ from .tasks import convert_video_to_mp4
 
 @admin.register(Creator)
 class CreatorAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "tags", "created_at", "updated_at")
-    list_filter = ("created_at", "updated_at")
+    list_display = ("id", "name", "language", "tags", "created_at", "updated_at")
+    list_filter = ("language", "created_at", "updated_at")
     search_fields = ("id", "name", "tags")
     readonly_fields = ("id", "video_mp4", "created_at", "updated_at")
 

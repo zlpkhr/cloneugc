@@ -5,6 +5,11 @@ from shortid import shortid
 
 
 class Creator(models.Model):
+    LANGUAGE_CHOICES = [
+        ("en", "English"),
+        ("ru", "Russian"),
+    ]
+
     id = models.CharField(
         primary_key=True,
         max_length=6,
@@ -18,6 +23,7 @@ class Creator(models.Model):
         default=list,
         help_text="Comma separated; leave blank if none.",
     )
+    language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES)
     video = models.FileField(upload_to="booth/creators/videos")
     video_mp4 = models.FileField(
         null=True,
