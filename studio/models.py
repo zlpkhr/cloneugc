@@ -4,7 +4,7 @@ from booth.models import Creator
 from shortid import shortid
 
 
-class UGC(models.Model):
+class Ugc(models.Model):
     id = models.CharField(
         primary_key=True,
         max_length=6,
