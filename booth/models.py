@@ -26,17 +26,6 @@ class Creator(models.Model):
 
     @property
     def video_url(self):
-        cache_key = f"creator_video_url_{self.id}"
-        url = cache.get(cache_key)
-
-        if url is None:
-            url = self.video_mp4.url if self.video_mp4 else self.video.url
-
-            cache.set(cache_key, url, settings.DEFAULT_STORAGE_QUERYSTRING_EXPIRE)
-
-        return url
-
-    def refresh_video_url(self):
-        cache.delete(f"creator_video_url_{self.id}")
+        return self.video_mp4.url if self.video_mp4 else self.video.url
 
     video_mp4_upload_to = "booth/creators/videos"
