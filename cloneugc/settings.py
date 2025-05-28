@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "booth",
+    "studio",
 ]
 
 MIDDLEWARE = [
