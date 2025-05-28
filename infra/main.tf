@@ -28,12 +28,3 @@ resource "aws_s3_bucket" "uploads_bucket" {
 output "uploads_bucket_name" {
   value = aws_s3_bucket.uploads_bucket.bucket
 }
-
-resource "aws_sqs_queue" "celery_queue" {
-  name_prefix                = "cloneugc-celery-"
-  visibility_timeout_seconds = 3600
-}
-
-output "celery_queue_url" {
-  value = aws_sqs_queue.celery_queue.url
-}
