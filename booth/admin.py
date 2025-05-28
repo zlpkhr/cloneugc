@@ -6,6 +6,8 @@ from .tasks import convert_video_to_mp4, create_voice_clone
 
 @admin.register(Creator)
 class CreatorAdmin(admin.ModelAdmin):
+    change_form_template = "admin/booth/creator/change_form.html"
+    
     list_display = (
         "id",
         "name",
