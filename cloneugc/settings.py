@@ -130,16 +130,20 @@ USE_TZ = True
 
 # Storage
 
-QUERYSTRING_EXPIRE = 24 * 60 * 60  # 24 hours
+DEFAULT_STORAGE_BUCKET_NAME = os.getenv("DEFAULT_STORAGE_BUCKET_NAME")
+
+DEFAULT_STORAGE_REGION_NAME = "us-east-1"
+
+DEFAULT_STORAGE_QUERYSTRING_EXPIRE = 24 * 60 * 60  # 24 hours
 
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            "bucket_name": os.getenv("DEFAULT_STORAGE_BUCKET_NAME"),
-            "region_name": "us-east-1",
+            "bucket_name": DEFAULT_STORAGE_BUCKET_NAME,
+            "region_name": DEFAULT_STORAGE_REGION_NAME,
             "file_overwrite": False,
-            "querystring_expire": QUERYSTRING_EXPIRE,
+            "querystring_expire": DEFAULT_STORAGE_QUERYSTRING_EXPIRE,
             "max_memory_size": 8 * 1024 * 1024,  # 8MB
         },
     },
