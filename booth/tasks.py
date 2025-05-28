@@ -1,7 +1,7 @@
+import logging
 import os
 import subprocess
 import tempfile
-import logging
 
 from celery import shared_task
 from django.core.files.storage import default_storage
