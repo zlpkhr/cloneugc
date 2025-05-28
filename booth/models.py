@@ -23,7 +23,11 @@ class Creator(models.Model):
         default=list,
         help_text="Comma separated; leave blank if none.",
     )
-    language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES)
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGE_CHOICES,
+        help_text="Changing language reclones voice.",
+    )
     video = models.FileField(upload_to="booth/creators/videos")
     video_mp4 = models.FileField(
         null=True,
@@ -46,5 +50,6 @@ class Creator(models.Model):
     def delete(self, *args, **kwargs):
         if self.cartesia_voice_id:
             from booth.tasks import delete_cartesia_voice  # Lazy import
+
             delete_cartesia_voice.delay(self.cartesia_voice_id)
         super().delete(*args, **kwargs)
