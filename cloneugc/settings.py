@@ -179,3 +179,8 @@ CACHES = {
 # Celery
 
 CELERY_BROKER_URL = "redis://localhost:6379/0"
+
+
+# Cartesia
+
+CARTERSIA_API_KEY = os.getenv("CARTERSIA_API_KEY")

@@ -1,10 +1,12 @@
 import logging
+import requests
 import os
 import subprocess
 import tempfile
 
 from celery import shared_task
 from django.core.files.storage import default_storage
+from django.conf import settings
 
 from booth.models import Creator
 from shortid import shortid
@@ -83,5 +85,79 @@ def convert_video_to_mp4(creator_id: str):
         )
 
 
+@shared_task
 def create_voice_clone(creator_id: str):
-    pass
+    creator = Creator.objects.get(id=creator_id)
+
+    with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as tmpfile:
+        audio_path = tmpfile.name
+
+    ffmpeg_cmd = [
+        "ffmpeg",
+        "-y",
+        "-i",
+        creator.video_url,
+        "-vn",
+        "-acodec",
+        "libmp3lame",
+        "-ar",
+        "44100",
+        "-ac",
+        "2",
+        "-b:a",
+        "192k",
+        audio_path,
+    ]
+
+    try:
+        subprocess.run(
+            ffmpeg_cmd,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+        )
+        logger.info(f"Extracted audio for creator {creator.name} ({creator.id})")
+    except subprocess.CalledProcessError as err:
+        if os.path.exists(audio_path):
+            os.remove(audio_path)
+        err_msg = err.stderr.decode("utf-8").strip() if err.stderr else "Unknown error"
+        logger.error(
+            f"FFmpeg audio extraction failed for creator {creator.name} ({creator.id}): {err_msg}"
+        )
+        raise Exception(f"FFmpeg audio extraction failed: {err_msg}")
+
+    url = "https://api.cartesia.ai/voices/clone"
+    headers = {
+        "Cartesia-Version": "2025-04-16",
+        "Authorization": f"Bearer {settings.CARTESIA_API_KEY}",
+    }
+    name = f"{creator.name} ({creator.id})"
+    language = creator.language
+
+    with open(audio_path, "rb") as audio_file:
+        files = {"clip": (f"{creator.id}.mp3", audio_file, "audio/mpeg")}
+        data = {
+            "name": name,
+            "language": language,
+        }
+        response = requests.post(url, data=data, files=files, headers=headers)
+
+    if os.path.exists(audio_path):
+        os.remove(audio_path)
+        logger.debug(f"Removed temporary audio file {audio_path}")
+
+    response.raise_for_status()
+
+    result = response.json()
+    voice_id = result.get("id")
+    if voice_id:
+        creator.cartesia_voice_id = voice_id
+        creator.save(update_fields=["cartesia_voice_id"])
+        logger.info(
+            f"Voice clone created and saved for creator {creator.name} ({creator.id}), voice id: {voice_id}"
+        )
+        return result
+    else:
+        raise Exception(
+            f"Voice clone API succeeded but no id returned for creator {creator.name} ({creator.id})"
+        )

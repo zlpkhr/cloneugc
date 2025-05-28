@@ -30,6 +30,7 @@ class Creator(models.Model):
         blank=True,
         editable=False,
     )
+    cartesia_voice_id = models.TextField(null=True, blank=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

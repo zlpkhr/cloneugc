@@ -9,7 +9,7 @@ class CreatorAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "language", "tags", "created_at", "updated_at")
     list_filter = ("language", "created_at", "updated_at")
     search_fields = ("id", "name", "tags")
-    readonly_fields = ("id", "video_mp4", "created_at", "updated_at")
+    readonly_fields = ("id", "video_mp4", "cartesia_voice_id", "created_at", "updated_at")
 
     def save_model(self, request, obj, form, change):
         # Determine what actions to take
