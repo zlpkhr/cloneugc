@@ -30,7 +30,8 @@ class Creator(models.Model):
         url = cache.get(cache_key)
 
         if url is None:
-            url = self.video.url
+            url = self.video_mp4.url if self.video_mp4 else self.video.url
+
             cache.set(cache_key, url, settings.DEFAULT_STORAGE_QUERYSTRING_EXPIRE)
 
         return url
