@@ -1,7 +1,7 @@
-from shortid import shortid
-from django.core.cache import cache
-from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
+
+from shortid import shortid
 
 
 class Creator(models.Model):
@@ -11,7 +11,13 @@ class Creator(models.Model):
         default=shortid,
         editable=False,
     )
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=64)
+    tags = ArrayField(
+        models.CharField(max_length=64),
+        blank=True,
+        default=list,
+        help_text="Comma separated; leave blank if none.",
+    )
     video = models.FileField(upload_to="booth/creators/videos")
     video_mp4 = models.FileField(
         null=True,
