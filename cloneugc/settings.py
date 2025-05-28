@@ -15,10 +15,6 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-# Import necessary boto3 modules for configuration
-from boto3.s3.transfer import TransferConfig
-from botocore.config import Config
-
 load_dotenv()
 
 
