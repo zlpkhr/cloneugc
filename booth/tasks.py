@@ -68,8 +68,8 @@ def convert_video_to_mp4(creator_id: str):
             )
 
         creator.video_mp4.name = saved_path
-        creator.refresh_video_url()
         creator.save()
+        creator.refresh_video_url()
 
         logger.info(
             f'Saved converted video for creator {creator.name} ({creator.id}) at "{saved_path}".'
