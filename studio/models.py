@@ -5,6 +5,10 @@ from shortid import shortid
 
 
 class Ugc(models.Model):
+    class Meta:
+        verbose_name = "UGC"
+        verbose_name_plural = "UGCS"
+
     id = models.CharField(
         primary_key=True,
         max_length=6,
