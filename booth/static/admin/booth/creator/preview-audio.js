@@ -18,7 +18,6 @@ previewAudioButton.addEventListener("click", async () => {
   try {
     const params = new URLSearchParams({
       creator_id: creatorId,
-      language: language,
       text: text,
     });
     const response = await fetch(`/booth/preview-audio?${params.toString()}`);

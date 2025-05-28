@@ -13,7 +13,6 @@ def preview_audio(request: HttpRequest):
         return JsonResponse(form.errors, status=422)
 
     creator_id = form.cleaned_data["creator_id"]
-    language = form.cleaned_data["language"]
     text = form.cleaned_data["text"]
 
     try:
@@ -43,8 +42,7 @@ def preview_audio(request: HttpRequest):
             "container": "mp3",
             "bit_rate": 128000,
             "sample_rate": 44100,
-        },
-        "language": language,
+        }
     }
 
     try:
