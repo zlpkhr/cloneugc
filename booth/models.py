@@ -36,4 +36,7 @@ class Creator(models.Model):
 
         return url
 
+    def refresh_video_url(self):
+        cache.delete(f"creator_video_url_{self.id}")
+
     video_mp4_upload_to = "booth/creators/videos"

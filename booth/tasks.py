@@ -68,6 +68,7 @@ def convert_video_to_mp4(creator_id: str):
             )
 
         creator.video_mp4.name = saved_path
+        creator.refresh_video_url()
         creator.save()
 
         logger.info(
