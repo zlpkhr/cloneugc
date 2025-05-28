@@ -161,3 +161,25 @@ def create_voice_clone(creator_id: str):
         raise Exception(
             f"Voice clone API succeeded but no id returned for creator {creator.name} ({creator.id})"
         )
+
+
+@shared_task
+def delete_cartesia_voice(voice_id: str):
+    """
+    Deletes a Cartesia voice by its ID using the Cartesia API.
+    Logs any errors that occur.
+    """
+    url = f"https://api.cartesia.ai/voices/{voice_id}"
+    headers = {
+        "Cartesia-Version": "2025-04-16",
+        "Authorization": f"Bearer {settings.CARTESIA_API_KEY}",
+    }
+    try:
+        response = requests.delete(url, headers=headers)
+        response.raise_for_status()
+        logger.info(f"Successfully deleted Cartesia voice {voice_id}")
+    except Exception as e:
+        logger.error(f"Failed to delete Cartesia voice {voice_id}: {e}")
+        if hasattr(e, "response") and e.response is not None:
+            logger.error(f"Response content: {e.response.text}")
+        return None

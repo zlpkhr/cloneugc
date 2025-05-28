@@ -42,3 +42,9 @@ class Creator(models.Model):
         return self.video_mp4.url if self.video_mp4 else self.video.url
 
     video_mp4_upload_to = "booth/creators/videos"
+
+    def delete(self, *args, **kwargs):
+        if self.cartesia_voice_id:
+            from booth.tasks import delete_cartesia_voice  # Lazy import
+            delete_cartesia_voice.delay(self.cartesia_voice_id)
+        super().delete(*args, **kwargs)
