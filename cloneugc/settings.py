@@ -15,6 +15,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+# Import necessary boto3 modules for configuration
+from boto3.s3.transfer import TransferConfig
+from botocore.config import Config
+
 load_dotenv()
 
 
@@ -125,13 +129,17 @@ USE_TZ = True
 
 # Storage
 
+QUERYSTRING_EXPIRE = 24 * 60 * 60  # 24 hours
+
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
             "bucket_name": os.getenv("DEFAULT_STORAGE_BUCKET_NAME"),
-            "max_memory_size": 128 * 1024 * 1024,
+            "region_name": "us-east-1",
             "file_overwrite": False,
+            "querystring_expire": QUERYSTRING_EXPIRE,
+            "max_memory_size": 8 * 1024 * 1024,  # 8MB
         },
     },
     "staticfiles": {
