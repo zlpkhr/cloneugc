@@ -87,8 +87,12 @@ WSGI_APPLICATION = "cloneugc.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "USER": "cloneugc",
+        "PASSWORD": "p@ssw0rd",
+        "HOST": "localhost",
+        "PORT": "5432",
+        "NAME": "cloneugc",
     }
 }
 
@@ -157,3 +161,17 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Cache
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://localhost:6379/0",
+    }
+}
+
+
+# Celery
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
