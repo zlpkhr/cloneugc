@@ -11,6 +11,11 @@ class Creator(models.Model):
     )
     name = models.CharField(max_length=255)
     video = models.FileField(upload_to="booth/creators/videos/")
+    video_mp4 = models.FileField(
+        upload_to="booth/creators/videos/",
+        null=True,
+        blank=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
