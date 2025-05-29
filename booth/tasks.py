@@ -14,7 +14,7 @@ from shortid import shortid
 logger = logging.getLogger(__name__)
 
 
-@shared_task
+@shared_task(acks_late=True)
 def convert_video_to_mp4(creator_id: str):
     creator = Creator.objects.get(id=creator_id)
 
@@ -85,7 +85,7 @@ def convert_video_to_mp4(creator_id: str):
         )
 
 
-@shared_task
+@shared_task(acks_late=True)
 def create_voice_clone(creator_id: str):
     creator = Creator.objects.get(id=creator_id)
 
@@ -163,7 +163,7 @@ def create_voice_clone(creator_id: str):
         )
 
 
-@shared_task
+@shared_task(acks_late=True)
 def delete_cartesia_voice(voice_id: str):
     """
     Deletes a Cartesia voice by its ID using the Cartesia API.
