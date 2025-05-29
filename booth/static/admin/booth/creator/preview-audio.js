@@ -4,8 +4,14 @@ const previewDefault = {
 };
 
 const previewAudioButton = document.getElementById("preview-audio");
+
 const creatorId = previewAudioButton.dataset.creatorId;
 const language = previewAudioButton.dataset.language;
+
+if (!creatorId || !language) {
+  previewAudioButton.disabled = true;
+  throw new Error("Missing creatorId or language in data attributes.");
+}
 
 previewAudioButton.addEventListener("click", async () => {
   const text = window.prompt(
@@ -16,38 +22,30 @@ previewAudioButton.addEventListener("click", async () => {
 
   previewAudioButton.disabled = true;
   try {
-    const params = new URLSearchParams({
-      creator_id: creatorId,
-      text: text,
-    });
-    const response = await fetch(`/booth/preview-audio?${params.toString()}`);
-    const contentType = response.headers.get("content-type");
+    const response = await fetch(
+      `/booth/preview-audio?creator_id=${creatorId}&text=${text}`
+    );
+
     if (!response.ok) {
       let errorMsg = "Unknown error";
-      if (contentType && contentType.includes("application/json")) {
-        const data = await response.json();
-        if (data.errors) {
-          errorMsg = Object.values(data.errors).flat().join("\n");
-        } else if (data.error) {
-          errorMsg = data.error;
-        }
-      } else {
-        errorMsg = await response.text();
+      const data = await response.json();
+      if (data.errors) {
+        errorMsg = Object.values(data.errors).flat().join("\n");
+      } else if (data.error) {
+        errorMsg = data.error;
       }
+
       alert(errorMsg);
       return;
     }
-    if (contentType && contentType.startsWith("audio/")) {
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audio.play();
-      audio.onended = () => {
-        URL.revokeObjectURL(url);
-      };
-    } else {
-      alert("Unexpected response from server.");
-    }
+
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audio.play();
+    audio.onended = () => {
+      URL.revokeObjectURL(url);
+    };
   } catch (err) {
     alert("Network error: " + err);
   } finally {
