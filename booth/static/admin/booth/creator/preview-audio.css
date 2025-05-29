@@ -1,4 +1,4 @@
-.preview-audio-button {
+button.preview-audio-button {
   padding: 3px 12px;
   border: none;
   border-radius: 15px;
@@ -15,7 +15,11 @@
 
   transition: color 0.15s, background 0.15s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: var(--button-hover-bg);
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 }
