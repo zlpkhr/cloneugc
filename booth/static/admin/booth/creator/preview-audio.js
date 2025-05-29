@@ -3,52 +3,50 @@ const previewDefault = {
   ru: "Привет, как дела?",
 };
 
-const previewAudioButton = document.getElementById("preview-audio");
+const previewAudioBtn = document.querySelector("button#preview-audio");
 
-const creatorId = previewAudioButton.dataset.creatorId;
-const language = previewAudioButton.dataset.language;
+const creatorId = previewAudioBtn.dataset.creatorId;
+const language = previewAudioBtn.dataset.language;
 
-if (!creatorId || !language) {
-  previewAudioButton.disabled = true;
-  throw new Error("Missing creatorId or language in data attributes.");
-}
-
-previewAudioButton.addEventListener("click", async () => {
+previewAudioBtn.addEventListener("click", async () => {
   const text = window.prompt(
     "Preview voice with following:",
     previewDefault[language]
   );
+
   if (!text) return;
 
-  previewAudioButton.disabled = true;
-  try {
-    const response = await fetch(
-      `/booth/preview-audio?creator_id=${creatorId}&text=${text}`
-    );
+  previewAudioBtn.disabled = true;
 
-    if (!response.ok) {
-      let errorMsg = "Unknown error";
-      const data = await response.json();
-      if (data.errors) {
-        errorMsg = Object.values(data.errors).flat().join("\n");
-      } else if (data.error) {
-        errorMsg = data.error;
-      }
+  const reqUrl = new URL("/booth/preview-audio", window.location.origin);
 
-      alert(errorMsg);
-      return;
-    }
+  reqUrl.searchParams.set("creator_id", creatorId);
+  reqUrl.searchParams.set("text", text);
 
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    audio.play();
-    audio.onended = () => {
-      URL.revokeObjectURL(url);
-    };
-  } catch (err) {
-    alert("Network error: " + err);
-  } finally {
-    previewAudioButton.disabled = false;
+  const res = await fetch(reqUrl);
+
+  if (!res.ok) {
+    previewAudioBtn.disabled = false;
+
+    alert("Request failed. See details in the console.");
+
+    const data = await res.json();
+
+    console.error({ response: res, data });
+
+    return;
   }
+
+  const blob = await res.blob();
+
+  const url = URL.createObjectURL(blob);
+  const audio = new Audio(url);
+
+  audio.play();
+
+  audio.addEventListener("ended", () => {
+    URL.revokeObjectURL(url);
+  });
+
+  previewAudioBtn.disabled = false;
 });
