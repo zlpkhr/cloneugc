@@ -45,6 +45,7 @@
 
 <script type="module">
   const captureTrigger = document.querySelector("#start-capture");
+  const startCaptureContainer = document.querySelector("#start-capture-container");
   let lightImageUrl = null;
   let darkImageUrl = null;
 
@@ -92,10 +93,12 @@
 
   captureTrigger.addEventListener("click", async () => {
     captureTrigger.style.visibility = "hidden";
+    startCaptureContainer.style.visibility = "hidden";
 
     document.addEventListener("fullscreenchange", () => {
       if (!document.fullscreenElement) {
         captureTrigger.style.visibility = "visible";
+        startCaptureContainer.style.visibility = "visible";
         document.body.style.backgroundImage = "none";
         document.body.style.height = "";
         document.body.style.width = "";
@@ -144,5 +147,8 @@
 {% endblock %}
 
 {% block content %}
-<button id="start-capture" class="button fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Start Capture</button>
+<div id="start-capture-container" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 justify-center items-center">
+  <button id="start-capture" class="button">Start Capture</button>
+  <p class="text-center text-lg font-medium">For best results, use light mode in bright environments,<br>and dark mode in dark environments.</p>
+</div>
 {% endblock %}
