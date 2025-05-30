@@ -80,13 +80,17 @@
     border-radius: calc(infinity * 1px);
     padding: --spacing(1) --spacing(2.5);
 
-    &:active {
+    &:is(button):active {
       background-color: var(--color-stone-100);
     }
 
-    &:disabled {
+    &:is(button):disabled {
       background-color: var(--color-stone-100);
       color: var(--color-stone-500);
+    }
+
+    &:is(a):hover {
+      background-color: var(--color-stone-100);
     }
   }
 }

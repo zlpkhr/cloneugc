@@ -204,6 +204,8 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Auth
 
+LOGIN_URL = reverse_lazy("login")
+
 LOGIN_REDIRECT_URL = reverse_lazy("create_ugc")
 
 LOGOUT_REDIRECT_URL = "/"

@@ -8,6 +8,13 @@
 {% endblock %}
 
 {% block content %}
+  <nav class="m-10 flex justify-end items-center gap-4">
+    <span class="text-base font-semibold">Credits: {{ user.account.credits }}</span>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="button-surface" type="submit">Logout</button>
+    </form>
+  </nav>
   <div class="m-10 flex gap-10">
     <main class="p-8 bg-white border border-black/15 rounded-xl shadow-md shadow-black/5 max-w-xl w-full max-h-fit">
       <h2 class="text-2xl font-bold">Create UGC</h2>
@@ -35,7 +42,14 @@
             Add punctuation where appropriate. Use “-” to indicate pauses, and use “dot” instead of “.” in URLs. Use two question marks for questions, avoid using quotation marks, and put a space before a question mark.
           </p>
         </div>
-        <button class="button mt-12 min-w-32">Create</button>
+        {% if user.account.credits > 0 %}
+          <button class="button mt-12 min-w-32">Create</button>
+        {% else %}
+          <div class="mt-12 flex items-center gap-2 flex-col justify-center">
+            <span class="text-xl text-stone-500">You don't have enough credits.</span>
+            <a class="button" href="#">Buy Credits</a>
+          </div>
+        {% endif %}
       </form>
     </main>
     <aside class="flex-1 grid grid-cols-3 h-full gap-5">
