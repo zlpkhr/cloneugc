@@ -1,0 +1,13 @@
+{
+  "name": "cloneugc",
+  "private": true,
+  "scripts": {
+    "dev": "postcss ./static/css/base.css --use @tailwindcss/postcss --output ./static/dist/css/base.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "postcss-cli": "^11.0.1"
+  }
+}
