@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.cache import cache
 from django.conf import settings
+from accounts.models import Account
 from booth.models import Creator
 from shortid import shortid
 
@@ -16,6 +17,12 @@ class Ugc(models.Model):
         default=shortid,
         editable=False,
     )
+    account = models.ForeignKey(
+        Account,
+        on_delete=models.SET_NULL,
+        null=True,
+        editable=False,
+    )
     creator = models.ForeignKey(Creator, null=True, on_delete=models.SET_NULL)
     audio = models.FileField(upload_to="ugc/audios/", null=True, blank=True)
     video = models.FileField(upload_to="ugc/videos/", null=True, blank=True)
@@ -24,7 +31,9 @@ class Ugc(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.creator.name} - {self.id}"
+        if self.creator:
+            return f"{self.creator.name} - {self.id}"
+        return self.id
 
     @property
     def public_video_url(self):
@@ -34,7 +43,7 @@ class Ugc(models.Model):
         if url is None:
             if not self.video:
                 return None
-            
+
             url = self.video.url
             cache.set(cache_key, url, settings.DEFAULT_STORAGE_QUERYSTRING_EXPIRE)
 
