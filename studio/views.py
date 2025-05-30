@@ -6,15 +6,17 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 from booth.models import Creator
 from .ai import format_sonic_text
 from .models import Ugc
 from .forms import UgcForm
 from .tasks import create_ugc_video
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class CreateUgcView(CreateView):
+class CreateUgcView(LoginRequiredMixin, CreateView):
     model = Ugc
     form_class = UgcForm
     template_name = "studio/ugc_form.html"
@@ -36,6 +38,7 @@ class CreateUgcView(CreateView):
 
 @csrf_exempt
 @require_POST
+@login_required
 def prepare_script(request: HttpRequest):
     payload = json.loads(request.body)
     script = payload.get("script")
@@ -50,6 +53,7 @@ def prepare_script(request: HttpRequest):
 
 @csrf_exempt
 @require_POST
+@login_required
 def preview_audio(request: HttpRequest):
     payload = json.loads(request.body)
 

@@ -1,11 +1,13 @@
 import requests
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .forms import PreviewAudioForm
 from .models import Creator
 
 
+@staff_member_required
 def preview_audio(request: HttpRequest):
     form = PreviewAudioForm(request.GET)
 
