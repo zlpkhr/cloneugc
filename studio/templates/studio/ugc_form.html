@@ -41,7 +41,7 @@
     <aside class="flex-1 grid grid-cols-3 h-full gap-5">
       {% for ugc in ugcs %}
         {% if ugc.public_video_url %}
-          <video src="{{ ugc.public_video_url }}" class="aspect-[9/16] rounded-lg bg-stone-100" playsinline controls></video>
+          <video src="{{ ugc.public_video_url }}" class="object-cover aspect-[9/16] rounded-lg bg-stone-100" playsinline controls></video>
         {% else %}
           <div class="aspect-[9/16] rounded-lg bg-stone-100 border-2 border-dashed border-stone-300 text-base text-stone-500 text-center flex items-center justify-center font-medium p-4 text-pretty">
             Processing, contact support if it takes over 1 hour.
