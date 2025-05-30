@@ -43,7 +43,8 @@
           </p>
         </div>
         {% if user.account.credits > 0 %}
-          <button class="button mt-12 min-w-32">Create</button>
+          <button class="button mt-12">Create</button>
+          <p class="text-base text-stone-500 mt-2">You will be charged 1 credit for generation.</p>
         {% else %}
           <div class="mt-12 flex items-center gap-2 flex-col justify-center">
             <span class="text-xl font-bold">You don't have enough credits.</span>
