@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.core.cache import cache
+from django.conf import settings
 from booth.models import Creator
 from shortid import shortid
 
@@ -24,3 +25,17 @@ class Ugc(models.Model):
 
     def __str__(self):
         return f"{self.creator.name} - {self.id}"
+
+    @property
+    def public_video_url(self):
+        cache_key = f"ugc_public_video_url_{self.id}"
+        url = cache.get(cache_key)
+
+        if url is None:
+            if not self.video:
+                return None
+            
+            url = self.video.url
+            cache.set(cache_key, url, settings.DEFAULT_STORAGE_QUERYSTRING_EXPIRE)
+
+        return url

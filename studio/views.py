@@ -22,6 +22,7 @@ class CreateUgcView(CreateView):
         ctx = super().get_context_data(**kwargs)
 
         ctx["creators"] = Creator.objects.all()
+        ctx["ugcs"] = Ugc.objects.all().order_by("-created_at")
 
         return ctx
 
