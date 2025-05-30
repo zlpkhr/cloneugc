@@ -18,6 +18,46 @@ logger = logging.getLogger(__name__)
 def convert_video_to_mp4(creator_id: str):
     creator = Creator.objects.get(id=creator_id)
 
+    ffprobe_cmd = [
+        "ffprobe",
+        "-v",
+        "error",
+        "-show_entries",
+        "format=format_name",
+        "-of",
+        "default=noprint_wrappers=1:nokey=1",
+        creator.video.url,
+    ]
+
+    try:
+        result = subprocess.run(
+            ffprobe_cmd,
+            text=True,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        formats = result.stdout.strip().split(",")
+        logger.info(
+            f"FFprobe ran successfully for creator {creator.name} ({creator.id})."
+        )
+        if "mp4" in formats:
+            logger.info(
+                f"Creator {creator.name} ({creator.id}) video is already in mp4 format."
+            )
+            creator.video_mp4.name = creator.video.name
+            creator.save()
+            return
+
+        logger.info(
+            f"Creator {creator.name} ({creator.id}) does not have an mp4 video."
+        )
+    except subprocess.CalledProcessError as err:
+        err_msg = err.stderr.decode("utf-8").strip() if err.stderr else "Unknown error"
+        logger.error(
+            f"FFprobe failed for creator {creator.name} ({creator.id}): {err_msg}"
+        )
+
     with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as tmpfile:
         output_video_path = tmpfile.name
 
