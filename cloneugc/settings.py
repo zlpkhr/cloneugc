@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -199,3 +200,10 @@ FAL_API_KEY = os.getenv("FAL_API_KEY")
 # OpenAI
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+
+# Auth
+
+LOGIN_REDIRECT_URL = reverse_lazy("create_ugc")
+
+LOGOUT_REDIRECT_URL = "/"
