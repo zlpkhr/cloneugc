@@ -16,6 +16,8 @@ class Ugc(models.Model):
         editable=False,
     )
     creator = models.ForeignKey(Creator, null=True, on_delete=models.SET_NULL)
+    audio = models.FileField(upload_to="ugc/audios/", null=True, blank=True)
+    video = models.FileField(upload_to="ugc/videos/", null=True, blank=True)
     script = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
