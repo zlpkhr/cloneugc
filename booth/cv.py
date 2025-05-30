@@ -1,5 +1,8 @@
 import cv2
 import numpy as np
+import json
+import qrcode
+from PIL import Image
 
 
 def generate_aruco_board_img(
@@ -49,6 +52,65 @@ def generate_aruco_board_img(
     marker_ids = [0, 1, 2, 3]
     dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
 
+    # Create metadata for QR code
+    metadata = {
+        "dictionary": "DICT_4X4_50",
+        "marker_size_px": marker_size,
+        "margin_px": margin,
+        "corner_markers": {
+            "TL": {"id": 0, "corner_index": 0},
+            "TR": {"id": 1, "corner_index": 1},
+            "BR": {"id": 2, "corner_index": 2},
+            "BL": {"id": 3, "corner_index": 3}
+        },
+        "screen_aspect": round(aspect_ratio, 3)
+    }
+
+    # Calculate QR code size - make it as large as possible without overlapping markers
+    # QR code will be placed in the center, so we need to ensure it doesn't reach the markers
+    center_x, center_y = board_w // 2, board_h // 2
+
+    # Calculate the minimum distance from center to any marker
+    marker_positions = [
+        (margin + marker_size // 2, margin + marker_size // 2),  # TL
+        (board_w - margin - marker_size // 2, margin + marker_size // 2),  # TR
+        (board_w - margin - marker_size // 2, board_h - margin - marker_size // 2),  # BR
+        (margin + marker_size // 2, board_h - margin - marker_size // 2),  # BL
+    ]
+
+    min_distance_to_marker = float('inf')
+    for mx, my in marker_positions:
+        distance = min(abs(center_x - mx), abs(center_y - my))
+        min_distance_to_marker = min(min_distance_to_marker, distance)
+
+    # QR code should be smaller than twice the minimum distance (with some safety margin)
+    qr_safety_margin = 20  # pixels
+    max_qr_size = int((min_distance_to_marker - qr_safety_margin) * 2)
+    max_qr_size = max(max_qr_size, 80)  # Minimum QR code size for readability
+
+    # Generate QR code
+    qr = qrcode.QRCode(
+        version=None,  # Let it auto-determine version
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
+        box_size=1,  # We'll scale it ourselves
+        border=1,
+    )
+    qr.add_data(json.dumps(metadata, separators=(',', ':')))
+    qr.make(fit=True)
+
+    # Create QR code image
+    qr_img = qr.make_image(fill_color="black", back_color="white")
+    qr_array = np.array(qr_img)
+
+    # Scale QR code to fit the calculated size
+    qr_height, qr_width = qr_array.shape
+    scale_factor = min(max_qr_size / qr_width, max_qr_size / qr_height)
+    new_qr_width = int(qr_width * scale_factor)
+    new_qr_height = int(qr_height * scale_factor)
+
+    # Resize QR code
+    qr_resized = cv2.resize(qr_array.astype(np.uint8) * 255, (new_qr_width, new_qr_height), interpolation=cv2.INTER_NEAREST)
+
     # Create blank white board
     board = np.ones((board_h, board_w), dtype=np.uint8) * 255
 
@@ -60,11 +122,26 @@ def generate_aruco_board_img(
         (margin, board_h - margin - marker_size),
     ]
 
-    # Draw markers
+    # Draw ArUco markers
     for i, (x, y) in enumerate(positions):
         marker = np.zeros((marker_size, marker_size), dtype=np.uint8)
         cv2.aruco.generateImageMarker(dictionary, marker_ids[i], marker_size, marker)
         board[y : y + marker_size, x : x + marker_size] = marker
+
+    # Place QR code in the center
+    qr_start_x = center_x - new_qr_width // 2
+    qr_start_y = center_y - new_qr_height // 2
+    qr_end_x = qr_start_x + new_qr_width
+    qr_end_y = qr_start_y + new_qr_height
+
+    # Ensure QR code fits within board boundaries
+    qr_start_x = max(0, qr_start_x)
+    qr_start_y = max(0, qr_start_y)
+    qr_end_x = min(board_w, qr_end_x)
+    qr_end_y = min(board_h, qr_end_y)
+
+    # Place the QR code
+    board[qr_start_y:qr_end_y, qr_start_x:qr_end_x] = qr_resized[:qr_end_y-qr_start_y, :qr_end_x-qr_start_x]
 
     success, buf = cv2.imencode(".png", board)
     if not success:

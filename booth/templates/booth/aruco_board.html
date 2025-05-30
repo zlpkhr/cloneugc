@@ -13,40 +13,74 @@
         document.addEventListener("fullscreenchange", () => {
           if (!document.fullscreenElement) {
             captureTrigger.style.visibility = "visible";
+            document.body.style.backgroundImage = "none";
           }
         });
-
-        const screenWidth = window.screen.width;
-        const screenHeight = window.screen.height;
-
-        const img = await fetch(
-          `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
-        );
-        const imgBlob = await img.blob();
-        const imgUrl = URL.createObjectURL(imgBlob);
-        document.body.style.backgroundImage = `url('${imgUrl}')`;
-        document.body.style.backgroundSize = "cover";
-        document.body.style.backgroundPosition = "center";
-        document.body.style.backgroundRepeat = "no-repeat";
-        document.body.style.height = "100vh";
-        document.body.style.width = "100vw";
-        document.body.style.margin = "0";
-        document.body.style.padding = "0";
 
         const el = document.documentElement;
         if (el.requestFullscreen) {
           el.requestFullscreen({
             navigationUI: "hide",
           });
+
+          const screenWidth = window.screen.width;
+          const screenHeight = window.screen.height;
+
+          const img = await fetch(
+            `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
+          );
+          const imgBlob = await img.blob();
+          const imgUrl = URL.createObjectURL(imgBlob);
+          document.body.style.backgroundImage = `url('${imgUrl}')`;
+          document.body.style.backgroundSize = "cover";
+          document.body.style.backgroundPosition = "center";
+          document.body.style.backgroundRepeat = "no-repeat";
+          document.body.style.height = "100vh";
+          document.body.style.width = "100vw";
         } else if (el.webkitRequestFullscreen) {
           el.webkitRequestFullscreen();
+          const screenWidth = window.screen.width;
+          const screenHeight = window.screen.height;
+
+          const img = await fetch(
+            `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
+          );
+          const imgBlob = await img.blob();
+          const imgUrl = URL.createObjectURL(imgBlob);
+          document.body.style.backgroundImage = `url('${imgUrl}')`;
+          document.body.style.backgroundSize = "cover";
+          document.body.style.backgroundPosition = "center";
+          document.body.style.backgroundRepeat = "no-repeat";
+          document.body.style.height = "100vh";
+          document.body.style.width = "100vw";
         } else {
           alert(
             "Fullscreen not supported; results may be worse. Try another device or continue."
           );
+
+          const screenWidth = window.visualViewport.width;
+          const screenHeight = window.visualViewport.height;
+
+          const img = await fetch(
+            `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
+          );
+          const imgBlob = await img.blob();
+          const imgUrl = URL.createObjectURL(imgBlob);
+          document.body.style.backgroundImage = `url('${imgUrl}')`;
+          document.body.style.backgroundSize = "cover";
+          document.body.style.backgroundPosition = "center";
+          document.body.style.backgroundRepeat = "no-repeat";
+          document.body.style.height = "100dvh";
+          document.body.style.width = "100dvw";
         }
       });
     </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
     <button id="start-capture">Start Capture</button>
