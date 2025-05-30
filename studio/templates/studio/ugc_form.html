@@ -1,12 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Create UGC{% endblock %}
 
+{% block head %}
+  <script type="module" src="{% static 'studio/js/ugc-form.js' %}"></script>
+{% endblock %}
+
 {% block content %}
-  <h2>Create UGC</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="button">Create</button>
-  </form>
+  <main class="p-8 bg-white border border-black/15 m-10 rounded-xl shadow-md shadow-black/5 max-w-lg">
+    <h2 class="text-2xl font-bold">Create UGC</h2>
+    <form method="post" class="mt-10">
+      {% csrf_token %}
+      <span class="form-label">1. Select Creator</span>
+      <input id="creator-input" type="hidden" name="creator">
+      <div class="grid grid-cols-3 gap-5 mt-4">
+        {% for creator in creators %}
+          <video id="creator-video" data-creator-id="{{ creator.id }}" class="aspect-[9/16] rounded-lg data-[selected=true]:outline-2 data-[selected=true]:outline-pink-700 bg-stone-100" src="{{ creator.public_video_url }}" autoplay muted loop playsinline></video>
+        {% endfor %}
+      </div>
+      <div class="mt-10">
+        <label for="script" class="form-label block w-fit">2. Write Script</label>
+        <textarea id="script" name="script" class="form-textarea mt-4 w-full min-h-64" required></textarea>
+        <p class="text-base text-stone-500 mt-2">
+          Add punctuation where appropriate. Use “-” to indicate pauses, and use “dot” instead of “.” in URLs. Use two question marks for questions, avoid using quotation marks, and put a space before a question mark.
+        </p>
+      </div>
+      <button class="button mt-12 min-w-32">Create</button>
+    </form>
+  </main>
 {% endblock %}

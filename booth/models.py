@@ -1,3 +1,5 @@
+from django.core.cache import cache
+from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
@@ -53,3 +55,14 @@ class Creator(models.Model):
 
             delete_cartesia_voice.delay(self.cartesia_voice_id)
         super().delete(*args, **kwargs)
+
+    @property
+    def public_video_url(self):
+        cache_key = f"creator_public_video_url_{self.id}"
+        url = cache.get(cache_key)
+
+        if url is None:
+            url = self.video_url
+            cache.set(cache_key, url, settings.DEFAULT_STORAGE_QUERYSTRING_EXPIRE)
+
+        return url
