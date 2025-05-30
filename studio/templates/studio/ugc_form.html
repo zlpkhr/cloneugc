@@ -17,7 +17,7 @@
         <input id="creator-input" type="hidden" name="creator">
         <div class="grid grid-cols-3 gap-5 mt-4">
           {% for creator in creators %}
-            <video id="creator-video" data-creator-id="{{ creator.id }}" class="aspect-[9/16] rounded-lg data-[selected=true]:outline-2 data-[selected=true]:outline-pink-700 bg-stone-100" src="{{ creator.public_video_url }}" autoplay muted loop playsinline></video>
+            <video id="creator-video" data-creator-id="{{ creator.id }}" class="aspect-[9/16] rounded-lg data-[selected=true]:outline-2 object-cover data-[selected=true]:outline-pink-700 bg-stone-100" src="{{ creator.public_video_url }}" autoplay muted loop playsinline></video>
           {% endfor %}
         </div>
         <div class="mt-10">
