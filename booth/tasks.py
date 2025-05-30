@@ -152,7 +152,7 @@ def create_voice_clone(creator_id: str):
     voice_id = result.get("id")
     if voice_id:
         creator.cartesia_voice_id = voice_id
-        creator.save(update_fields=["cartesia_voice_id"])
+        creator.save()
         logger.info(
             f"Voice clone created and saved for creator {creator.name} ({creator.id}), voice id: {voice_id}"
         )
