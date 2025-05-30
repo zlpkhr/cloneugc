@@ -1,9 +1,12 @@
+from django.shortcuts import render
 import requests
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.http import require_GET
 
-from .forms import PreviewAudioForm
+from .cv import generate_aruco_board_img
+from .forms import ArucoBoardImgForm, PreviewAudioForm
 from .models import Creator
 
 
@@ -56,3 +59,22 @@ def preview_audio(request: HttpRequest):
         return JsonResponse({"errors": [str(e)]}, status=502)
 
     return HttpResponse(resp.content, content_type="audio/mpeg")
+
+
+def aruco_board(request: HttpRequest):
+    return render(request, "booth/aruco_board.html")
+
+
+@require_GET
+def aruco_board_img(request: HttpRequest):
+    form = ArucoBoardImgForm(request.GET)
+
+    if not form.is_valid():
+        return JsonResponse({"errors": form.errors}, status=422)
+
+    screen_width = form.cleaned_data["screen_width"]
+    screen_height = form.cleaned_data["screen_height"]
+
+    img = generate_aruco_board_img(screen_width, screen_height)
+
+    return HttpResponse(img, content_type="image/png")

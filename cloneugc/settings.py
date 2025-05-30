@@ -37,6 +37,9 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
+if DEBUG:
+    ALLOWED_HOSTS.append("*")
+
 
 # Application definition
 
