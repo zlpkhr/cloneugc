@@ -1,4 +1,6 @@
 from django.shortcuts import render
+import base64
+
 import requests
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse
@@ -75,6 +77,13 @@ def aruco_board_img(request: HttpRequest):
     screen_width = form.cleaned_data["screen_width"]
     screen_height = form.cleaned_data["screen_height"]
 
-    img = generate_aruco_board_img(screen_width, screen_height)
+    light_img, dark_img = generate_aruco_board_img(screen_width, screen_height)
 
-    return HttpResponse(img, content_type="image/png")
+    light_b64 = base64.b64encode(light_img).decode("ascii")
+    dark_b64 = base64.b64encode(dark_img).decode("ascii")
+    return JsonResponse(
+        {
+            "light": light_b64,
+            "dark": dark_b64,
+        }
+    )

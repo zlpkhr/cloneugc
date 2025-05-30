@@ -106,8 +106,8 @@ def generate_aruco_board_img(
     # Resize QR code using nearest neighbor to maintain sharpness
     qr_resized = cv2.resize(qr_img, (new_qr_width, new_qr_height), interpolation=cv2.INTER_NEAREST)
 
-    # Create blank white board
-    board = np.ones((board_h, board_w), dtype=np.uint8) * 255
+    # Create blank white board (for dark mode - black markers on white background)
+    board_dark = np.ones((board_h, board_w), dtype=np.uint8) * 255
 
     # Corner positions: (top-left, top-right, bottom-right, bottom-left)
     positions = [
@@ -117,13 +117,13 @@ def generate_aruco_board_img(
         (margin, board_h - margin - marker_size),
     ]
 
-    # Draw ArUco markers
+    # Draw ArUco markers on dark mode board
     for i, (x, y) in enumerate(positions):
         marker = np.zeros((marker_size, marker_size), dtype=np.uint8)
         cv2.aruco.generateImageMarker(dictionary, marker_ids[i], marker_size, marker)
-        board[y : y + marker_size, x : x + marker_size] = marker
+        board_dark[y : y + marker_size, x : x + marker_size] = marker
 
-    # Place QR code in the center
+    # Place QR code in the center of dark mode board
     qr_start_x = center_x - new_qr_width // 2
     qr_start_y = center_y - new_qr_height // 2
     qr_end_x = qr_start_x + new_qr_width
@@ -135,10 +135,19 @@ def generate_aruco_board_img(
     qr_end_x = min(board_w, qr_end_x)
     qr_end_y = min(board_h, qr_end_y)
     
-    # Place the QR code
-    board[qr_start_y:qr_end_y, qr_start_x:qr_end_x] = qr_resized[:qr_end_y-qr_start_y, :qr_end_x-qr_start_x]
+    # Place the QR code on dark mode board
+    board_dark[qr_start_y:qr_end_y, qr_start_x:qr_end_x] = qr_resized[:qr_end_y-qr_start_y, :qr_end_x-qr_start_x]
 
-    success, buf = cv2.imencode(".png", board)
-    if not success:
-        raise RuntimeError("Failed to encode image")
-    return buf.tobytes()
+    # Create light mode board by inverting colors (white markers on black background)
+    board_light = 255 - board_dark
+
+    # Encode both images
+    success_light, buf_light = cv2.imencode(".png", board_light)
+    if not success_light:
+        raise RuntimeError("Failed to encode light mode image")
+    
+    success_dark, buf_dark = cv2.imencode(".png", board_dark)
+    if not success_dark:
+        raise RuntimeError("Failed to encode dark mode image")
+    
+    return buf_light.tobytes(), buf_dark.tobytes()

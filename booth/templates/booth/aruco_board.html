@@ -1,88 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aruco Board</title>
-    <script type="module">
-      const captureTrigger = document.querySelector("#start-capture");
+{% extends "base.html" %}
 
-      captureTrigger.addEventListener("click", async () => {
-        captureTrigger.style.visibility = "hidden";
+{% block title %}Device Capture{% endblock %}
 
-        document.addEventListener("fullscreenchange", () => {
-          if (!document.fullscreenElement) {
-            captureTrigger.style.visibility = "visible";
-            document.body.style.backgroundImage = "none";
-          }
-        });
+{% block head %}
+<style>
+  .aruco-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  /* Light mode styles */
+  @media (prefers-color-scheme: light) {
+    .aruco-background.light-mode {
+      display: block;
+    }
+    .aruco-background.dark-mode {
+      display: none;
+    }
+  }
+  
+  /* Dark mode styles */
+  @media (prefers-color-scheme: dark) {
+    .aruco-background.light-mode {
+      display: none;
+    }
+    .aruco-background.dark-mode {
+      display: block;
+    }
+  }
+  
+  /* Fallback when no preference is detected */
+  @media (prefers-color-scheme: no-preference) {
+    .aruco-background.light-mode {
+      display: block;
+    }
+    .aruco-background.dark-mode {
+      display: none;
+    }
+  }
+</style>
 
-        const el = document.documentElement;
-        if (el.requestFullscreen) {
-          el.requestFullscreen({
-            navigationUI: "hide",
-          });
+<script type="module">
+  const captureTrigger = document.querySelector("#start-capture");
+  let lightImageUrl = null;
+  let darkImageUrl = null;
 
-          const screenWidth = window.screen.width;
-          const screenHeight = window.screen.height;
+  function applyArucoBackground() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const imageUrl = prefersDark ? darkImageUrl : lightImageUrl;
+    
+    if (imageUrl) {
+      document.body.style.backgroundImage = `url('${imageUrl}')`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundPosition = "center";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.height = "100vh";
+      document.body.style.width = "100vw";
+    }
+  }
 
-          const img = await fetch(
-            `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
-          );
-          const imgBlob = await img.blob();
-          const imgUrl = URL.createObjectURL(imgBlob);
-          document.body.style.backgroundImage = `url('${imgUrl}')`;
-          document.body.style.backgroundSize = "cover";
-          document.body.style.backgroundPosition = "center";
-          document.body.style.backgroundRepeat = "no-repeat";
-          document.body.style.height = "100vh";
-          document.body.style.width = "100vw";
-        } else if (el.webkitRequestFullscreen) {
-          el.webkitRequestFullscreen();
-          const screenWidth = window.screen.width;
-          const screenHeight = window.screen.height;
+  // Listen for color scheme changes
+  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  darkModeMediaQuery.addEventListener('change', () => {
+    if (lightImageUrl && darkImageUrl) {
+      applyArucoBackground();
+    }
+  });
 
-          const img = await fetch(
-            `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
-          );
-          const imgBlob = await img.blob();
-          const imgUrl = URL.createObjectURL(imgBlob);
-          document.body.style.backgroundImage = `url('${imgUrl}')`;
-          document.body.style.backgroundSize = "cover";
-          document.body.style.backgroundPosition = "center";
-          document.body.style.backgroundRepeat = "no-repeat";
-          document.body.style.height = "100vh";
-          document.body.style.width = "100vw";
-        } else {
-          alert(
-            "Fullscreen not supported; results may be worse. Try another device or continue."
-          );
+  async function loadArucoImages(screenWidth, screenHeight) {
+    try {
+      const response = await fetch(
+        `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
+      );
+      const data = await response.json();
+      
+      // Convert base64 to blob URLs
+      const lightBlob = new Blob([Uint8Array.from(atob(data.light), c => c.charCodeAt(0))], { type: 'image/png' });
+      const darkBlob = new Blob([Uint8Array.from(atob(data.dark), c => c.charCodeAt(0))], { type: 'image/png' });
+      
+      lightImageUrl = URL.createObjectURL(lightBlob);
+      darkImageUrl = URL.createObjectURL(darkBlob);
+      
+      applyArucoBackground();
+    } catch (error) {
+      console.error('Failed to load ArUco images:', error);
+    }
+  }
 
-          const screenWidth = window.visualViewport.width;
-          const screenHeight = window.visualViewport.height;
+  captureTrigger.addEventListener("click", async () => {
+    captureTrigger.style.visibility = "hidden";
 
-          const img = await fetch(
-            `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
-          );
-          const imgBlob = await img.blob();
-          const imgUrl = URL.createObjectURL(imgBlob);
-          document.body.style.backgroundImage = `url('${imgUrl}')`;
-          document.body.style.backgroundSize = "cover";
-          document.body.style.backgroundPosition = "center";
-          document.body.style.backgroundRepeat = "no-repeat";
-          document.body.style.height = "100dvh";
-          document.body.style.width = "100dvw";
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) {
+        captureTrigger.style.visibility = "visible";
+        document.body.style.backgroundImage = "none";
+        document.body.style.height = "";
+        document.body.style.width = "";
+        
+        // Clean up blob URLs
+        if (lightImageUrl) {
+          URL.revokeObjectURL(lightImageUrl);
+          lightImageUrl = null;
         }
-      });
-    </script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
+        if (darkImageUrl) {
+          URL.revokeObjectURL(darkImageUrl);
+          darkImageUrl = null;
+        }
       }
-    </style>
-  </head>
-  <body>
-    <button id="start-capture">Start Capture</button>
-  </body>
-</html>
+    });
+
+    const el = document.documentElement;
+    if (el.requestFullscreen) {
+      el.requestFullscreen({
+        navigationUI: "hide",
+      });
+
+      const screenWidth = window.screen.width;
+      const screenHeight = window.screen.height;
+      await loadArucoImages(screenWidth, screenHeight);
+    } else if (el.webkitRequestFullscreen) {
+      el.webkitRequestFullscreen();
+      
+      const screenWidth = window.screen.width;
+      const screenHeight = window.screen.height;
+      await loadArucoImages(screenWidth, screenHeight);
+    } else {
+      alert(
+        "Fullscreen not supported; results may be worse. Try another device or continue."
+      );
+
+      const screenWidth = window.visualViewport.width;
+      const screenHeight = window.visualViewport.height;
+      await loadArucoImages(screenWidth, screenHeight);
+      
+      document.body.style.height = "100dvh";
+      document.body.style.width = "100dvw";
+    }
+  });
+</script>
+{% endblock %}
+
+{% block content %}
+<button id="start-capture" class="button fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">Start Capture</button>
+{% endblock %}
