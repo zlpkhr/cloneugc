@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 import json
-import qrcode
-from PIL import Image
 
 
 def generate_aruco_board_img(
@@ -88,28 +86,25 @@ def generate_aruco_board_img(
     max_qr_size = int((min_distance_to_marker - qr_safety_margin) * 2)
     max_qr_size = max(max_qr_size, 80)  # Minimum QR code size for readability
 
-    # Generate QR code
-    qr = qrcode.QRCode(
-        version=None,  # Let it auto-determine version
-        error_correction=qrcode.constants.ERROR_CORRECT_M,
-        box_size=1,  # We'll scale it ourselves
-        border=1,
-    )
-    qr.add_data(json.dumps(metadata, separators=(',', ':')))
-    qr.make(fit=True)
-
-    # Create QR code image
-    qr_img = qr.make_image(fill_color="black", back_color="white")
-    qr_array = np.array(qr_img)
-
+    # Generate QR code using OpenCV
+    qr_encoder = cv2.QRCodeEncoder.create()
+    metadata_json = json.dumps(metadata, separators=(',', ':'))
+    
+    # Generate QR code image
+    qr_img = qr_encoder.encode(metadata_json)
+    
+    # Convert to grayscale if needed and resize to fit the calculated size
+    if len(qr_img.shape) == 3:
+        qr_img = cv2.cvtColor(qr_img, cv2.COLOR_BGR2GRAY)
+    
     # Scale QR code to fit the calculated size
-    qr_height, qr_width = qr_array.shape
+    qr_height, qr_width = qr_img.shape
     scale_factor = min(max_qr_size / qr_width, max_qr_size / qr_height)
     new_qr_width = int(qr_width * scale_factor)
     new_qr_height = int(qr_height * scale_factor)
-
-    # Resize QR code
-    qr_resized = cv2.resize(qr_array.astype(np.uint8) * 255, (new_qr_width, new_qr_height), interpolation=cv2.INTER_NEAREST)
+    
+    # Resize QR code using nearest neighbor to maintain sharpness
+    qr_resized = cv2.resize(qr_img, (new_qr_width, new_qr_height), interpolation=cv2.INTER_NEAREST)
 
     # Create blank white board
     board = np.ones((board_h, board_w), dtype=np.uint8) * 255
@@ -133,13 +128,13 @@ def generate_aruco_board_img(
     qr_start_y = center_y - new_qr_height // 2
     qr_end_x = qr_start_x + new_qr_width
     qr_end_y = qr_start_y + new_qr_height
-
+    
     # Ensure QR code fits within board boundaries
     qr_start_x = max(0, qr_start_x)
     qr_start_y = max(0, qr_start_y)
     qr_end_x = min(board_w, qr_end_x)
     qr_end_y = min(board_h, qr_end_y)
-
+    
     # Place the QR code
     board[qr_start_y:qr_end_y, qr_start_x:qr_end_x] = qr_resized[:qr_end_y-qr_start_y, :qr_end_x-qr_start_x]
 
