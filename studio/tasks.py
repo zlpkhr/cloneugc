@@ -58,7 +58,7 @@ def create_ugc_video(ugc_id: str):
         json={
             "video_url": ugc.creator.video_url,
             "audio_url": ugc.audio.url,
-            "sync_mode": "cut_off",
+            "sync_mode": "bounce",
         },
         timeout=60,
     )
