@@ -9,7 +9,7 @@
 
 {% block content %}
   <div class="m-10 flex gap-10">
-    <main class="p-8 bg-white border border-black/15 rounded-xl shadow-md shadow-black/5 max-w-lg w-full max-h-fit">
+    <main class="p-8 bg-white border border-black/15 rounded-xl shadow-md shadow-black/5 max-w-xl w-full max-h-fit">
       <h2 class="text-2xl font-bold">Create UGC</h2>
       <form method="post" class="mt-10">
         {% csrf_token %}
@@ -25,7 +25,10 @@
             <label for="script" class="form-label block w-fit">
               2. Write Script
             </label>
-            <button id="prepare-script-trigger" type="button" class="button-soft">Prepare Script</button>
+            <div class="flex items-center gap-2">
+              <button id="prepare-script-trigger" type="button" class="button-surface">Prepare Script</button>
+              <button id="preview-audio-trigger" type="button" class="button-surface">Preview Audio</button>
+            </div>
           </div>
           <textarea id="script" name="script" class="form-textarea mt-4 w-full min-h-64" required></textarea>
           <p class="text-base text-stone-500 mt-2">

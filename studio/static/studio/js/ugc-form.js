@@ -43,6 +43,12 @@
         body: JSON.stringify({ script: scriptEl.value }),
       });
 
+      if (!res.ok) {
+        throw new Error("Prepare script request failed.", {
+          cause: res,
+        });
+      }
+
       const data = await res.json();
       scriptEl.value = data.preparedScript;
     } catch (error) {
@@ -51,6 +57,53 @@
     } finally {
       scriptEl.disabled = false;
       prepareScriptTrigger.disabled = false;
+    }
+  });
+}
+
+{
+  const previewAudioTrigger = document.querySelector("#preview-audio-trigger");
+  const scriptEl = document.querySelector("#script");
+  const creatorInput = document.querySelector("#creator-input");
+
+  previewAudioTrigger.addEventListener("click", async () => {
+    previewAudioTrigger.disabled = true;
+
+    try {
+      const res = await fetch("/studio/preview-audio/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          creator_id: creatorInput.value,
+          text: scriptEl.value,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+
+        throw new Error("Preview audio request failed.", {
+          cause: new Error(data.error),
+        });
+      }
+
+      const blob = await res.blob();
+
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+
+      audio.play();
+
+      audio.addEventListener("ended", () => {
+        URL.revokeObjectURL(url);
+      });
+    } catch (error) {
+      console.error("Failed to preview audio:", error);
+      alert("Failed to preview the audio. Try again or contact support.");
+    } finally {
+      previewAudioTrigger.disabled = false;
     }
   });
 }
