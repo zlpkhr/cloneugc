@@ -31,7 +31,14 @@ class CreateUgcView(LoginRequiredMixin, CreateView):
         return ctx
 
     def form_valid(self, form):
+        account = self.request.user.account
+
+        account.credits -= 1
+        account.save()
+
+        form.instance.account = account
         response = super().form_valid(form)
+
         create_ugc_video.delay(self.object.id)
         return response
 
