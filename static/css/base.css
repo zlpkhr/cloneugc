@@ -6,3 +6,41 @@
     font-variation-settings: "slnt" 0, "FLAR" 0, "VOLM" 0;
   }
 }
+
+@layer components {
+  .form-label {
+    font-weight: 500;
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+    color: var(--color-stone-900);
+  }
+
+  .form-textarea {
+    background-color: var(--color-white);
+    border: 1px solid --alpha(var(--color-black) / 15%);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    color: var(--color-stone-900);
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+    padding: --spacing(3);
+
+    &:focus {
+      outline-color: var(--color-pink-700);
+    }
+  }
+
+  .button {
+    background-color: var(--color-pink-700);
+    color: var(--color-white);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: var(--text-lg--line-height);
+    border-radius: calc(infinity * 1px);
+    padding: --spacing(1.5) --spacing(2.5);
+
+    &:active {
+      background-color: var(--color-pink-800);
+    }
+  }
+}
