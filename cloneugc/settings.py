@@ -193,3 +193,8 @@ CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")
 # Fal
 
 FAL_API_KEY = os.getenv("FAL_API_KEY")
+
+
+# OpenAI
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")

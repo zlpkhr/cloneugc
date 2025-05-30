@@ -20,7 +20,12 @@
         {% endfor %}
       </div>
       <div class="mt-10">
-        <label for="script" class="form-label block w-fit">2. Write Script</label>
+        <div class="flex justify-between items-center">
+          <label for="script" class="form-label block w-fit">
+            2. Write Script
+          </label>
+          <button id="prepare-script-trigger" type="button" class="button-soft">Prepare Script</button>
+        </div>
         <textarea id="script" name="script" class="form-textarea mt-4 w-full min-h-64" required></textarea>
         <p class="text-base text-stone-500 mt-2">
           Add punctuation where appropriate. Use “-” to indicate pauses, and use “dot” instead of “.” in URLs. Use two question marks for questions, avoid using quotation marks, and put a space before a question mark.

@@ -31,6 +31,13 @@
     &:focus {
       outline-color: var(--color-pink-700);
     }
+
+    &:disabled {
+      background-color: var(--color-stone-100);
+      border-color: --alpha(var(--color-black) / 10%);
+      color: var(--color-stone-500);
+      box-shadow: none;
+    }
   }
 
   .button {
@@ -44,6 +51,25 @@
 
     &:active {
       background-color: var(--color-pink-800);
+    }
+  }
+
+  .button-soft {
+    background-color: var(--color-pink-50);
+    color: var(--color-pink-700);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: var(--text-sm--line-height);
+    border-radius: calc(infinity * 1px);
+    padding: --spacing(1) --spacing(2.5);
+
+    &:active {
+      background-color: var(--color-pink-100);
+    }
+
+    &:disabled {
+      background-color: var(--color-stone-100);
+      color: var(--color-stone-500);
     }
   }
 }
