@@ -41,6 +41,15 @@
       display: none;
     }
   }
+
+  body {
+    @media (prefers-color-scheme: dark) {
+      background-color: black;
+    }
+    @media (prefers-color-scheme: light) {
+      background-color: white;
+    }
+  }
 </style>
 
 <script type="module">
@@ -79,8 +88,8 @@
       const data = await response.json();
       
       // Convert base64 to blob URLs
-      const lightBlob = new Blob([Uint8Array.from(atob(data.light), c => c.charCodeAt(0))], { type: 'image/png' });
-      const darkBlob = new Blob([Uint8Array.from(atob(data.dark), c => c.charCodeAt(0))], { type: 'image/png' });
+      const darkBlob = new Blob([Uint8Array.from(atob(data.light), c => c.charCodeAt(0))], { type: 'image/png' });
+      const lightBlob = new Blob([Uint8Array.from(atob(data.dark), c => c.charCodeAt(0))], { type: 'image/png' });
       
       lightImageUrl = URL.createObjectURL(lightBlob);
       darkImageUrl = URL.createObjectURL(darkBlob);
@@ -139,9 +148,14 @@
       const screenHeight = window.visualViewport.height;
       await loadArucoImages(screenWidth, screenHeight);
       
-      document.body.style.height = "100dvh";
-      document.body.style.width = "100dvw";
+      document.body.style.height = "100svh";
+      document.body.style.width = "100svw";
     }
+  });
+
+  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    document.documentElement.dataset.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
   });
 </script>
 {% endblock %}
@@ -149,6 +163,6 @@
 {% block content %}
 <div id="start-capture-container" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 justify-center items-center">
   <button id="start-capture" class="button">Start Capture</button>
-  <p class="text-center text-lg font-medium">For best results, use your device in light mode in bright environments,<br>and in dark mode in dark environments.</p>
+  <p class="text-center dark:text-white text-lg font-medium">For best results, use your device in light mode in bright environments,<br>and in dark mode in dark environments.</p>
 </div>
 {% endblock %}
