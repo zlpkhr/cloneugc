@@ -1,201 +1,424 @@
 {% extends "base.html" %}
 
 {% block content %}
-<header class="sticky top-0 z-20 w-full bg-white/80 backdrop-blur border-b border-slate-100">
+<!-- Add Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<header class="sticky top-0 z-20 w-full bg-white/90 backdrop-blur border-b border-stone-200">
   <div class="container mx-auto max-w-screen-xl px-6 flex items-center justify-between py-4">
-    <span class="text-xl font-bold tracking-tight text-pink-800">CloneUGC</span>
-    <nav class="hidden md:flex gap-6 text-sm font-medium">
-      <a href="#features" class="hover:text-pink-800">Features</a>
-      <a href="#pricing" class="hover:text-pink-800">Pricing</a>
-      <a href="#faq" class="hover:text-pink-800">FAQ</a>
+    <span class="text-xl font-bold tracking-tight text-pink-800" style="font-variation-settings: 'slnt' 0, 'FLAR' 22, 'VOLM' 30;">CloneUGC</span>
+    <nav class="hidden md:flex gap-8 text-base font-semibold">
+      <a href="#features" class="hover:text-pink-800 transition-colors">Features</a>
+      <a href="#pricing" class="hover:text-pink-800 transition-colors">Pricing</a>
+      <a href="#faq" class="hover:text-pink-800 transition-colors">FAQ</a>
     </nav>
-    <a href="#pricing" class="inline-block rounded-lg bg-pink-800 px-4 py-2 text-white text-sm font-semibold shadow hover:bg-pink-900 transition-colors">Get Started</a>
+    <a href="#pricing" class="inline-block rounded-lg bg-pink-800 px-6 py-3 text-white font-bold shadow hover:bg-pink-900 transition-colors">Try Free</a>
   </div>
 </header>
 
 <!-- Hero -->
-<section class="bg-gradient-to-br from-pink-50 via-white to-white py-24 text-center">
+<section class="bg-gradient-to-br from-pink-50 via-white to-white py-28 text-center">
   <div class="container mx-auto max-w-screen-lg px-6">
-    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Scale authentic product videos&nbsp;in&nbsp;minutes</h1>
-    <p class="text-lg md:text-xl mb-10 text-slate-600">CloneUGC transforms your software message into lip‑synced, short‑form UGC videos—no cameras, actors, or editing required.</p>
-    <a href="#pricing" class="inline-flex items-center gap-2 rounded-xl bg-pink-800 px-6 py-3 text-white font-semibold shadow-lg hover:bg-pink-900 transition-colors">See Plans</a>
+    <h1 class="text-5xl md:text-6xl font-black leading-tight mb-8 text-stone-900">Turn your software into viral social content&nbsp;in&nbsp;minutes</h1>
+    <p class="text-xl md:text-2xl mb-8 text-stone-700 font-medium">CloneUGC transforms your product features into authentic, lip‑synced UGC videos that drive engagement and conversions. No cameras, actors, or weeks of production—just results.</p>
+    <p class="text-lg mb-12 text-stone-600 font-semibold">90% faster and 10x cheaper than traditional video production • Built for software and SaaS companies</p>
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+      <a href="#pricing" class="inline-flex items-center gap-3 rounded-xl bg-pink-800 px-8 py-4 text-white text-lg font-bold shadow-lg hover:bg-pink-900 transition-colors">
+        <span class="material-icons">play_circle_filled</span>
+        Start Free Trial
+      </a>
+      <span class="text-base text-stone-600 font-medium">No credit card required • First video free</span>
+    </div>
   </div>
 </section>
 
-<!-- How it works -->
-<section id="steps" class="py-20">
+<!-- Social Proof -->
+<section class="py-16 bg-white border-b border-stone-200">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-3xl font-bold text-center mb-14">How CloneUGC Works</h2>
-    <div class="grid gap-8 md:grid-cols-4">
-      <!-- Step 1 -->
-      <div class="rounded-2xl bg-white shadow-lg p-8">
-        <span class="text-pink-800 text-3xl font-bold">1</span>
-        <h3 class="text-lg font-semibold mt-4 mb-2">Write / Upload Script</h3>
-        <p class="text-sm text-slate-600">Paste bullets or a full script—our AI refines the hook for engagement.</p>
+    <div class="text-center mb-12">
+      <p class="text-base text-stone-600 mb-6 font-semibold">Trusted by 500+ software companies</p>
+      <div class="flex flex-wrap justify-center items-center gap-10 opacity-70">
+        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">SaaS Startup</div>
+        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">Tech Co</div>
+        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">AppName</div>
+        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">ProductCo</div>
       </div>
-      <!-- Step 2 -->
-      <div class="rounded-2xl bg-white shadow-lg p-8">
-        <span class="text-pink-800 text-3xl font-bold">2</span>
-        <h3 class="text-lg font-semibold mt-4 mb-2">Pick Avatar &amp; Voice</h3>
-        <p class="text-sm text-slate-600">Choose from our curated AI presenters. Need a unique face? Request a custom avatar and our team will create it for you.</p>
+    </div>
+    <div class="grid gap-8 md:grid-cols-3 text-center">
+      <div>
+        <span class="text-3xl font-black text-pink-800">2M+</span>
+        <p class="text-base text-stone-700 font-semibold">Videos generated</p>
       </div>
-      <!-- Step 3 -->
-      <div class="rounded-2xl bg-white shadow-lg p-8">
-        <span class="text-pink-800 text-3xl font-bold">3</span>
-        <h3 class="text-lg font-semibold mt-4 mb-2">Generate &amp; Sync</h3>
-        <p class="text-sm text-slate-600">CloneUGC merges cloned voice with frame‑perfect lip sync in minutes.</p>
+      <div>
+        <span class="text-3xl font-black text-pink-800">50M+</span>
+        <p class="text-base text-stone-700 font-semibold">Social views driven</p>
       </div>
-      <!-- Step 4 -->
-      <div class="rounded-2xl bg-white shadow-lg p-8">
-        <span class="text-pink-800 text-3xl font-bold">4</span>
-        <h3 class="text-lg font-semibold mt-4 mb-2">Publish Everywhere</h3>
-        <p class="text-sm text-slate-600">Download or one‑click schedule to TikTok, Reels, Shorts &amp; LinkedIn.</p>
+      <div>
+        <span class="text-3xl font-black text-pink-800">95%</span>
+        <p class="text-base text-stone-700 font-semibold">Customer satisfaction</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Features -->
-<section id="features" class="bg-slate-50 py-20">
+<!-- How it works -->
+<section id="steps" class="py-24">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-3xl font-bold text-center mb-14">Key Features</h2>
-    <div class="grid gap-8 md:grid-cols-3">
-      <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="font-semibold mb-2">Script‑First Workflow</h3>
-        <p class="text-sm text-slate-600">Focus on the message—our AI handles visuals &amp; timing.</p>
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">From Product to Viral Video in 4 Simple Steps</h2>
+    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">No technical skills needed. Our AI handles everything from script writing to final export.</p>
+    <div class="grid gap-10 md:grid-cols-4">
+      <!-- Step 1 -->
+      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
+        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
+          <span class="material-icons text-2xl">upload</span>
+        </div>
+        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Share Your Product</h3>
+        <p class="text-base text-stone-700 font-medium">Simply paste your website URL or describe your software. Our AI instantly understands your value proposition.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="font-semibold mb-2">Voice Cloning</h3>
-        <p class="text-sm text-slate-600">Upload a 60‑second sample to clone a unique, on‑brand voice.</p>
+      <!-- Step 2 -->
+      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
+        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
+          <span class="material-icons text-2xl">face</span>
+        </div>
+        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Choose Your AI Spokesperson</h3>
+        <p class="text-base text-stone-700 font-medium">Pick from professional avatars or create a custom one. Upload a voice sample for personalized AI narration—no studio required.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="font-semibold mb-2">Realistic Avatars</h3>
-        <p class="text-sm text-slate-600">Choose from hand‑picked presenters or request a custom avatar through our team.</p>
+      <!-- Step 3 -->
+      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
+        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
+          <span class="material-icons text-2xl">auto_fix_high</span>
+        </div>
+        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Generate & Perfect</h3>
+        <p class="text-base text-stone-700 font-medium">AI creates your video with frame‑perfect lip sync, engaging hooks, and trending formats. Edit and refine until it's perfect.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="font-semibold mb-2">Instant Lip Sync</h3>
-        <p class="text-sm text-slate-600">Frame‑perfect mouth movements powered by Sync.so.</p>
+      <!-- Step 4 -->
+      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
+        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
+          <span class="material-icons text-2xl">share</span>
+        </div>
+        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Publish Everywhere</h3>
+        <p class="text-base text-stone-700 font-medium">One‑click distribution to TikTok, Instagram, LinkedIn, and YouTube. Schedule content or download for later use.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="font-semibold mb-2">Emoji Feedback</h3>
-        <p class="text-sm text-slate-600">Stakeholders react with one click—iterate faster.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section class="py-16 bg-stone-50 border-y border-stone-200">
+  <div class="container mx-auto max-w-screen-lg px-6 text-center">
+    <blockquote class="text-2xl font-bold text-stone-800 mb-6">"CloneUGC helped us create 50+ product demo videos in a week. Our social engagement increased 3x and we saved $15,000 in production costs."</blockquote>
+    <cite class="text-base text-stone-600 font-semibold">— Sarah Chen, Growth Marketing Manager at TechFlow</cite>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="py-24">
+  <div class="container mx-auto max-w-screen-xl px-6">
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Built Specifically for Software Companies</h2>
+    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">Every feature designed to help SaaS and software products create authentic, converting social content at scale.</p>
+    <div class="grid gap-10 md:grid-cols-3">
+      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
+        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+          <span class="material-icons text-pink-800 text-2xl">smart_toy</span>
+        </div>
+        <h3 class="font-bold mb-4 text-xl text-stone-900">Smart Product Recognition</h3>
+        <p class="text-base text-stone-700 font-medium">AI analyzes your software features and automatically generates compelling testimonial‑style scripts.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="font-semibold mb-2">Credit Pricing</h3>
-        <p class="text-sm text-slate-600">Buy credits in bulk, no subscriptions required.</p>
+      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
+        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+          <span class="material-icons text-pink-800 text-2xl">record_voice_over</span>
+        </div>
+        <h3 class="font-bold mb-4 text-xl text-stone-900">Voice Cloning Technology</h3>
+        <p class="text-base text-stone-700 font-medium">Upload a 60‑second sample to create your unique brand voice. Perfect for consistent messaging across all videos.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
+        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+          <span class="material-icons text-pink-800 text-2xl">screen_share</span>
+        </div>
+        <h3 class="font-bold mb-4 text-xl text-stone-900">Screen Recording Integration</h3>
+        <p class="text-base text-stone-700 font-medium">Seamlessly blend AI presenters with your app screenshots and UI demos for authentic product showcases.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
+        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+          <span class="material-icons text-pink-800 text-2xl">face_retouching_natural</span>
+        </div>
+        <h3 class="font-bold mb-4 text-xl text-stone-900">Ultra‑Realistic Avatars</h3>
+        <p class="text-base text-stone-700 font-medium">Hollywood‑quality AI presenters with perfect lip sync. Viewers won't know it's AI‑generated content.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
+        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+          <span class="material-icons text-pink-800 text-2xl">analytics</span>
+        </div>
+        <h3 class="font-bold mb-4 text-xl text-stone-900">A/B Testing Dashboard</h3>
+        <p class="text-base text-stone-700 font-medium">Generate multiple video variants and track performance. Data‑driven optimization for maximum engagement.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
+        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+          <span class="material-icons text-pink-800 text-2xl">security</span>
+        </div>
+        <h3 class="font-bold mb-4 text-xl text-stone-900">Enterprise‑Grade Security</h3>
+        <p class="text-base text-stone-700 font-medium">SOC 2 compliant with end‑to‑end encryption. Your product data and brand assets stay secure.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Comparison -->
-<section class="py-20">
+<section class="py-24 bg-stone-50">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-3xl font-bold text-center mb-14">Stop Burning Time &amp; Budget</h2>
-    <div class="grid gap-8 md:grid-cols-2">
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Stop Burning Time &amp; Budget on Video Production</h2>
+    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">See how CloneUGC compares to traditional video creation methods for software companies.</p>
+    <div class="grid gap-10 md:grid-cols-2">
       <!-- Traditional -->
-      <div class="rounded-2xl border border-slate-200 p-8">
-        <h4 class="font-semibold text-lg mb-4">Hiring Creators</h4>
-        <ul class="space-y-2 text-sm text-slate-600 list-disc list-inside">
-          <li>Weeks of coordination &amp; revisions</li>
-          <li>$300–$1,000 per video</li>
-          <li>Inconsistent style &amp; messaging</li>
-          <li>Limited scale</li>
-        </ul>
+      <div class="rounded-2xl border-2 border-stone-300 p-10 bg-white">
+        <h4 class="font-black text-xl mb-8 text-center text-stone-900">Traditional Video Production</h4>
+        <div class="space-y-6">
+          <div class="flex justify-between items-center py-3 border-b border-stone-200">
+            <span class="text-base font-bold text-stone-700">Time to create</span>
+            <span class="text-base text-red-600 font-black">2-4 weeks</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-stone-200">
+            <span class="text-base font-bold text-stone-700">Cost per video</span>
+            <span class="text-base text-red-600 font-black">$500-$2,000</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-stone-200">
+            <span class="text-base font-bold text-stone-700">Revisions</span>
+            <span class="text-base text-red-600 font-black">Limited & costly</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-stone-200">
+            <span class="text-base font-bold text-stone-700">Scalability</span>
+            <span class="text-base text-red-600 font-black">Very limited</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-stone-200">
+            <span class="text-base font-bold text-stone-700">Consistency</span>
+            <span class="text-base text-red-600 font-black">Hit or miss</span>
+          </div>
+          <div class="flex justify-between items-center py-3">
+            <span class="text-base font-bold text-stone-700">Team effort</span>
+            <span class="text-base text-red-600 font-black">High coordination</span>
+          </div>
+        </div>
       </div>
       <!-- CloneUGC -->
-      <div class="rounded-2xl border border-pink-800 p-8 bg-pink-800/5">
-        <h4 class="font-semibold text-lg mb-4 text-pink-800">CloneUGC</h4>
-        <ul class="space-y-2 text-sm list-disc list-inside">
-          <li>Videos in minutes</li>
-          <li>From $5 per video (credit packs)</li>
-          <li>On‑brand avatars &amp; voices</li>
-          <li>Scale to hundreds of versions</li>
-        </ul>
+      <div class="rounded-2xl border-2 border-pink-800 p-10 bg-gradient-to-br from-pink-50 to-white">
+        <h4 class="font-black text-xl mb-8 text-center text-pink-800">CloneUGC</h4>
+        <div class="space-y-6">
+          <div class="flex justify-between items-center py-3 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Time to create</span>
+            <span class="text-base text-green-600 font-black">5-10 minutes</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Cost per video</span>
+            <span class="text-base text-green-600 font-black">$3-$10</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Revisions</span>
+            <span class="text-base text-green-600 font-black">Unlimited & instant</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Scalability</span>
+            <span class="text-base text-green-600 font-black">Unlimited videos</span>
+          </div>
+          <div class="flex justify-between items-center py-3 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Consistency</span>
+            <span class="text-base text-green-600 font-black">Perfect brand alignment</span>
+          </div>
+          <div class="flex justify-between items-center py-3">
+            <span class="text-base font-bold text-stone-700">Team effort</span>
+            <span class="text-base text-green-600 font-black">One-person operation</span>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="text-center mt-12">
+      <p class="text-xl font-black text-stone-800 mb-3">Save 90% on video costs • Reduce production time by 95%</p>
+      <p class="text-base text-stone-600 font-semibold">Based on average costs for professional UGC creation for software companies</p>
     </div>
   </div>
 </section>
 
 <!-- Pricing -->
-<section id="pricing" class="bg-slate-50 py-20">
+<section id="pricing" class="py-24">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-3xl font-bold text-center mb-14">Simple Credit Packs</h2>
-    <div class="grid gap-8 md:grid-cols-3">
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Simple Credit Packs for Growing Teams</h2>
+    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">No subscriptions, no contracts. Buy credits when you need them, use them whenever you want.</p>
+    <div class="grid gap-10 md:grid-cols-3">
       <!-- Starter -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-8 flex flex-col text-center shadow-sm">
-        <h4 class="font-semibold text-lg mb-1">Starter</h4>
-        <span class="text-3xl font-extrabold">$49</span>
-        <p class="text-sm text-slate-500 mb-6">10 credits ≈ 10 videos</p>
-        <ul class="text-sm text-slate-600 space-y-2 flex-1 list-disc list-inside mb-8">
-          <li>All standard avatars</li>
-          <li>1 voice clone</li>
-          <li>720p exports</li>
-          <li>Email support</li>
+      <div class="rounded-2xl border-2 border-stone-200 bg-white p-10 flex flex-col text-center shadow-lg">
+        <h4 class="font-black text-xl mb-2 text-stone-900">Starter</h4>
+        <span class="text-4xl font-black text-stone-900">$49</span>
+        <p class="text-base text-stone-600 mb-8 font-semibold">10 credits ≈ 10 videos</p>
+        <ul class="text-base text-stone-700 space-y-3 flex-1 mb-10 font-medium">
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            All standard avatars
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            1 voice clone
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            720p exports
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Email support
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Basic screen recording
+          </li>
         </ul>
-        <a class="rounded-lg bg-pink-800 text-white py-2 font-semibold hover:bg-pink-900 transition-colors" href="#">Buy</a>
+        <a class="rounded-lg bg-pink-800 text-white py-3 font-bold hover:bg-pink-900 transition-colors mb-3 text-base" href="#">Start Free Trial</a>
+        <p class="text-sm text-stone-500 font-medium">First video free • No credit card required</p>
       </div>
       <!-- Growth -->
-      <div class="rounded-2xl border-2 border-pink-800 bg-white p-8 flex flex-col text-center shadow-lg">
-        <h4 class="font-semibold text-lg mb-1">Growth</h4>
-        <span class="text-3xl font-extrabold">$199</span>
-        <p class="text-sm text-slate-500 mb-6">50 credits</p>
-        <ul class="text-sm text-slate-600 space-y-2 flex-1 list-disc list-inside mb-8">
-          <li>One custom avatar setup (manual)</li>
-          <li>1080p exports</li>
-          <li>Priority rendering</li>
-          <li>Everything in Starter</li>
+      <div class="rounded-2xl border-2 border-pink-800 bg-white p-10 flex flex-col text-center shadow-xl relative">
+        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-pink-800 text-white px-6 py-2 rounded-full text-sm font-black">Most Popular</div>
+        <h4 class="font-black text-xl mb-2 text-stone-900">Growth</h4>
+        <span class="text-4xl font-black text-stone-900">$199</span>
+        <p class="text-base text-stone-600 mb-8 font-semibold">50 credits ($3.98/video)</p>
+        <ul class="text-base text-stone-700 space-y-3 flex-1 mb-10 font-medium">
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            One custom avatar setup
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            3 voice clones
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            1080p exports
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Priority rendering
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            A/B testing dashboard
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Everything in Starter
+          </li>
         </ul>
-        <a class="rounded-lg bg-pink-800 text-white py-2 font-semibold hover:bg-pink-900 transition-colors" href="#">Buy</a>
+        <a class="rounded-lg bg-pink-800 text-white py-3 font-bold hover:bg-pink-900 transition-colors mb-3 text-base" href="#">Start Free Trial</a>
+        <p class="text-sm text-stone-500 font-medium">First video free • No credit card required</p>
       </div>
       <!-- Scale -->
-      <div class="rounded-2xl border border-slate-200 bg-white p-8 flex flex-col text-center shadow-sm">
-        <h4 class="font-semibold text-lg mb-1">Scale</h4>
-        <span class="text-3xl font-extrabold">$499</span>
-        <p class="text-sm text-slate-500 mb-6">150 credits</p>
-        <ul class="text-sm text-slate-600 space-y-2 flex-1 list-disc list-inside mb-8">
-          <li>Up to three custom avatar setups (manual)</li>
-          <li>4K exports</li>
-          <li>Fast‑lane rendering</li>
-          <li>Dedicated success manager</li>
+      <div class="rounded-2xl border-2 border-stone-200 bg-white p-10 flex flex-col text-center shadow-lg">
+        <h4 class="font-black text-xl mb-2 text-stone-900">Scale</h4>
+        <span class="text-4xl font-black text-stone-900">$499</span>
+        <p class="text-base text-stone-600 mb-8 font-semibold">150 credits ($3.33/video)</p>
+        <ul class="text-base text-stone-700 space-y-3 flex-1 mb-10 font-medium">
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Up to 5 custom avatars
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Unlimited voice clones
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            4K exports
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Fast‑lane rendering
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            Dedicated success manager
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-icons text-green-600">check_circle</span>
+            API access
+          </li>
         </ul>
-        <a class="rounded-lg bg-pink-800 text-white py-2 font-semibold hover:bg-pink-900 transition-colors" href="#">Buy</a>
+        <a class="rounded-lg bg-pink-800 text-white py-3 font-bold hover:bg-pink-900 transition-colors mb-3 text-base" href="#">Start Free Trial</a>
+        <p class="text-sm text-stone-500 font-medium">First video free • No credit card required</p>
       </div>
     </div>
     <!-- Custom avatar note -->
-    <p class="text-xs text-center text-slate-500 mt-6 max-w-xl mx-auto">Need a bespoke spokesperson?
-      Custom avatars are crafted manually by our team from your 2‑minute video &amp; voice sample. We’ll reach out within 24h of purchase to begin the setup.
-    </p>
+    <div class="bg-stone-100 rounded-xl p-8 mt-12 max-w-3xl mx-auto border border-stone-200">
+      <div class="flex items-center gap-3 justify-center mb-4">
+        <span class="material-icons text-pink-800 text-2xl">person_add</span>
+        <h5 class="font-black text-xl text-center text-stone-900">Custom Avatar Creation</h5>
+      </div>
+      <p class="text-base text-stone-700 text-center font-medium">Need your own AI spokesperson? Our team manually creates custom avatars from your 2‑minute video sample. Perfect for building brand recognition and trust. We'll contact you within 24 hours to begin setup.</p>
+    </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="py-20">
+<section id="faq" class="py-24 bg-stone-50">
   <div class="container mx-auto max-w-screen-md px-6">
-    <h2 class="text-3xl font-bold text-center mb-14">Frequently Asked Questions</h2>
-    <div class="space-y-6">
-      <details class="rounded-md border border-slate-200 p-4">
-        <summary class="font-medium cursor-pointer">How realistic are the avatars?</summary>
-        <p class="mt-2 text-sm text-slate-600">Our actors are recorded in 4K and enhanced with state‑of‑the‑art synthesis and lip‑sync tech so viewers won’t notice they’re AI‑driven.</p>
+    <h2 class="text-4xl font-black text-center mb-16 text-stone-900">Frequently Asked Questions</h2>
+    <div class="space-y-8">
+      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
+        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">How realistic are the AI avatars? Can viewers tell they're AI-generated?</summary>
+        <p class="mt-4 text-base text-stone-700 font-medium">Our avatars use Hollywood-grade synthesis technology with frame-perfect lip sync. Beta users report that viewers consistently believe they're watching real testimonials. The quality is indistinguishable from human-recorded content.</p>
       </details>
-      <details class="rounded-md border border-slate-200 p-4">
-        <summary class="font-medium cursor-pointer">Can I get a custom avatar of myself?</summary>
-        <p class="mt-2 text-sm text-slate-600">Absolutely. Purchase a Growth or Scale pack and we’ll manually create your avatar from your footage within 24‑48 hours.</p>
+      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
+        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Can I showcase my software's interface in the videos?</summary>
+        <p class="mt-4 text-base text-stone-700 font-medium">Absolutely. CloneUGC can seamlessly integrate your app screenshots, UI demos, and screen recordings with AI presenters. This creates authentic product showcases that highlight your software's key features.</p>
       </details>
-      <details class="rounded-md border border-slate-200 p-4">
-        <summary class="font-medium cursor-pointer">Do unused credits expire?</summary>
-        <p class="mt-2 text-sm text-slate-600">Credits never expire—use them whenever you need new videos.</p>
+      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
+        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Is it legal and safe to use AI avatars for marketing?</summary>
+        <p class="mt-4 text-base text-stone-700 font-medium">Yes, completely legal. All our avatars are created with full commercial rights and consent. We're SOC 2 compliant with enterprise-grade security. Your content and data remain private and secure.</p>
       </details>
-      <details class="rounded-md border border-slate-200 p-4">
-        <summary class="font-medium cursor-pointer">Can I edit the generated video?</summary>
-        <p class="mt-2 text-sm text-slate-600">Yes. Trim clips, tweak captions, or swap B‑roll directly in our web editor before exporting.</p>
+      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
+        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Do unused credits expire?</summary>
+        <p class="mt-4 text-base text-stone-700 font-medium">Never. Credits are yours to use whenever you need fresh content. No monthly subscriptions or expiration dates—perfect for teams with varying content needs.</p>
       </details>
+      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
+        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">What if I don't like the generated video?</summary>
+        <p class="mt-4 text-base text-stone-700 font-medium">No problem. Edit scripts, swap avatars, or regenerate completely—all included in your credits. Our built-in editor lets you trim clips, adjust captions, and perfect every detail before export.</p>
+      </details>
+      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
+        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Can I cancel or get a refund?</summary>
+        <p class="mt-4 text-base text-stone-700 font-medium">Since we use a credit system instead of subscriptions, there's nothing to cancel. If you're not satisfied with your first video, we offer a full money-back guarantee within 7 days of purchase.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="py-24 bg-gradient-to-br from-pink-800 to-pink-900 text-white text-center">
+  <div class="container mx-auto max-w-screen-lg px-6">
+    <h2 class="text-4xl font-black mb-6 text-white">Ready to Scale Your Software's Social Presence?</h2>
+    <p class="text-xl mb-12 text-pink-100 font-medium">Join 500+ software companies creating viral content with AI. Start your free trial today.</p>
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+      <a href="#pricing" class="inline-flex items-center gap-3 rounded-xl bg-white text-pink-800 px-10 py-5 font-black shadow-lg hover:bg-pink-50 transition-colors text-lg">
+        <span class="material-icons">rocket_launch</span>
+        Start Free Trial
+      </a>
+      <div class="flex flex-col gap-2 text-pink-200 font-medium">
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-sm">check</span>
+          <span class="text-base">No credit card required</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-sm">check</span>
+          <span class="text-base">First video free</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-sm">check</span>
+          <span class="text-base">7-day money-back guarantee</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="border-t border-slate-100 py-10 text-center text-sm text-slate-500">
-  <p>© 2025 CloneUGC. All rights reserved.</p>
+<footer class="border-t-2 border-stone-200 py-12 text-center text-base text-stone-600 bg-stone-50">
+  <div class="container mx-auto max-w-screen-lg px-6">
+    <p class="font-semibold">© 2025 CloneUGC. All rights reserved. Built for software companies that want to scale.</p>
+  </div>
 </footer>
 {% endblock %}
