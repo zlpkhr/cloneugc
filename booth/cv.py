@@ -4,6 +4,7 @@ import json
 import qrcode
 from PIL import Image  # qrcode returns a PIL image
 
+
 def generate_aruco_board_img(screen_width: int, screen_height: int):
     # ---------- 1. BOARD SIZE ----------
     aspect_ratio = screen_width / screen_height
@@ -17,8 +18,8 @@ def generate_aruco_board_img(screen_width: int, screen_height: int):
     # ---------- 2. MARKER SIZE ----------
     min_margin_percent, min_space_percent = 0.08, 0.15
     marker_size = min(
-        int(board_w * (1 - 2*min_margin_percent - min_space_percent) / 2),
-        int(board_h * (1 - 2*min_margin_percent - min_space_percent) / 2),
+        int(board_w * (1 - 2 * min_margin_percent - min_space_percent) / 2),
+        int(board_h * (1 - 2 * min_margin_percent - min_space_percent) / 2),
     )
     marker_size = max(marker_size, 40)
 
@@ -47,7 +48,10 @@ def generate_aruco_board_img(screen_width: int, screen_height: int):
     marker_centres = [
         (margin + marker_size // 2, margin + marker_size // 2),  # TL
         (board_w - margin - marker_size // 2, margin + marker_size // 2),  # TR
-        (board_w - margin - marker_size // 2, board_h - margin - marker_size // 2),  # BR
+        (
+            board_w - margin - marker_size // 2,
+            board_h - margin - marker_size // 2,
+        ),  # BR
         (margin + marker_size // 2, board_h - margin - marker_size // 2),  # BL
     ]
     min_dist = min(
@@ -56,11 +60,13 @@ def generate_aruco_board_img(screen_width: int, screen_height: int):
     qr_side = max(int((min_dist - 20) * 2), 80)  # keep ≥80 px
 
     # ---------- 6. QR-CODE GENERATION (qrcode) ----------
+    # ----- where you build the QR object -----
     qr = qrcode.QRCode(
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=1,     # start with 1 px modules
-        border=0,       # no extra white border; we already have margins
+        error_correction=qrcode.constants.ERROR_CORRECT_H,  # ← bump to H
+        box_size=2,  # ← each module starts at 2 px, gives more headroom
+        border=4,  # ← full quiet zone (spec minimum)
     )
+
     qr.add_data(metadata_json)
     qr.make(fit=True)
 
@@ -98,7 +104,7 @@ def generate_aruco_board_img(screen_width: int, screen_height: int):
     board_light = 255 - board_dark
 
     ok_light, buf_light = cv2.imencode(".png", board_light)
-    ok_dark,  buf_dark  = cv2.imencode(".png", board_dark)
+    ok_dark, buf_dark = cv2.imencode(".png", board_dark)
     if not (ok_light and ok_dark):
         raise RuntimeError("PNG encoding failed")
 
