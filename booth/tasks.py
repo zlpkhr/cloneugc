@@ -1,12 +1,12 @@
 import logging
-import requests
 import os
 import subprocess
 import tempfile
 
+import requests
 from celery import shared_task
-from django.core.files.storage import default_storage
 from django.conf import settings
+from django.core.files.storage import default_storage
 
 from booth.models import Creator
 from shortid import shortid

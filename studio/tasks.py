@@ -1,11 +1,11 @@
-from pathlib import Path
+import json
 import logging
+from pathlib import Path
+
 import requests
+from celery import shared_task
 from django.conf import settings
 from django.core.files.base import ContentFile
-import json
-
-from celery import shared_task
 
 from shortid import shortid
 

@@ -1,19 +1,21 @@
 import json
-from django.conf import settings
+
 import requests
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpRequest, HttpResponse, JsonResponse
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.views.generic.edit import CreateView
 
 from booth.models import Creator
+
 from .ai import format_sonic_text
-from .models import Ugc
 from .forms import UgcForm
+from .models import Ugc
 from .tasks import create_ugc_video
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class CreateUgcView(LoginRequiredMixin, CreateView):

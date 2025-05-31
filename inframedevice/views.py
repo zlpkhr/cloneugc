@@ -1,6 +1,7 @@
 import base64
-from django.shortcuts import render
+
 from django.http import HttpRequest, JsonResponse
+from django.shortcuts import render
 from django.views.decorators.http import require_GET
 
 from inframedevice.cv import generate_aruco_board_img

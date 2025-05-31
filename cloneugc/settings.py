@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "booth",
     "studio",
     "accounts",
+    "inframedevice",
 ]
 
 MIDDLEWARE = [
