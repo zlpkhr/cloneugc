@@ -4,15 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('booth', '0007_creator_cartesia_voice_id'),
+        ("booth", "0007_creator_cartesia_voice_id"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='creator',
-            name='language',
-            field=models.CharField(choices=[('en', 'English'), ('ru', 'Russian')], help_text='Changing language reclones voice.', max_length=2),
+            model_name="creator",
+            name="language",
+            field=models.CharField(
+                choices=[("en", "English"), ("ru", "Russian")],
+                help_text="Changing language reclones voice.",
+                max_length=2,
+            ),
         ),
     ]

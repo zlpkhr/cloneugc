@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('booth', '0001_initial'),
+        ("booth", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='creator',
-            name='video_mp4',
-            field=models.FileField(blank=True, null=True, upload_to='booth/creators/videos/'),
+            model_name="creator",
+            name="video_mp4",
+            field=models.FileField(
+                blank=True, null=True, upload_to="booth/creators/videos/"
+            ),
         ),
     ]

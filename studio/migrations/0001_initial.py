@@ -6,22 +6,37 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('booth', '0001_initial'),
+        ("booth", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UGC',
+            name="UGC",
             fields=[
-                ('id', models.CharField(default=shortid.shortid, editable=False, max_length=6, primary_key=True, serialize=False)),
-                ('script', models.TextField()),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('creator', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='booth.creator')),
+                (
+                    "id",
+                    models.CharField(
+                        default=shortid.shortid,
+                        editable=False,
+                        max_length=6,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("script", models.TextField()),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "creator",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="booth.creator",
+                    ),
+                ),
             ],
         ),
     ]

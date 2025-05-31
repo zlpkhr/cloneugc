@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class BoothConfig(AppConfig):
+class InframedeviceConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "booth"
+    name = "inframedevice"

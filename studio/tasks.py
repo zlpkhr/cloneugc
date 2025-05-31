@@ -68,7 +68,9 @@ def create_ugc_video(ugc_id: str):
     if not request_id:
         raise Exception("Fal API did not return a request id")
 
-    status_stream_url = f"https://queue.fal.run/fal-ai/sync-lipsync/requests/{request_id}/status/stream"
+    status_stream_url = (
+        f"https://queue.fal.run/fal-ai/sync-lipsync/requests/{request_id}/status/stream"
+    )
     with requests.get(
         status_stream_url,
         headers={

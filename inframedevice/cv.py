@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import json
 import qrcode
-from PIL import Image  # qrcode returns a PIL image
 
 
 def generate_aruco_board_img(screen_width: int, screen_height: int):

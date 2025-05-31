@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('studio', '0003_ugc_video'),
+        ("studio", "0003_ugc_video"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='ugc',
-            name='audio',
-            field=models.FileField(blank=True, null=True, upload_to='ugc/audios/'),
+            model_name="ugc",
+            name="audio",
+            field=models.FileField(blank=True, null=True, upload_to="ugc/audios/"),
         ),
     ]

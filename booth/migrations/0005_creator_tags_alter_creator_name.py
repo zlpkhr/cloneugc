@@ -5,20 +5,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('booth', '0004_alter_creator_video'),
+        ("booth", "0004_alter_creator_video"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='creator',
-            name='tags',
-            field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=64), blank=True, default=list, size=None),
+            model_name="creator",
+            name="tags",
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.CharField(max_length=64),
+                blank=True,
+                default=list,
+                size=None,
+            ),
         ),
         migrations.AlterField(
-            model_name='creator',
-            name='name',
+            model_name="creator",
+            name="name",
             field=models.CharField(max_length=64),
         ),
     ]

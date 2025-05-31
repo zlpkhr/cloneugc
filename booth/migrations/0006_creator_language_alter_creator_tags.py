@@ -5,21 +5,30 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('booth', '0005_creator_tags_alter_creator_name'),
+        ("booth", "0005_creator_tags_alter_creator_name"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='creator',
-            name='language',
-            field=models.CharField(choices=[('en', 'English'), ('ru', 'Russian')], default='en', max_length=2),
+            model_name="creator",
+            name="language",
+            field=models.CharField(
+                choices=[("en", "English"), ("ru", "Russian")],
+                default="en",
+                max_length=2,
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='creator',
-            name='tags',
-            field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=64), blank=True, default=list, help_text='Comma separated; leave blank if none.', size=None),
+            model_name="creator",
+            name="tags",
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.CharField(max_length=64),
+                blank=True,
+                default=list,
+                help_text="Comma separated; leave blank if none.",
+                size=None,
+            ),
         ),
     ]

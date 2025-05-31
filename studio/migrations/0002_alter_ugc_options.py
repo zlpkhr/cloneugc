@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('studio', '0001_initial'),
+        ("studio", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='ugc',
-            options={'verbose_name': 'UGC', 'verbose_name_plural': 'UGCS'},
+            name="ugc",
+            options={"verbose_name": "UGC", "verbose_name_plural": "UGCS"},
         ),
     ]
