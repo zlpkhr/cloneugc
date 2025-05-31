@@ -83,7 +83,7 @@
   async function loadArucoImages(screenWidth, screenHeight) {
     try {
       const response = await fetch(
-        `/booth/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
+        `/inframedevice/aruco-board-img?screen_width=${screenWidth}&screen_height=${screenHeight}`
       );
       const data = await response.json();
       
