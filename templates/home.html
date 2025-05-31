@@ -1,424 +1,396 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Add Material Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<header class="sticky top-0 z-20 w-full bg-white/90 backdrop-blur border-b border-stone-200">
+<header class="sticky top-0 z-20 w-full bg-white/90 backdrop-blur border-b border-black/15">
   <div class="container mx-auto max-w-screen-xl px-6 flex items-center justify-between py-4">
     <span class="text-xl font-bold tracking-tight text-pink-800" style="font-variation-settings: 'slnt' 0, 'FLAR' 22, 'VOLM' 30;">CloneUGC</span>
     <nav class="hidden md:flex gap-8 text-base font-semibold">
+      <a href="#examples" class="hover:text-pink-800 transition-colors">Examples</a>
       <a href="#features" class="hover:text-pink-800 transition-colors">Features</a>
       <a href="#pricing" class="hover:text-pink-800 transition-colors">Pricing</a>
-      <a href="#faq" class="hover:text-pink-800 transition-colors">FAQ</a>
+      <a href="#contact" class="hover:text-pink-800 transition-colors">Contact</a>
     </nav>
-    <a href="#pricing" class="inline-block rounded-lg bg-pink-800 px-6 py-3 text-white font-bold shadow hover:bg-pink-900 transition-colors">Try Free</a>
+    <a href="#contact" class="inline-block rounded-lg bg-pink-800 px-6 py-3 text-white font-bold hover:bg-pink-900 transition-colors">Get Started</a>
   </div>
 </header>
 
 <!-- Hero -->
 <section class="bg-gradient-to-br from-pink-50 via-white to-white py-28 text-center">
   <div class="container mx-auto max-w-screen-lg px-6">
-    <h1 class="text-5xl md:text-6xl font-black leading-tight mb-8 text-stone-900">Turn your software into viral social content&nbsp;in&nbsp;minutes</h1>
-    <p class="text-xl md:text-2xl mb-8 text-stone-700 font-medium">CloneUGC transforms your product features into authentic, lip‑synced UGC videos that drive engagement and conversions. No cameras, actors, or weeks of production—just results.</p>
-    <p class="text-lg mb-12 text-stone-600 font-semibold">90% faster and 10x cheaper than traditional video production • Built for software and SaaS companies</p>
+    <h1 class="text-5xl md:text-6xl font-black leading-tight mb-8 text-stone-900">Test viral TikTok concepts for your app&nbsp;in&nbsp;minutes</h1>
+    <p class="text-xl md:text-2xl mb-8 text-stone-700 font-medium">Quickly validate content formats and messaging with AI-generated videos before investing in expensive creators. Find what works, then scale with confidence.</p>
+    <p class="text-lg mb-12 text-stone-600 font-semibold">Perfect for indie hackers and founders testing app marketing strategies</p>
     <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-      <a href="#pricing" class="inline-flex items-center gap-3 rounded-xl bg-pink-800 px-8 py-4 text-white text-lg font-bold shadow-lg hover:bg-pink-900 transition-colors">
-        <span class="material-icons">play_circle_filled</span>
-        Start Free Trial
+      <a href="#contact" class="inline-flex items-center gap-3 rounded-xl bg-pink-800 px-8 py-4 text-white text-lg font-bold hover:bg-pink-900 transition-colors">
+        <span class="material-symbols-rounded" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">play_circle</span>
+        Start Testing Content
       </a>
-      <span class="text-base text-stone-600 font-medium">No credit card required • First video free</span>
+      <span class="text-base text-stone-600 font-medium">30-day money-back guarantee</span>
     </div>
   </div>
 </section>
 
-<!-- Social Proof -->
-<section class="py-16 bg-white border-b border-stone-200">
+<!-- Content Examples -->
+<section id="examples" class="py-20 bg-stone-50">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <div class="text-center mb-12">
-      <p class="text-base text-stone-600 mb-6 font-semibold">Trusted by 500+ software companies</p>
-      <div class="flex flex-wrap justify-center items-center gap-10 opacity-70">
-        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">SaaS Startup</div>
-        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">Tech Co</div>
-        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">AppName</div>
-        <div class="bg-stone-100 px-6 py-3 rounded-lg text-stone-700 font-bold text-lg">ProductCo</div>
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">See CloneUGC in Action</h2>
+    <p class="text-center text-stone-700 text-lg mb-12 max-w-2xl mx-auto font-medium">Real examples of AI-generated content that helped app founders discover winning formulas.</p>
+    
+    <div class="grid gap-8 md:grid-cols-3 lg:grid-cols-4 max-w-4xl mx-auto">
+      <!-- TikTok Style Video -->
+      <div class="bg-white rounded-xl border border-black/15 overflow-hidden">
+        <div class="aspect-[9/16] bg-gradient-to-br from-pink-100 to-stone-100 flex items-center justify-center">
+          <div class="text-center">
+            <span class="material-symbols-rounded text-4xl text-pink-800 mb-2 block">play_circle</span>
+            <p class="text-sm font-bold text-stone-700">TikTok Format</p>
+            <p class="text-xs text-stone-600">Product Demo</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold text-sm text-stone-900 mb-1">"This meditation app changed my life!"</h4>
+          <p class="text-xs text-stone-600">Testimonial style • 45s</p>
+        </div>
+      </div>
+
+      <!-- Instagram Reel -->
+      <div class="bg-white rounded-xl border border-black/15 overflow-hidden">
+        <div class="aspect-[9/16] bg-gradient-to-br from-pink-100 to-stone-100 flex items-center justify-center">
+          <div class="text-center">
+            <span class="material-symbols-rounded text-4xl text-pink-800 mb-2 block">play_circle</span>
+            <p class="text-sm font-bold text-stone-700">Instagram Reel</p>
+            <p class="text-xs text-stone-600">Unboxing</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold text-sm text-stone-900 mb-1">"POV: You discover the perfect productivity app"</h4>
+          <p class="text-xs text-stone-600">Trend hook • 30s</p>
+        </div>
+      </div>
+
+      <!-- YouTube Short -->
+      <div class="bg-white rounded-xl border border-black/15 overflow-hidden">
+        <div class="aspect-[9/16] bg-gradient-to-br from-pink-100 to-stone-100 flex items-center justify-center">
+          <div class="text-center">
+            <span class="material-symbols-rounded text-4xl text-pink-800 mb-2 block">play_circle</span>
+            <p class="text-sm font-bold text-stone-700">YouTube Short</p>
+            <p class="text-xs text-stone-600">Tutorial</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold text-sm text-stone-900 mb-1">"How I organize my day in 60 seconds"</h4>
+          <p class="text-xs text-stone-600">How-to format • 60s</p>
+        </div>
+      </div>
+
+      <!-- Problem/Solution -->
+      <div class="bg-white rounded-xl border border-black/15 overflow-hidden">
+        <div class="aspect-[9/16] bg-gradient-to-br from-pink-100 to-stone-100 flex items-center justify-center">
+          <div class="text-center">
+            <span class="material-symbols-rounded text-4xl text-pink-800 mb-2 block">play_circle</span>
+            <p class="text-sm font-bold text-stone-700">Problem/Solution</p>
+            <p class="text-xs text-stone-600">Storytelling</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold text-sm text-stone-900 mb-1">"I was struggling with focus until..."</h4>
+          <p class="text-xs text-stone-600">Story arc • 50s</p>
+        </div>
       </div>
     </div>
-    <div class="grid gap-8 md:grid-cols-3 text-center">
-      <div>
-        <span class="text-3xl font-black text-pink-800">2M+</span>
-        <p class="text-base text-stone-700 font-semibold">Videos generated</p>
-      </div>
-      <div>
-        <span class="text-3xl font-black text-pink-800">50M+</span>
-        <p class="text-base text-stone-700 font-semibold">Social views driven</p>
-      </div>
-      <div>
-        <span class="text-3xl font-black text-pink-800">95%</span>
-        <p class="text-base text-stone-700 font-semibold">Customer satisfaction</p>
-      </div>
+
+    <div class="text-center mt-10">
+      <p class="text-base text-stone-600 font-semibold">Test different formats and hooks to discover what resonates with your audience</p>
     </div>
   </div>
 </section>
 
 <!-- How it works -->
-<section id="steps" class="py-24">
+<section id="steps" class="py-20">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">From Product to Viral Video in 4 Simple Steps</h2>
-    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">No technical skills needed. Our AI handles everything from script writing to final export.</p>
-    <div class="grid gap-10 md:grid-cols-4">
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">From App Idea to Tested Content in 4 Steps</h2>
+    <p class="text-center text-stone-700 text-lg mb-12 max-w-2xl mx-auto font-medium">Validate your content strategy before spending thousands on creators and production.</p>
+    <div class="grid gap-8 md:grid-cols-4">
       <!-- Step 1 -->
-      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
-        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
-          <span class="material-icons text-2xl">upload</span>
+      <div class="rounded-xl bg-white p-8 text-center border border-black/15">
+        <div class="w-14 h-14 bg-pink-800 text-white rounded-full flex items-center justify-center font-black mx-auto mb-4">
+          <span class="material-symbols-rounded" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">upload</span>
         </div>
-        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Share Your Product</h3>
-        <p class="text-base text-stone-700 font-medium">Simply paste your website URL or describe your software. Our AI instantly understands your value proposition.</p>
+        <h3 class="text-xl font-bold mb-3 text-stone-900">Share Your App</h3>
+        <p class="text-base text-stone-700 font-medium">Upload screenshots or describe your app's value proposition. Our AI understands your unique selling points.</p>
       </div>
       <!-- Step 2 -->
-      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
-        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
-          <span class="material-icons text-2xl">face</span>
+      <div class="rounded-xl bg-white p-8 text-center border border-black/15">
+        <div class="w-14 h-14 bg-pink-800 text-white rounded-full flex items-center justify-center font-black mx-auto mb-4">
+          <span class="material-symbols-rounded" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">psychology</span>
         </div>
-        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Choose Your AI Spokesperson</h3>
-        <p class="text-base text-stone-700 font-medium">Pick from professional avatars or create a custom one. Upload a voice sample for personalized AI narration—no studio required.</p>
+        <h3 class="text-xl font-bold mb-3 text-stone-900">Choose Test Concepts</h3>
+        <p class="text-base text-stone-700 font-medium">Select different content formats, hooks, and messaging angles to test what resonates with your target audience.</p>
       </div>
       <!-- Step 3 -->
-      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
-        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
-          <span class="material-icons text-2xl">auto_fix_high</span>
+      <div class="rounded-xl bg-white p-8 text-center border border-black/15">
+        <div class="w-14 h-14 bg-pink-800 text-white rounded-full flex items-center justify-center font-black mx-auto mb-4">
+          <span class="material-symbols-rounded" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">auto_fix_high</span>
         </div>
-        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Generate & Perfect</h3>
-        <p class="text-base text-stone-700 font-medium">AI creates your video with frame‑perfect lip sync, engaging hooks, and trending formats. Edit and refine until it's perfect.</p>
+        <h3 class="text-xl font-bold mb-3 text-stone-900">Generate & Compare</h3>
+        <p class="text-base text-stone-700 font-medium">AI creates multiple video variations instantly. Compare different approaches and identify winning patterns.</p>
       </div>
       <!-- Step 4 -->
-      <div class="rounded-2xl bg-white shadow-xl p-10 text-center border border-stone-100">
-        <div class="w-16 h-16 bg-pink-800 text-white rounded-full flex items-center justify-center text-2xl font-black mx-auto mb-6">
-          <span class="material-icons text-2xl">share</span>
+      <div class="rounded-xl bg-white p-8 text-center border border-black/15">
+        <div class="w-14 h-14 bg-pink-800 text-white rounded-full flex items-center justify-center font-black mx-auto mb-4">
+          <span class="material-symbols-rounded" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">trending_up</span>
         </div>
-        <h3 class="text-xl font-bold mt-6 mb-4 text-stone-900">Publish Everywhere</h3>
-        <p class="text-base text-stone-700 font-medium">One‑click distribution to TikTok, Instagram, LinkedIn, and YouTube. Schedule content or download for later use.</p>
+        <h3 class="text-xl font-bold mb-3 text-stone-900">Scale What Works</h3>
+        <p class="text-base text-stone-700 font-medium">Once you've validated concepts, confidently invest in professional creators using proven formulas.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Testimonial -->
-<section class="py-16 bg-stone-50 border-y border-stone-200">
+<section class="py-12 bg-stone-50 border-y border-black/15">
   <div class="container mx-auto max-w-screen-lg px-6 text-center">
-    <blockquote class="text-2xl font-bold text-stone-800 mb-6">"CloneUGC helped us create 50+ product demo videos in a week. Our social engagement increased 3x and we saved $15,000 in production costs."</blockquote>
-    <cite class="text-base text-stone-600 font-semibold">— Sarah Chen, Growth Marketing Manager at TechFlow</cite>
+    <blockquote class="text-2xl font-bold text-stone-800 mb-6">"We tested 12 different hooks in one day with CloneUGC. Found our winner and then hired a creator to remake it professionally. Saved us weeks of guesswork."</blockquote>
+    <cite class="text-base text-stone-600 font-semibold">— Sarah Kim, Founder of FocusFlow App</cite>
   </div>
 </section>
 
 <!-- Features -->
-<section id="features" class="py-24">
+<section id="features" class="py-20">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Built Specifically for Software Companies</h2>
-    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">Every feature designed to help SaaS and software products create authentic, converting social content at scale.</p>
-    <div class="grid gap-10 md:grid-cols-3">
-      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
-        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-          <span class="material-icons text-pink-800 text-2xl">smart_toy</span>
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Built for Smart Content Testing</h2>
+    <p class="text-center text-stone-700 text-lg mb-12 max-w-2xl mx-auto font-medium">Every feature designed to help you discover winning content strategies before major investments.</p>
+    <div class="grid gap-8 md:grid-cols-3">
+      <div class="bg-white rounded-xl p-8 border border-black/15">
+        <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+          <span class="material-symbols-rounded text-pink-800" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">smart_toy</span>
         </div>
-        <h3 class="font-bold mb-4 text-xl text-stone-900">Smart Product Recognition</h3>
-        <p class="text-base text-stone-700 font-medium">AI analyzes your software features and automatically generates compelling testimonial‑style scripts.</p>
+        <h3 class="font-bold mb-3 text-xl text-stone-900">Multiple Hook Testing</h3>
+        <p class="text-base text-stone-700 font-medium">Test different opening hooks, pain points, and value propositions to see what captures attention best.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
-        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-          <span class="material-icons text-pink-800 text-2xl">record_voice_over</span>
+      <div class="bg-white rounded-xl p-8 border border-black/15">
+        <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+          <span class="material-symbols-rounded text-pink-800" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">record_voice_over</span>
         </div>
-        <h3 class="font-bold mb-4 text-xl text-stone-900">Voice Cloning Technology</h3>
-        <p class="text-base text-stone-700 font-medium">Upload a 60‑second sample to create your unique brand voice. Perfect for consistent messaging across all videos.</p>
+        <h3 class="font-bold mb-3 text-xl text-stone-900">Voice & Tone Variations</h3>
+        <p class="text-base text-stone-700 font-medium">Test different voices and communication styles to find what resonates with your target demographic.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
-        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-          <span class="material-icons text-pink-800 text-2xl">screen_share</span>
+      <div class="bg-white rounded-xl p-8 border border-black/15">
+        <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+          <span class="material-symbols-rounded text-pink-800" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">phone_iphone</span>
         </div>
-        <h3 class="font-bold mb-4 text-xl text-stone-900">Screen Recording Integration</h3>
-        <p class="text-base text-stone-700 font-medium">Seamlessly blend AI presenters with your app screenshots and UI demos for authentic product showcases.</p>
+        <h3 class="font-bold mb-3 text-xl text-stone-900">App Demo Integration</h3>
+        <p class="text-base text-stone-700 font-medium">Show your app in action with seamless screen recordings integrated into testimonial-style content.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
-        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-          <span class="material-icons text-pink-800 text-2xl">face_retouching_natural</span>
+      <div class="bg-white rounded-xl p-8 border border-black/15">
+        <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+          <span class="material-symbols-rounded text-pink-800" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">science</span>
         </div>
-        <h3 class="font-bold mb-4 text-xl text-stone-900">Ultra‑Realistic Avatars</h3>
-        <p class="text-base text-stone-700 font-medium">Hollywood‑quality AI presenters with perfect lip sync. Viewers won't know it's AI‑generated content.</p>
+        <h3 class="font-bold mb-3 text-xl text-stone-900">Format Experimentation</h3>
+        <p class="text-base text-stone-700 font-medium">Test unboxings, tutorials, testimonials, and trend-based content to discover your best-performing format.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
-        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-          <span class="material-icons text-pink-800 text-2xl">analytics</span>
+      <div class="bg-white rounded-xl p-8 border border-black/15">
+        <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+          <span class="material-symbols-rounded text-pink-800" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">trending_up</span>
         </div>
-        <h3 class="font-bold mb-4 text-xl text-stone-900">A/B Testing Dashboard</h3>
-        <p class="text-base text-stone-700 font-medium">Generate multiple video variants and track performance. Data‑driven optimization for maximum engagement.</p>
+        <h3 class="font-bold mb-3 text-xl text-stone-900">Trend Adaptation</h3>
+        <p class="text-base text-stone-700 font-medium">Adapt current TikTok and Instagram trends to showcase your app in contextually relevant ways.</p>
       </div>
-      <div class="bg-white rounded-2xl shadow-xl p-10 border border-stone-100">
-        <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-          <span class="material-icons text-pink-800 text-2xl">security</span>
+      <div class="bg-white rounded-xl p-8 border border-black/15">
+        <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+          <span class="material-symbols-rounded text-pink-800" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">speed</span>
         </div>
-        <h3 class="font-bold mb-4 text-xl text-stone-900">Enterprise‑Grade Security</h3>
-        <p class="text-base text-stone-700 font-medium">SOC 2 compliant with end‑to‑end encryption. Your product data and brand assets stay secure.</p>
+        <h3 class="font-bold mb-3 text-xl text-stone-900">Rapid Iteration</h3>
+        <p class="text-base text-stone-700 font-medium">Generate and compare dozens of concepts in hours instead of waiting weeks for traditional content creation.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Comparison -->
-<section class="py-24 bg-stone-50">
+<section class="py-20 bg-stone-50">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Stop Burning Time &amp; Budget on Video Production</h2>
-    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">See how CloneUGC compares to traditional video creation methods for software companies.</p>
-    <div class="grid gap-10 md:grid-cols-2">
+    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Test Smart, Scale Smart</h2>
+    <p class="text-center text-stone-700 text-lg mb-12 max-w-2xl mx-auto font-medium">Compare traditional guesswork approach vs. data-driven content testing with CloneUGC.</p>
+    <div class="grid gap-8 md:grid-cols-2">
       <!-- Traditional -->
-      <div class="rounded-2xl border-2 border-stone-300 p-10 bg-white">
-        <h4 class="font-black text-xl mb-8 text-center text-stone-900">Traditional Video Production</h4>
-        <div class="space-y-6">
-          <div class="flex justify-between items-center py-3 border-b border-stone-200">
-            <span class="text-base font-bold text-stone-700">Time to create</span>
-            <span class="text-base text-red-600 font-black">2-4 weeks</span>
+      <div class="rounded-xl border-2 border-black/20 p-8 bg-white">
+        <h4 class="font-black text-xl mb-6 text-center text-stone-900">Traditional Approach</h4>
+        <div class="space-y-4">
+          <div class="flex justify-between items-center py-2 border-b border-black/10">
+            <span class="text-base font-bold text-stone-700">Testing concepts</span>
+            <span class="text-base text-stone-600 font-black">Expensive guesswork</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-stone-200">
-            <span class="text-base font-bold text-stone-700">Cost per video</span>
-            <span class="text-base text-red-600 font-black">$500-$2,000</span>
+          <div class="flex justify-between items-center py-2 border-b border-black/10">
+            <span class="text-base font-bold text-stone-700">Cost per test</span>
+            <span class="text-base text-stone-600 font-black">$150-$500</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-stone-200">
-            <span class="text-base font-bold text-stone-700">Revisions</span>
-            <span class="text-base text-red-600 font-black">Limited & costly</span>
+          <div class="flex justify-between items-center py-2 border-b border-black/10">
+            <span class="text-base font-bold text-stone-700">Time to validate</span>
+            <span class="text-base text-stone-600 font-black">1-3 weeks</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-stone-200">
-            <span class="text-base font-bold text-stone-700">Scalability</span>
-            <span class="text-base text-red-600 font-black">Very limited</span>
+          <div class="flex justify-between items-center py-2 border-b border-black/10">
+            <span class="text-base font-bold text-stone-700">Iterations possible</span>
+            <span class="text-base text-stone-600 font-black">1-2 max</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-stone-200">
-            <span class="text-base font-bold text-stone-700">Consistency</span>
-            <span class="text-base text-red-600 font-black">Hit or miss</span>
+          <div class="flex justify-between items-center py-2 border-b border-black/10">
+            <span class="text-base font-bold text-stone-700">Risk level</span>
+            <span class="text-base text-stone-600 font-black">High (all or nothing)</span>
           </div>
-          <div class="flex justify-between items-center py-3">
-            <span class="text-base font-bold text-stone-700">Team effort</span>
-            <span class="text-base text-red-600 font-black">High coordination</span>
+          <div class="flex justify-between items-center py-2">
+            <span class="text-base font-bold text-stone-700">Confidence level</span>
+            <span class="text-base text-stone-600 font-black">Low (hope & pray)</span>
           </div>
         </div>
       </div>
       <!-- CloneUGC -->
-      <div class="rounded-2xl border-2 border-pink-800 p-10 bg-gradient-to-br from-pink-50 to-white">
-        <h4 class="font-black text-xl mb-8 text-center text-pink-800">CloneUGC</h4>
-        <div class="space-y-6">
-          <div class="flex justify-between items-center py-3 border-b border-pink-200">
-            <span class="text-base font-bold text-stone-700">Time to create</span>
-            <span class="text-base text-green-600 font-black">5-10 minutes</span>
+      <div class="rounded-xl border-2 border-pink-200 p-8 bg-gradient-to-br from-pink-50 to-white">
+        <h4 class="font-black text-xl mb-6 text-center text-pink-800">CloneUGC Testing</h4>
+        <div class="space-y-4">
+          <div class="flex justify-between items-center py-2 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Testing concepts</span>
+            <span class="text-base text-pink-800 font-black">Data-driven validation</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-pink-200">
-            <span class="text-base font-bold text-stone-700">Cost per video</span>
-            <span class="text-base text-green-600 font-black">$3-$10</span>
+          <div class="flex justify-between items-center py-2 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Cost per test</span>
+            <span class="text-base text-pink-800 font-black">$3-$5</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-pink-200">
-            <span class="text-base font-bold text-stone-700">Revisions</span>
-            <span class="text-base text-green-600 font-black">Unlimited & instant</span>
+          <div class="flex justify-between items-center py-2 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Time to validate</span>
+            <span class="text-base text-pink-800 font-black">Same day</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-pink-200">
-            <span class="text-base font-bold text-stone-700">Scalability</span>
-            <span class="text-base text-green-600 font-black">Unlimited videos</span>
+          <div class="flex justify-between items-center py-2 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Iterations possible</span>
+            <span class="text-base text-pink-800 font-black">10+ easily</span>
           </div>
-          <div class="flex justify-between items-center py-3 border-b border-pink-200">
-            <span class="text-base font-bold text-stone-700">Consistency</span>
-            <span class="text-base text-green-600 font-black">Perfect brand alignment</span>
+          <div class="flex justify-between items-center py-2 border-b border-pink-200">
+            <span class="text-base font-bold text-stone-700">Risk level</span>
+            <span class="text-base text-pink-800 font-black">Low (small tests)</span>
           </div>
-          <div class="flex justify-between items-center py-3">
-            <span class="text-base font-bold text-stone-700">Team effort</span>
-            <span class="text-base text-green-600 font-black">One-person operation</span>
+          <div class="flex justify-between items-center py-2">
+            <span class="text-base font-bold text-stone-700">Confidence level</span>
+            <span class="text-base text-pink-800 font-black">High (validated concepts)</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="text-center mt-12">
-      <p class="text-xl font-black text-stone-800 mb-3">Save 90% on video costs • Reduce production time by 95%</p>
-      <p class="text-base text-stone-600 font-semibold">Based on average costs for professional UGC creation for software companies</p>
+    <div class="text-center mt-8">
+      <p class="text-xl font-black text-stone-800 mb-2">Test 10 concepts for the price of 1 traditional video</p>
+      <p class="text-base text-stone-600 font-semibold">Based on 2025 UGC creator rates from industry research</p>
     </div>
   </div>
 </section>
 
 <!-- Pricing -->
-<section id="pricing" class="py-24">
+<section id="pricing" class="py-20">
   <div class="container mx-auto max-w-screen-xl px-6">
-    <h2 class="text-4xl font-black text-center mb-8 text-stone-900">Simple Credit Packs for Growing Teams</h2>
-    <p class="text-center text-stone-700 text-lg mb-16 max-w-2xl mx-auto font-medium">No subscriptions, no contracts. Buy credits when you need them, use them whenever you want.</p>
-    <div class="grid gap-10 md:grid-cols-3">
-      <!-- Starter -->
-      <div class="rounded-2xl border-2 border-stone-200 bg-white p-10 flex flex-col text-center shadow-lg">
-        <h4 class="font-black text-xl mb-2 text-stone-900">Starter</h4>
-        <span class="text-4xl font-black text-stone-900">$49</span>
-        <p class="text-base text-stone-600 mb-8 font-semibold">10 credits ≈ 10 videos</p>
-        <ul class="text-base text-stone-700 space-y-3 flex-1 mb-10 font-medium">
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            All standard avatars
+    <div class="mx-auto max-w-4xl text-center">
+      <h2 class="text-4xl md:text-5xl font-black mb-8 text-stone-900">Simple Credit-Based Pricing</h2>
+      <p class="text-lg md:text-xl text-stone-700 font-medium mb-12 max-w-2xl mx-auto">No subscriptions, no recurring fees. Buy credits once and use them for testing whenever inspiration strikes.</p>
+    </div>
+    
+    <div class="mx-auto max-w-4xl rounded-xl ring-2 ring-black/15 bg-white lg:flex lg:max-w-none">
+      <div class="p-8 sm:p-10 lg:flex-auto">
+        <h3 class="text-3xl font-black text-stone-900">Testing Pack</h3>
+        <p class="mt-4 text-lg text-stone-700 font-medium">Everything you need to validate content concepts and discover winning strategies for your app.</p>
+        <div class="mt-8 flex items-center gap-x-4">
+          <h4 class="flex-none text-lg font-black text-pink-800">What's included</h4>
+          <div class="h-px flex-auto bg-black/15"></div>
+        </div>
+        <ul role="list" class="mt-6 grid grid-cols-1 gap-3 text-base text-stone-700 sm:grid-cols-2 sm:gap-4 font-medium">
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
+            All creator avatars
           </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            1 voice clone
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
+            Multiple hook testing
           </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            720p exports
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
+            Voice variations
           </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
+            1080p video exports
+          </li>
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
+            App screen integration
+          </li>
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
+            Trend templates
+          </li>
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
             Email support
           </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            Basic screen recording
+          <li class="flex gap-x-3">
+            <span class="material-symbols-rounded text-pink-800 text-xl" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 20">check_circle</span>
+            Priority processing
           </li>
         </ul>
-        <a class="rounded-lg bg-pink-800 text-white py-3 font-bold hover:bg-pink-900 transition-colors mb-3 text-base" href="#">Start Free Trial</a>
-        <p class="text-sm text-stone-500 font-medium">First video free • No credit card required</p>
       </div>
-      <!-- Growth -->
-      <div class="rounded-2xl border-2 border-pink-800 bg-white p-10 flex flex-col text-center shadow-xl relative">
-        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-pink-800 text-white px-6 py-2 rounded-full text-sm font-black">Most Popular</div>
-        <h4 class="font-black text-xl mb-2 text-stone-900">Growth</h4>
-        <span class="text-4xl font-black text-stone-900">$199</span>
-        <p class="text-base text-stone-600 mb-8 font-semibold">50 credits ($3.98/video)</p>
-        <ul class="text-base text-stone-700 space-y-3 flex-1 mb-10 font-medium">
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            One custom avatar setup
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            3 voice clones
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            1080p exports
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            Priority rendering
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            A/B testing dashboard
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            Everything in Starter
-          </li>
-        </ul>
-        <a class="rounded-lg bg-pink-800 text-white py-3 font-bold hover:bg-pink-900 transition-colors mb-3 text-base" href="#">Start Free Trial</a>
-        <p class="text-sm text-stone-500 font-medium">First video free • No credit card required</p>
-      </div>
-      <!-- Scale -->
-      <div class="rounded-2xl border-2 border-stone-200 bg-white p-10 flex flex-col text-center shadow-lg">
-        <h4 class="font-black text-xl mb-2 text-stone-900">Scale</h4>
-        <span class="text-4xl font-black text-stone-900">$499</span>
-        <p class="text-base text-stone-600 mb-8 font-semibold">150 credits ($3.33/video)</p>
-        <ul class="text-base text-stone-700 space-y-3 flex-1 mb-10 font-medium">
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            Up to 5 custom avatars
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            Unlimited voice clones
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            4K exports
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            Fast‑lane rendering
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            Dedicated success manager
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="material-icons text-green-600">check_circle</span>
-            API access
-          </li>
-        </ul>
-        <a class="rounded-lg bg-pink-800 text-white py-3 font-bold hover:bg-pink-900 transition-colors mb-3 text-base" href="#">Start Free Trial</a>
-        <p class="text-sm text-stone-500 font-medium">First video free • No credit card required</p>
+      <div class="p-2 lg:w-full lg:max-w-md lg:shrink-0">
+        <div class="rounded-xl bg-stone-50 py-8 text-center ring-1 ring-black/15 ring-inset lg:flex lg:flex-col lg:justify-center lg:py-12 border border-black/15">
+          <div class="mx-auto max-w-xs px-6">
+            <p class="text-lg font-black text-stone-900">Pay once, test forever</p>
+            <p class="mt-4 flex items-baseline justify-center gap-x-2">
+              <span class="text-5xl font-black text-stone-900">$199</span>
+              <span class="text-base font-bold text-stone-600">USD</span>
+            </p>
+            <p class="text-base text-stone-600 font-semibold mt-2">50 credits ≈ 50 test videos</p>
+            <a href="#contact" class="mt-6 block w-full rounded-xl bg-pink-800 px-6 py-3 text-center text-lg font-black text-white hover:bg-pink-900 transition-colors">Start Testing</a>
+            <p class="mt-4 text-sm text-stone-500 font-medium">30-day money-back guarantee<br>Credits never expire</p>
+          </div>
+        </div>
       </div>
     </div>
+    
     <!-- Custom avatar note -->
-    <div class="bg-stone-100 rounded-xl p-8 mt-12 max-w-3xl mx-auto border border-stone-200">
-      <div class="flex items-center gap-3 justify-center mb-4">
-        <span class="material-icons text-pink-800 text-2xl">person_add</span>
+    <div class="bg-stone-100 rounded-xl p-6 mt-8 max-w-3xl mx-auto border border-black/15">
+      <div class="flex items-center gap-3 justify-center mb-3">
+        <span class="material-symbols-rounded text-pink-800" style="font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24">person_add</span>
         <h5 class="font-black text-xl text-center text-stone-900">Custom Avatar Creation</h5>
       </div>
-      <p class="text-base text-stone-700 text-center font-medium">Need your own AI spokesperson? Our team manually creates custom avatars from your 2‑minute video sample. Perfect for building brand recognition and trust. We'll contact you within 24 hours to begin setup.</p>
+      <p class="text-base text-stone-700 text-center font-medium">Want to test with your own face? We'll create a custom avatar from your 2‑minute video sample. Perfect for personal brand testing. Setup starts within 24 hours.</p>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="py-24 bg-stone-50">
-  <div class="container mx-auto max-w-screen-md px-6">
-    <h2 class="text-4xl font-black text-center mb-16 text-stone-900">Frequently Asked Questions</h2>
-    <div class="space-y-8">
-      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
-        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">How realistic are the AI avatars? Can viewers tell they're AI-generated?</summary>
-        <p class="mt-4 text-base text-stone-700 font-medium">Our avatars use Hollywood-grade synthesis technology with frame-perfect lip sync. Beta users report that viewers consistently believe they're watching real testimonials. The quality is indistinguishable from human-recorded content.</p>
-      </details>
-      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
-        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Can I showcase my software's interface in the videos?</summary>
-        <p class="mt-4 text-base text-stone-700 font-medium">Absolutely. CloneUGC can seamlessly integrate your app screenshots, UI demos, and screen recordings with AI presenters. This creates authentic product showcases that highlight your software's key features.</p>
-      </details>
-      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
-        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Is it legal and safe to use AI avatars for marketing?</summary>
-        <p class="mt-4 text-base text-stone-700 font-medium">Yes, completely legal. All our avatars are created with full commercial rights and consent. We're SOC 2 compliant with enterprise-grade security. Your content and data remain private and secure.</p>
-      </details>
-      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
-        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Do unused credits expire?</summary>
-        <p class="mt-4 text-base text-stone-700 font-medium">Never. Credits are yours to use whenever you need fresh content. No monthly subscriptions or expiration dates—perfect for teams with varying content needs.</p>
-      </details>
-      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
-        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">What if I don't like the generated video?</summary>
-        <p class="mt-4 text-base text-stone-700 font-medium">No problem. Edit scripts, swap avatars, or regenerate completely—all included in your credits. Our built-in editor lets you trim clips, adjust captions, and perfect every detail before export.</p>
-      </details>
-      <details class="rounded-xl border-2 border-stone-200 p-6 bg-white">
-        <summary class="font-bold cursor-pointer text-lg text-stone-900 hover:text-pink-800 transition-colors">Can I cancel or get a refund?</summary>
-        <p class="mt-4 text-base text-stone-700 font-medium">Since we use a credit system instead of subscriptions, there's nothing to cancel. If you're not satisfied with your first video, we offer a full money-back guarantee within 7 days of purchase.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- Final CTA -->
-<section class="py-24 bg-gradient-to-br from-pink-800 to-pink-900 text-white text-center">
+<!-- Contact Form -->
+<section id="contact" class="py-20 bg-white">
   <div class="container mx-auto max-w-screen-lg px-6">
-    <h2 class="text-4xl font-black mb-6 text-white">Ready to Scale Your Software's Social Presence?</h2>
-    <p class="text-xl mb-12 text-pink-100 font-medium">Join 500+ software companies creating viral content with AI. Start your free trial today.</p>
-    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-      <a href="#pricing" class="inline-flex items-center gap-3 rounded-xl bg-white text-pink-800 px-10 py-5 font-black shadow-lg hover:bg-pink-50 transition-colors text-lg">
-        <span class="material-icons">rocket_launch</span>
-        Start Free Trial
-      </a>
-      <div class="flex flex-col gap-2 text-pink-200 font-medium">
-        <div class="flex items-center gap-2">
-          <span class="material-icons text-sm">check</span>
-          <span class="text-base">No credit card required</span>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-4xl font-black text-stone-900 mb-4">Ready to Test Your Content Ideas?</h2>
+      <p class="text-lg text-stone-700 font-medium">Tell us about your app and we'll help you start validating content concepts today.</p>
+    </div>
+    <form action="#" method="POST" class="mx-auto mt-12 max-w-xl">
+      <div class="grid grid-cols-1 gap-y-6">
+        <div>
+          <label for="name" class="block text-sm font-bold text-stone-900 mb-2">Name</label>
+          <input type="text" name="name" id="name" autocomplete="name" class="block w-full rounded-lg bg-white px-4 py-3 text-base text-stone-900 border border-black/15 focus:border-pink-800 focus:ring-1 focus:ring-pink-800" required>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="material-icons text-sm">check</span>
-          <span class="text-base">First video free</span>
+        <div>
+          <label for="email" class="block text-sm font-bold text-stone-900 mb-2">Email</label>
+          <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-lg bg-white px-4 py-3 text-base text-stone-900 border border-black/15 focus:border-pink-800 focus:ring-1 focus:ring-pink-800" required>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="material-icons text-sm">check</span>
-          <span class="text-base">7-day money-back guarantee</span>
+        <div>
+          <label for="app" class="block text-sm font-bold text-stone-900 mb-2">App name or website</label>
+          <input type="text" name="app" id="app" placeholder="YourApp.com or App Store link" class="block w-full rounded-lg bg-white px-4 py-3 text-base text-stone-900 border border-black/15 focus:border-pink-800 focus:ring-1 focus:ring-pink-800" required>
         </div>
       </div>
-    </div>
+      <div class="mt-8">
+        <button type="submit" class="block w-full rounded-xl bg-pink-800 px-6 py-4 text-center text-lg font-black text-white hover:bg-pink-900 transition-colors">Start Testing with CloneUGC</button>
+      </div>
+    </form>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="border-t-2 border-stone-200 py-12 text-center text-base text-stone-600 bg-stone-50">
+<footer class="border-t-2 border-black/15 py-8 text-center text-base text-stone-600 bg-stone-50">
   <div class="container mx-auto max-w-screen-lg px-6">
-    <p class="font-semibold">© 2025 CloneUGC. All rights reserved. Built for software companies that want to scale.</p>
+    <p class="font-semibold">© 2025 CloneUGC. All rights reserved. Built for smart content testing.</p>
   </div>
 </footer>
 {% endblock %}
