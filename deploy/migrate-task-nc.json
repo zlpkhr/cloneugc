@@ -9,6 +9,6 @@
       "subnet-0e00e3bd9b0139ade"
     ],
     "securityGroups": ["sg-0b4a5803aef00f3f9"],
-    "assignPublicIp": "DISABLED"
+    "assignPublicIp": "ENABLED"
   }
 }
