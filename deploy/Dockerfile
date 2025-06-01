@@ -29,4 +29,4 @@ RUN uv run --no-sync manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "cloneugc.wsgi:application"]
+CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "--timeout", "180", "cloneugc.wsgi:application"]
