@@ -1,6 +1,8 @@
 FROM python:3.13-slim
 
-RUN apt update && apt install -y --no-install-recommends ffmpeg
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update && apt-get install -y --no-install-recommends ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /bin/
 
