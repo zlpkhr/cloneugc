@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+from socket import gethostbyname, gethostname
 
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
@@ -35,7 +36,10 @@ if os.getenv("DJANGO_DEBUG"):
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ["cloneugc.com"]
+ALLOWED_HOSTS = [
+    gethostbyname(gethostname()),
+    "cloneugc.com",
+]
 
 if DEBUG:
     ALLOWED_HOSTS.append("*")
