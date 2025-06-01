@@ -27,18 +27,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-7l7*p$ix)&&p&*vfaxe#21-ge3w64k&(6r4%-=5c7pa=pgj8a)"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv("DJANGO_DEBUG"):
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-]
+ALLOWED_HOSTS = []
 
 if DEBUG:
     ALLOWED_HOSTS.append("*")
+
+DJANGO_ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS")
+
+if DJANGO_ALLOWED_HOSTS:
+    ALLOWED_HOSTS.extend(DJANGO_ALLOWED_HOSTS.split(","))
 
 
 # Application definition
@@ -94,11 +99,11 @@ WSGI_APPLICATION = "cloneugc.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "USER": "cloneugc",
-        "PASSWORD": "p@ssw0rd",
-        "HOST": "localhost",
-        "PORT": "5432",
-        "NAME": "cloneugc",
+        "USER": os.getenv("PG_USER"),
+        "PASSWORD": os.getenv("PG_PASSWORD"),
+        "HOST": os.getenv("PG_HOST"),
+        "PORT": os.getenv("PG_PORT"),
+        "NAME": os.getenv("PG_NAME"),
     }
 }
 
@@ -136,21 +141,16 @@ USE_TZ = True
 
 # Storage
 
-DEFAULT_STORAGE_BUCKET_NAME = os.getenv("DEFAULT_STORAGE_BUCKET_NAME")
-
-DEFAULT_STORAGE_REGION_NAME = "us-east-1"
-
 DEFAULT_STORAGE_QUERYSTRING_EXPIRE = 24 * 60 * 60  # 24 hours
 
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            "bucket_name": DEFAULT_STORAGE_BUCKET_NAME,
-            "region_name": DEFAULT_STORAGE_REGION_NAME,
+            "bucket_name": os.getenv("DEFAULT_STORAGE_BUCKET_NAME"),
             "file_overwrite": False,
             "querystring_expire": DEFAULT_STORAGE_QUERYSTRING_EXPIRE,
-            "max_memory_size": 8 * 1024 * 1024,  # 8MB
+            "max_memory_size": 16 * 1024 * 1024,  # 16MB
         },
     },
     "staticfiles": {
@@ -181,14 +181,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://localhost:6379/0",
+        "LOCATION": os.getenv("REDIS_URL"),
     }
 }
 
 
 # Celery
 
-CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_BROKER_URL = os.getenv("REDIS_URL")
 
 
 # Cartesia
