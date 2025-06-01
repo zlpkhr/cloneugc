@@ -16,10 +16,10 @@ COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /bin/
 WORKDIR /cloneugc
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --system --frozen --no-install-project --compile-bytecode
+RUN uv sync --system --frozen --no-dev --no-install-project --compile-bytecode
 
 COPY . .
-RUN uv sync --system --frozen --no-editable --compile-bytecode
+RUN uv sync --system --frozen --no-dev --no-editable --compile-bytecode
 
 COPY --from=assets /cloneugc/static/dist ./static/dist
 
