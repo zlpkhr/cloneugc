@@ -159,6 +159,8 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
+            "region_name": "us-east-1",
+            "use_ssl": False,
             "bucket_name": os.getenv("DEFAULT_STORAGE_BUCKET_NAME"),
             "file_overwrite": False,
             "querystring_expire": DEFAULT_STORAGE_QUERYSTRING_EXPIRE,
