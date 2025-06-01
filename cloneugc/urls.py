@@ -23,7 +23,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("studio/", include("studio.urls")),
     path("booth/", include("booth.urls")),
-    path("inframedevice/", include("inframedevice.urls")),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("", include("home.urls")),
