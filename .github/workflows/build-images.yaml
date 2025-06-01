@@ -89,31 +89,31 @@ jobs:
           cache-to: "type=gha,mode=max"
           build-args: |
             UV_CACHE_DIR=${{ github.workspace }}/.uv_cache
-    deploy-celery:
-      runs-on: ubuntu-24.04
-      needs: build-celery
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+  deploy-celery:
+    runs-on: ubuntu-24.04
+    needs: build-celery
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-        - name: Configure AWS credentials
-          uses: aws-actions/configure-aws-credentials@v4
-          with:
-            aws-region: us-east-1
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-        - name: Register new task definition
-          id: register
-          run: |
-            REVISION=$(aws ecs register-task-definition \
-              --cli-input-json file://deploy/ecs-task-definition.json \
-              --query 'taskDefinition.revision' --output text)
-            echo "revision=$REVISION" >> $GITHUB_OUTPUT
+      - name: Register new task definition
+        id: register
+        run: |
+          REVISION=$(aws ecs register-task-definition \
+            --cli-input-json file://deploy/ecs-task-definition.json \
+            --query 'taskDefinition.revision' --output text)
+          echo "revision=$REVISION" >> $GITHUB_OUTPUT
 
-        - name: Update ECS service
-          run: |
-            aws ecs update-service \
-              --cluster cloneugc-celery-cluster \
-              --service cloneugc-celery-worker-service-uz3u6e7e \
-              --task-definition cloneugc-celery-worker:${{ steps.register.outputs.revision }}
+      - name: Update ECS service
+        run: |
+          aws ecs update-service \
+            --cluster cloneugc-celery-cluster \
+            --service cloneugc-celery-worker-service-uz3u6e7e \
+            --task-definition cloneugc-celery-worker:${{ steps.register.outputs.revision }}
