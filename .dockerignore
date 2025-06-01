@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 staticfiles/
 node_modules/
+infra/
+.git/
+deploy/
