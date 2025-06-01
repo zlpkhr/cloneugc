@@ -69,3 +69,26 @@ output "redis_connection" {
     port = aws_elasticache_cluster.main.cache_nodes[0].port
   }
 }
+
+resource "aws_iam_role" "apprunner_s3" {
+  name = "apprunner-s3-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = [
+          "build.apprunner.amazonaws.com",
+          "tasks.apprunner.amazonaws.com"
+        ]
+      }
+      Action = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "apprunner_s3_fullaccess" {
+  role       = aws_iam_role.apprunner_s3.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+}
