@@ -8,17 +8,23 @@ dependencies = [
     "django>=5.2.1",
     "django-storages>=1.14.6",
     "gunicorn>=23.0.0",
-    "ipykernel>=6.29.5",
-    "numpy>=2.2.6",
     "openai>=1.82.1",
-    "opencv-python>=4.11.0.86",
     "psycopg[binary]>=3.2.9",
     "python-dotenv>=1.1.0",
-    "qrcode>=8.2",
     "requests>=2.32.3",
-    "ruff>=0.11.12",
-    "scikit-image>=0.25.2",
     "whitenoise[brotli]>=6.9.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "ruff>=0.11.12",
+]
+inframedevice = [
+    "numpy>=2.2.6",
+    "opencv-python>=4.11.0.86",
+    "qrcode>=8.2",
+    "scikit-image>=0.25.2",
 ]
 
 [tool.ruff.lint]

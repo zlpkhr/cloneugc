@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "booth",
     "studio",
     "accounts",
-    "inframedevice",
     "home",
 ]
 
