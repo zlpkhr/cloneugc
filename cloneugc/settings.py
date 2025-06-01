@@ -35,7 +35,7 @@ if os.getenv("DJANGO_DEBUG"):
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["cloneugc.com"]
 
 if DEBUG:
     ALLOWED_HOSTS.append("*")
@@ -45,6 +45,14 @@ DJANGO_ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS")
 if DJANGO_ALLOWED_HOSTS:
     ALLOWED_HOSTS.extend(DJANGO_ALLOWED_HOSTS.split(","))
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://cloneugc.com",
+]
+
+DJANGO_CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS")
+
+if DJANGO_CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.extend(DJANGO_CSRF_TRUSTED_ORIGINS.split(","))
 
 # Application definition
 

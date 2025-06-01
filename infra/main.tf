@@ -28,17 +28,6 @@ output "media_bucket_name" {
   value = aws_s3_bucket.media_bucket.bucket
 }
 
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnets" "default" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.default.id]
-  }
-}
-
 resource "random_password" "db_password" {
   length  = 20
   special = true
