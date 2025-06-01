@@ -5,7 +5,7 @@
   "cpu": "512",
   "memory": "1024",
   "executionRoleArn": "arn:aws:iam::621753709329:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::621753709329:role/apprunner-s3-role",
+  "taskRoleArn": "arn:aws:iam::621753709329:role/ecsTaskRoleFullS3Access",
   "containerDefinitions": [
     {
       "name": "celery-worker",
