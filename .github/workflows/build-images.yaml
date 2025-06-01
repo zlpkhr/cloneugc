@@ -34,7 +34,7 @@ jobs:
           context: .
           file: deploy/Dockerfile
           push: true
-          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/cloneugc:sha-${{ github.sha }}
+          tags: 621753709329.dkr.ecr.us-east-1.amazonaws.com/cloneugc/cloneugc:sha-${{ github.sha }}
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
@@ -69,7 +69,7 @@ jobs:
           context: .
           file: deploy/celery/Dockerfile
           push: true
-          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/cloneugc:sha-${{ github.sha }}
+          tags: 621753709329.dkr.ecr.us-east-1.amazonaws.com/cloneugc/cloneugc-celery:sha-${{ github.sha }}
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
