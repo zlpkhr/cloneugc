@@ -45,6 +45,7 @@ jobs:
           tags: |
             ${{ vars.ECR_REPOSITORY_URI }}:${{ steps.tag.outputs.short_sha }}
             ${{ vars.ECR_REPOSITORY_URI }}:latest
+          platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
@@ -85,6 +86,7 @@ jobs:
           tags: |
             ${{ vars.ECR_REPOSITORY_URI }}:celery-${{ steps.tag.outputs.short_sha }}
             ${{ vars.ECR_REPOSITORY_URI }}:celery-latest
+          platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
