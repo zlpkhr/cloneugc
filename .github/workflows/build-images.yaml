@@ -20,26 +20,21 @@ jobs:
           restore-keys: uv-cache-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          registry: ghcr.io
-          username: "${{ github.actor }}"
-          password: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: "ghcr.io/${{ github.repository }}"
-          tags: "type=sha,format=short"
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: deploy/Dockerfile
           push: true
-          tags: "${{ steps.meta.outputs.tags }}"
-          labels: "${{ steps.meta.outputs.labels }}"
+          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/cloneugc:sha-${{ github.sha }}
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
@@ -60,26 +55,21 @@ jobs:
           restore-keys: uv-cache-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          registry: ghcr.io
-          username: "${{ github.actor }}"
-          password: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Extract Docker metadata for Celery
-        id: meta_celery
-        uses: docker/metadata-action@v5
-        with:
-          images: "ghcr.io/${{ github.repository }}-celery"
-          tags: "type=sha,format=short"
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
       - name: Build and push Celery Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: deploy/celery/Dockerfile
           push: true
-          tags: "${{ steps.meta_celery.outputs.tags }}"
-          labels: "${{ steps.meta_celery.outputs.labels }}"
+          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/cloneugc:sha-${{ github.sha }}
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
