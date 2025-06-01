@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Restore uv cache
+        uses: actions/cache@v4
+        with:
+          path: .uv_cache
+          key: uv-cache-${{ hashFiles('**/uv.lock') }}
+          restore-keys: uv-cache-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Log in to GitHub Container Registry
@@ -36,6 +42,8 @@ jobs:
           labels: "${{ steps.meta.outputs.labels }}"
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
+          build-args: |
+            UV_CACHE_DIR=${{ github.workspace }}/.uv_cache
   build-celery:
     runs-on: ubuntu-24.04
     permissions:
@@ -44,6 +52,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Restore uv cache
+        uses: actions/cache@v4
+        with:
+          path: .uv_cache
+          key: uv-cache-${{ hashFiles('**/uv.lock') }}
+          restore-keys: uv-cache-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Log in to GitHub Container Registry
@@ -68,3 +82,5 @@ jobs:
           labels: "${{ steps.meta_celery.outputs.labels }}"
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
+          build-args: |
+            UV_CACHE_DIR=${{ github.workspace }}/.uv_cache
