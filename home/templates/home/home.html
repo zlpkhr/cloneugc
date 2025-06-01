@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+{% block title %}CloneUGC - Viral TikTok formats for your app{% endblock %}
+
+{% block head %}
+<script type="module">
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get("contact_saved") === "true") {
+    alert("Contact saved! We will reach out soon.");
+  }
+</script>
+{% endblock %}
+
 {% block content %}
 <header class="sticky top-0 z-20 w-full border-b border-black/15 bg-white/90 backdrop-blur">
   <div class="container mx-auto flex max-w-screen-xl items-center justify-between px-6 py-2">
@@ -553,7 +565,8 @@
       <h2 class="mb-4 text-4xl font-black text-stone-900">Ready to Test Content Ideas?</h2>
       <p class="text-lg font-medium text-stone-700">Tell us about your app and we'll help you start creating content strategies today.</p>
     </div>
-    <form action="#" method="POST" class="mx-auto mt-12 max-w-xl">
+    <form action="{% url 'save_contact' %}" method="POST" class="mx-auto mt-12 max-w-xl">
+      {% csrf_token %}
       <div class="grid grid-cols-1 gap-y-6">
         <div>
           <label for="name" class="mb-2 block text-sm font-bold text-stone-900">Name</label>

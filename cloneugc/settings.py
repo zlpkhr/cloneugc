@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "studio",
     "accounts",
     "inframedevice",
+    "home",
 ]
 
 MIDDLEWARE = [
