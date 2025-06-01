@@ -1,0 +1,55 @@
+name: Run DB Migrations
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/migrations/**"
+
+concurrency:
+  group: migrate-db-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  migrate:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Restore uv cache
+        uses: actions/cache@v4
+        with:
+          path: .uv_cache
+          key: uv-cache-${{ hashFiles('**/uv.lock') }}
+          restore-keys: uv-cache-
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Set short SHA
+        id: tag
+        run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      - name: Build and push Celery Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/migrate/Dockerfile
+          push: true
+          tags: |
+            ${{ vars.ECR_REPOSITORY_URI }}:migrate-${{ steps.tag.outputs.short_sha }}
+            ${{ vars.ECR_REPOSITORY_URI }}:migrate-latest
+          cache-from: type=gha
+          cache-to: "type=gha,mode=max"
+          build-args: |
+            UV_CACHE_DIR=${{ github.workspace }}/.uv_cache
