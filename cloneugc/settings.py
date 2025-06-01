@@ -117,7 +117,7 @@ DATABASES = {
         "PORT": os.getenv("PG_PORT"),
         "NAME": os.getenv("PG_NAME"),
         "OPTIONS": {
-            "sslmode": "disable",
+            "sslmode": "require",
         },
     }
 }
