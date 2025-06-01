@@ -1,4 +1,15 @@
-FROM python:3.13
+FROM oven/bun:1.2.14-slim AS assets
+
+WORKDIR /cloneugc
+
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
+
+COPY . .
+RUN bun run build
+
+
+FROM python:3.13-slim
 
 COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /bin/
 
@@ -11,5 +22,9 @@ RUN --mount=type=cache,target=${UV_CACHE_DIR} uv sync --frozen --no-dev --no-ins
 
 COPY . .
 RUN --mount=type=cache,target=${UV_CACHE_DIR} uv sync --frozen --no-dev --no-editable --compile-bytecode
+
+COPY --from=assets /cloneugc/static/dist ./static/dist
+
+RUN uv run --no-sync manage.py collectstatic --noinput
 
 CMD ["uv", "run", "--no-sync", "manage.py", "migrate", "--noinput"]

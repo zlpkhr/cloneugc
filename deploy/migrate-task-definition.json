@@ -1,0 +1,74 @@
+{
+  "family": "cloneugc-migrate-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::621753709329:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "migrate-container",
+      "image": "621753709329.dkr.ecr.us-east-1.amazonaws.com/cloneugc-mut:migrate-latest",
+      "essential": true,
+      "environment": [
+        {
+          "name": "PG_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "PG_HOST",
+          "value": "cloneugc-db.cgn0k2ay4k09.us-east-1.rds.amazonaws.com"
+        },
+        {
+          "name": "PG_NAME",
+          "value": "cloneugc-db"
+        },
+        {
+          "name": "DEFAULT_STORAGE_BUCKET_NAME",
+          "value": "cloneugc-media"
+        },
+        {
+          "name": "PG_USER",
+          "value": "cloneugc"
+        },
+        {
+          "name": "REDIS_URL",
+          "value": "redis://cloneugc-redis.h3o2gh.0001.use1.cache.amazonaws.com:6379/0"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "FAL_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:621753709329:secret:FAL_API_KEY-3Ip7Zu"
+        },
+        {
+          "name": "DJANGO_SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:621753709329:secret:DJANGO_SECRET_KEY-HKW0ra"
+        },
+        {
+          "name": "PG_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:621753709329:secret:PG_PASSWORD-cKMcJO"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:621753709329:secret:OPENAI_API_KEY-CSyFPa"
+        },
+        {
+          "name": "CARTESIA_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:621753709329:secret:CARTESIA_API_KEY-fjQyRP"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/cloneugc-migrate-task",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "true",
+          "mode": "non-blocking",
+          "max-buffer-size": "25m"
+        }
+      }
+    }
+  ]
+}

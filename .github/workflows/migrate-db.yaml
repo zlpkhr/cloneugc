@@ -53,3 +53,29 @@ jobs:
           cache-to: "type=gha,mode=max"
           build-args: |
             UV_CACHE_DIR=${{ github.workspace }}/.uv_cache
+      - name: Migrate DB
+        id: wait_migrate
+        run: |
+          TASK_ARN=$(aws ecs run-task \
+            --cluster cloneugc-celery-cluster \
+            --launch-type FARGATE \
+            --task-definition cloneugc-migrate-task:2 \
+            --network-configuration file://deploy/migrate-task-nc.json \
+            --query "tasks[0].taskArn" --output text)
+          
+          echo "Task ARN: $TASK_ARN"
+          
+          # Wait for task to stop (max 300s)
+          aws ecs wait tasks-stopped \
+            --cluster cloneugc-celery-cluster \
+            --tasks $TASK_ARN \
+            --max-attempts 40
+          
+          # Check exit code
+          EXIT_CODE=$(aws ecs describe-tasks --cluster cloneugc-celery-cluster --tasks $TASK_ARN --query "tasks[0].containers[0].exitCode" --output text)
+          echo "Migrate container exit code: $EXIT_CODE"
+          
+          if [ "$EXIT_CODE" != "0" ]; then
+            echo "Migration failed"
+            exit 1
+          fi
