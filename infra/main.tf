@@ -45,6 +45,7 @@ resource "aws_db_parameter_group" "main" {
 
 resource "aws_db_instance" "main" {
   identifier              = "cloneugc-db"
+  publicly_accessible     = true
   allocated_storage       = 20
   engine                  = "postgres"
   engine_version          = "17.5"
