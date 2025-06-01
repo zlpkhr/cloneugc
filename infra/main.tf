@@ -33,6 +33,16 @@ resource "random_password" "db_password" {
   special = true
 }
 
+resource "aws_db_parameter_group" "main" {
+  name   = "cloneugc-db-params"
+  family = "postgres17"
+
+  parameter {
+    name  = "rds.force_ssl"
+    value = "0"
+  }
+}
+
 resource "aws_db_instance" "main" {
   identifier              = "cloneugc-db"
   allocated_storage       = 20
@@ -42,6 +52,7 @@ resource "aws_db_instance" "main" {
   username                = "cloneugc"
   password                = random_password.db_password.result
   backup_retention_period = 7
+  parameter_group_name    = aws_db_parameter_group.main.name
 }
 
 resource "aws_elasticache_cluster" "main" {
