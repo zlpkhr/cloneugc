@@ -8,6 +8,7 @@ RUN bun install --frozen-lockfile
 COPY . .
 RUN bun run build
 
+
 FROM python:3.13-slim
 
 COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /bin/
@@ -15,9 +16,10 @@ COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /bin/
 WORKDIR /cloneugc
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen
+RUN uv sync --frozen --no-install-project --compile-bytecode
 
 COPY . .
+RUN uv sync --frozen --no-editable --compile-bytecode
 
 COPY --from=assets /cloneugc/static/dist ./static/dist
 
