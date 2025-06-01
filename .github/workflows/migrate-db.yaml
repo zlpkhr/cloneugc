@@ -68,8 +68,7 @@ jobs:
           # Wait for task to stop (max 300s)
           aws ecs wait tasks-stopped \
             --cluster cloneugc-celery-cluster \
-            --tasks $TASK_ARN \
-            --max-attempts 40
+            --tasks $TASK_ARN
           
           # Check exit code
           EXIT_CODE=$(aws ecs describe-tasks --cluster cloneugc-celery-cluster --tasks $TASK_ARN --query "tasks[0].containers[0].exitCode" --output text)
