@@ -28,13 +28,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
+      - name: Set short SHA
+        id: tag
+        run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: deploy/Dockerfile
           push: true
-          tags: ${{ env.ECR_REPOSITORY_URL }}:${{ github.sha }}
+          tags: ${{ env.ECR_REPOSITORY_URL }}:${{ steps.tag.outputs.short_sha }}
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
@@ -63,13 +66,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
+      - name: Set short SHA
+        id: tag
+        run: echo "short_sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
       - name: Build and push Celery Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: deploy/celery/Dockerfile
           push: true
-          tags: ${{ env.ECR_REPOSITORY_URL }}:celery-${{ github.sha }}
+          tags: ${{ env.ECR_REPOSITORY_URL }}:celery-${{ steps.tag.outputs.short_sha }}
           cache-from: type=gha
           cache-to: "type=gha,mode=max"
           build-args: |
