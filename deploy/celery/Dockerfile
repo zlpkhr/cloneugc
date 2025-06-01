@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python:3.13
 
 RUN --mount=type=cache,target=/var/cache/apt \
     apt update && apt install -y --no-install-recommends ffmpeg \
