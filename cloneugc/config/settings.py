@@ -152,6 +152,15 @@ PASSWORD_HASHERS = [
 ]
 
 
+# Auth
+
+LOGIN_URL = reverse_lazy("login")
+
+LOGIN_REDIRECT_URL = reverse_lazy("create_ugc")
+
+LOGOUT_REDIRECT_URL = "/"
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -230,12 +239,3 @@ FAL_API_KEY = getsecretkey("fal-api-key")
 # OpenAI
 
 OPENAI_API_KEY = getsecretkey("openai-api-key")
-
-
-# Auth
-
-LOGIN_URL = reverse_lazy("login")
-
-LOGIN_REDIRECT_URL = reverse_lazy("create_ugc")
-
-LOGOUT_REDIRECT_URL = "/"
