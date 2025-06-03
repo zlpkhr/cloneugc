@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import home, save_contact
+from .views import CreateContactView, home
 
 urlpatterns = [
     path("", home, name="home"),
-    path("save-contact/", save_contact, name="save_contact"),
+    path("contacts/", CreateContactView.as_view(), name="create_contact"),
 ]

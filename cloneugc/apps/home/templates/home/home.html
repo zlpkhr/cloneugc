@@ -4,7 +4,7 @@
 {% block title %}Viral TikTok formats for your app{% endblock %}
 
 {% block head %}
-<script type="module" src="{% static 'home/js/contact-save-alert.js' %}"></script>
+<script type="module" src="{% static 'home/js/contact-created-alert.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -520,7 +520,7 @@
       <h2 class="mb-4 text-4xl font-black text-stone-900">Ready to Test Content Ideas?</h2>
       <p class="text-lg font-medium text-stone-700">Tell us about your app and we'll help you start creating content strategies today.</p>
     </div>
-    <form action="{% url 'save_contact' %}" method="POST" class="mx-auto mt-12 max-w-xl">
+    <form method="POST" action="{% url 'create_contact' %}" class="mx-auto mt-12 max-w-xl">
       {% csrf_token %}
       <div class="grid grid-cols-1 gap-y-6">
         <div>
