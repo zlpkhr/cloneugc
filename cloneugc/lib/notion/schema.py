@@ -1,22 +1,25 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Text:
-    def __init__(self, value: str):
-        self.value = value
+    value: str
 
     def serialize(self):
         return {"title": [{"text": {"content": self.value}}]}
 
 
+@dataclass
 class Email:
-    def __init__(self, value: str):
-        self.value = value
+    value: str
 
     def serialize(self):
         return {"email": self.value}
 
 
+@dataclass
 class RichText:
-    def __init__(self, value: str):
-        self.value = value
+    value: str
 
     def serialize(self):
         return {"rich_text": [{"text": {"content": self.value}}]}
