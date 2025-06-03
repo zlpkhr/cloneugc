@@ -1,17 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}CloneUGC - Viral TikTok formats for your app{% endblock %}
+{% block title %}Viral TikTok formats for your app{% endblock %}
 
 {% block head %}
-<script type="module">
-  const params = new URLSearchParams(window.location.search);
-
-  if (params.get("contact_saved") === "true") {
-    alert("Contact saved! We will reach out soon.");
-  }
-
-  window.history.replaceState({}, "", window.location.pathname + window.location.hash);
-</script>
+<script type="module" src="{% static 'home/js/contact-save-alert.js' %}"></script>
 {% endblock %}
 
 {% block content %}
