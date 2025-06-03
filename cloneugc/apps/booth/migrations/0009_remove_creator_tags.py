@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('booth', '0008_alter_creator_language'),
+        ("booth", "0008_alter_creator_language"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='creator',
-            name='tags',
+            model_name="creator",
+            name="tags",
         ),
     ]

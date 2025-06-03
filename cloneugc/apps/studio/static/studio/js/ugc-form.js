@@ -21,7 +21,7 @@
 
 {
   const prepareScriptTrigger = document.querySelector(
-    "#prepare-script-trigger"
+    "#prepare-script-trigger",
   );
   const scriptEl = document.querySelector("#script");
 

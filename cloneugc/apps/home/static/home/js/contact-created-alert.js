@@ -9,5 +9,5 @@ if (params.get("contact_saved") === "True") {
 window.history.replaceState(
   {},
   "",
-  window.location.pathname + window.location.hash
+  window.location.pathname + window.location.hash,
 );

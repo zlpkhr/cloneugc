@@ -13,7 +13,9 @@ button.preview-audio-button {
   background: var(--button-bg);
   color: var(--button-fg);
 
-  transition: color 0.15s, background 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s;
 
   &:not(:disabled):hover {
     background-color: var(--button-hover-bg);

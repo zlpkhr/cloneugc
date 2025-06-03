@@ -11,7 +11,7 @@ const language = previewAudioBtn.dataset.language;
 previewAudioBtn.addEventListener("click", async () => {
   const text = window.prompt(
     "Preview voice with following:",
-    previewDefault[language]
+    previewDefault[language],
   );
 
   if (!text) return;
