@@ -2,8 +2,8 @@
   "name": "cloneugc",
   "private": true,
   "scripts": {
-    "dev": "postcss ./assets/css/base.css --use @tailwindcss/postcss --output ./assets/dist/css/base.css --watch",
-    "build": "postcss ./assets/css/base.css --use @tailwindcss/postcss --output ./assets/dist/css/base.css",
+    "dev": "postcss ./cloneugc/assets/css/base.css --use @tailwindcss/postcss --output ./cloneugc/assets/dist/css/base.css --watch",
+    "build": "postcss ./cloneugc/assets/css/base.css --use @tailwindcss/postcss --output ./cloneugc/assets/dist/css/base.css",
     "format": "prettier --write **/*.{js,css}"
   },
   "devDependencies": {

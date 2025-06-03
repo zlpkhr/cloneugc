@@ -15,6 +15,8 @@ RUN uv sync --frozen --no-dev --no-install-project --compile
 COPY --chown=1000:1000 . .
 RUN uv sync --frozen --no-dev --no-editable --compile
 
+WORKDIR /cloneugc/cloneugc
+
 USER 1000
 
 CMD ["uv", "run", "--no-sync", "celery", "--app=cloneugc", "worker", "--loglevel=INFO"]

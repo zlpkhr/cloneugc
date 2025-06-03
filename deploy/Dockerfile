@@ -20,7 +20,9 @@ RUN uv sync --frozen --no-dev --no-install-project --compile
 COPY . .
 RUN uv sync --frozen --no-dev --no-editable --compile
 
-COPY --from=assets /cloneugc/assets/dist ./assets/dist
+COPY --from=assets /cloneugc/cloneugc/assets/dist ./cloneugc/assets/dist
+
+WORKDIR /cloneugc/cloneugc
 
 RUN uv run --no-sync manage.py collectstatic --noinput
 

@@ -6,3 +6,6 @@ __pycache__/
 staticfiles/
 node_modules/
 assets/dist/
+deploy/
+infra/
+.github/
