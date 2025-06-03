@@ -19,4 +19,4 @@ WORKDIR /cloneugc/cloneugc
 
 USER 1000
 
-CMD ["uv", "run", "--no-sync", "celery", "--app=cloneugc", "worker", "--loglevel=INFO"]
+CMD ["uv", "run", "--no-sync", "celery", "--app=config", "worker", "--loglevel=INFO"]

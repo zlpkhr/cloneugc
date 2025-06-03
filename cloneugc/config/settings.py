@@ -86,7 +86,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "cloneugc.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -98,13 +98,13 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "cloneugc.context_processors.material_symbols",
+                "config.context_processors.material_symbols",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = "cloneugc.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
