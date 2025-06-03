@@ -6,7 +6,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("accounts", "0003_alter_account_user"),
+        ("account", "0003_alter_account_user"),
         ("studio", "0004_ugc_audio"),
     ]
 
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.SET_NULL,
-                to="accounts.account",
+                to="account.account",
             ),
         ),
     ]

@@ -3,7 +3,7 @@ from django.core.cache import cache
 from django.db import models
 from lib.shortid import shortid
 
-from apps.accounts.models import Account
+from apps.account.models import Account
 from apps.booth.models import Creator
 
 

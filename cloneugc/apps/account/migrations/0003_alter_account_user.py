@@ -7,7 +7,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("accounts", "0002_alter_account_credits"),
+        ("account", "0002_alter_account_credits"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
