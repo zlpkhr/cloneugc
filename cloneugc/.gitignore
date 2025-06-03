@@ -2,4 +2,4 @@
 __pycache__/
 staticfiles/
 node_modules/
-static/dist/
+assets/dist/
