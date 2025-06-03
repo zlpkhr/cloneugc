@@ -16,6 +16,7 @@ from socket import gethostbyname, gethostname
 
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
+from pkg.secretkey import getsecretkey
 
 load_dotenv()
 
@@ -220,17 +221,17 @@ CELERY_BROKER_URL = os.getenv("REDIS_URL")
 
 # Cartesia
 
-CARTESIA_API_KEY = os.getenv("CARTESIA_API_KEY")
+CARTESIA_API_KEY = getsecretkey("cartesia-api-key")
 
 
 # Fal
 
-FAL_API_KEY = os.getenv("FAL_API_KEY")
+FAL_API_KEY = getsecretkey("fal-api-key")
 
 
 # OpenAI
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = getsecretkey("openai-api-key")
 
 
 # Auth
