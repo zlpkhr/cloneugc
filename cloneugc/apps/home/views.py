@@ -5,7 +5,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
-from lib.notion import Database, schema
+from lib.notion import Database
 from notion_client import Client
 
 from .forms import ContactForm
@@ -20,7 +20,6 @@ class CreateContactView(View):
     contacts_db = Database(
         notion,
         settings.NOTION["databases"]["Contacts"]["id"],
-        settings.NOTION["databases"]["Contacts"]["schema"],
     )
 
     def post(self, request: HttpRequest):

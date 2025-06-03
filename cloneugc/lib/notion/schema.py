@@ -23,3 +23,10 @@ class RichText:
 
     def serialize(self):
         return {"rich_text": [{"text": {"content": self.value}}]}
+
+
+schema = {
+    "title": Text,
+    "email": Email,
+    "rich_text": RichText,
+}

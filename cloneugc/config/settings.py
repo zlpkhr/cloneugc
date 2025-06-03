@@ -16,7 +16,6 @@ from socket import gethostbyname, gethostname
 
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
-from lib.notion import schema
 from lib.secretkey import getsecretkey
 
 load_dotenv()
@@ -249,11 +248,6 @@ NOTION = {
     "databases": {
         "Contacts": {
             "id": "20707fb27d48806f8958d3a0309876a0",
-            "schema": {
-                "Name": schema.Text,
-                "Email": schema.Email,
-                "App Details": schema.RichText,
-            },
         },
     },
 }
