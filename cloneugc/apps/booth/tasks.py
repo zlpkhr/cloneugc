@@ -8,8 +8,9 @@ from celery import shared_task
 from django.conf import settings
 from django.core.files.storage import default_storage
 
-from .models import Creator
 from shortid import shortid
+
+from .models import Creator
 
 logger = logging.getLogger(__name__)
 
