@@ -5,6 +5,13 @@
 {% block extrahead %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'admin/booth/creator/preview-audio.css' %}">
+    <script type="importmap">
+        {
+            "imports": {
+                "studio/preview-audio": "{% static 'studio/js/preview-audio.js' %}"
+            }
+        }
+    </script>
     <script type="module" src="{% static 'admin/booth/creator/preview-audio.js' %}"></script>
 {% endblock %}
 

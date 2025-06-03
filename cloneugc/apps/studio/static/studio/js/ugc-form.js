@@ -1,3 +1,5 @@
+import { previewAudio } from "studio/preview-audio";
+
 {
   const creatorInput = document.querySelector("#creator-input");
   const creatorVideos = document.querySelectorAll("#creator-video");
@@ -70,26 +72,7 @@
     previewAudioTrigger.disabled = true;
 
     try {
-      const res = await fetch("/studio/preview-audio/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          creator_id: creatorInput.value,
-          text: scriptEl.value,
-        }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-
-        throw new Error("Preview audio request failed.", {
-          cause: new Error(data.error),
-        });
-      }
-
-      const blob = await res.blob();
+      const blob = await previewAudio(creatorInput.value, scriptEl.value);
 
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);

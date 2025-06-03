@@ -4,6 +4,13 @@
 {% block title %}Create UGC{% endblock %}
 
 {% block head %}
+  <script type="importmap">
+    {
+      "imports": {
+        "studio/preview-audio": "{% static 'studio/js/preview-audio.js' %}"
+      }
+    }
+  </script>
   <script type="module" src="{% static 'studio/js/ugc-form.js' %}"></script>
 {% endblock %}
 

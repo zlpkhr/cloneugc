@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "apps.account",
     "apps.home",
     "apps.notion",
+    "apps.voicecloner",
 ]
 
 MIDDLEWARE = [
@@ -249,6 +250,18 @@ NOTION = {
     "databases": {
         "Contacts": {
             "id": "20707fb27d48806f8958d3a0309876a0",
+        },
+    },
+}
+
+
+# Voice Cloner
+
+VOICE_CLONERS = {
+    "default": {
+        "provider": "cartesia",
+        "options": {
+            "api_key": getsecretkey("cartesia-api-key"),
         },
     },
 }

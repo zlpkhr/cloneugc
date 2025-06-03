@@ -8,6 +8,7 @@ dependencies = [
     "django>=5.2.1",
     "django-storages>=1.14.6",
     "gunicorn>=23.0.0",
+    "httpx>=0.28.1",
     "notion-client>=2.3.0",
     "openai>=1.82.1",
     "psycopg[binary]>=3.2.9",

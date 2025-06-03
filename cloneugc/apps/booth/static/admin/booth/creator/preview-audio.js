@@ -1,3 +1,5 @@
+import { previewAudio } from "studio/preview-audio";
+
 const previewDefault = {
   en: "Hello, how are you?",
   ru: "Привет, как дела?",
@@ -18,35 +20,21 @@ previewAudioBtn.addEventListener("click", async () => {
 
   previewAudioBtn.disabled = true;
 
-  const reqUrl = new URL("/booth/preview-audio", window.location.origin);
+  try {
+    const blob = await previewAudio(creatorId, text);
 
-  reqUrl.searchParams.set("creator_id", creatorId);
-  reqUrl.searchParams.set("text", text);
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
 
-  const res = await fetch(reqUrl);
+    audio.play();
 
-  if (!res.ok) {
-    previewAudioBtn.disabled = false;
-
+    audio.addEventListener("ended", () => {
+      URL.revokeObjectURL(url);
+    });
+  } catch (error) {
+    console.error("Failed to preview audio:", error);
     alert("Request failed. See details in the console.");
-
-    const data = await res.json();
-
-    console.error({ response: res, data });
-
-    return;
+  } finally {
+    previewAudioBtn.disabled = false;
   }
-
-  const blob = await res.blob();
-
-  const url = URL.createObjectURL(blob);
-  const audio = new Audio(url);
-
-  audio.play();
-
-  audio.addEventListener("ended", () => {
-    URL.revokeObjectURL(url);
-  });
-
-  previewAudioBtn.disabled = false;
 });
