@@ -46,6 +46,6 @@ class Ugc(models.Model):
                 return None
 
             url = self.video.url
-            cache.set(cache_key, url, settings.DEFAULT_STORAGE_QUERYSTRING_EXPIRE)
+            cache.set(cache_key, url, settings.S3_URL_EXPIRATION)
 
         return url

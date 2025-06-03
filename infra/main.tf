@@ -21,10 +21,9 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "media_bucket" {
-  bucket = "cloneugc-media"
+  bucket_prefix = "cloneugc-media-"
 }
 
 output "media_bucket_name" {
   value = aws_s3_bucket.media_bucket.bucket
 }
-

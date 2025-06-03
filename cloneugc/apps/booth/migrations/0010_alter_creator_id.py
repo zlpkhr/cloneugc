@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('booth', '0009_remove_creator_tags'),
+        ("booth", "0009_remove_creator_tags"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='creator',
-            name='id',
-            field=models.CharField(default=lib.shortid.shortid, editable=False, max_length=6, primary_key=True, serialize=False),
+            model_name="creator",
+            name="id",
+            field=models.CharField(
+                default=lib.shortid.shortid,
+                editable=False,
+                max_length=6,
+                primary_key=True,
+                serialize=False,
+            ),
         ),
     ]

@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('accounts', '0004_alter_account_id'),
+        ("accounts", "0004_alter_account_id"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='account',
-            name='id',
-            field=models.CharField(default=lib.shortid.shortid, editable=False, max_length=6, primary_key=True, serialize=False),
+            model_name="account",
+            name="id",
+            field=models.CharField(
+                default=lib.shortid.shortid,
+                editable=False,
+                max_length=6,
+                primary_key=True,
+                serialize=False,
+            ),
         ),
     ]

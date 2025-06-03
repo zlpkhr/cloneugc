@@ -55,6 +55,6 @@ class Creator(models.Model):
 
         if url is None:
             url = self.video_url
-            cache.set(cache_key, url, settings.DEFAULT_STORAGE_QUERYSTRING_EXPIRE)
+            cache.set(cache_key, url, settings.S3_URL_EXPIRATION)
 
         return url
