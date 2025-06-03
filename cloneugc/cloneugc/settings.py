@@ -97,6 +97,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "cloneugc.context_processors.material_symbols",
             ],
         },
     },
@@ -179,7 +180,7 @@ STORAGES = {
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static" / "dist",
+    BASE_DIR / "static",
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
