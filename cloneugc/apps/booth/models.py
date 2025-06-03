@@ -51,7 +51,7 @@ class Creator(models.Model):
 
     def delete(self, *args, **kwargs):
         if self.cartesia_voice_id:
-            from booth.tasks import delete_cartesia_voice  # Lazy import
+            from .tasks import delete_cartesia_voice  # Lazy import
 
             delete_cartesia_voice.delay(self.cartesia_voice_id)
         super().delete(*args, **kwargs)

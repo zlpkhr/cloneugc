@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    "booth",
+    "apps.booth",
     "studio",
     "accounts",
     "home",

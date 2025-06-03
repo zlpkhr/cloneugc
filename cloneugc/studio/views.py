@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView
 
-from booth.models import Creator
+from apps.booth.models import Creator
 
 from .ai import format_sonic_text
 from .forms import UgcForm
