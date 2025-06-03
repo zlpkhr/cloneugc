@@ -1,12 +1,11 @@
 from urllib.parse import urlencode
 
-from django.conf import settings
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
-from lib.notion import Database
-from notion_client import Client
+
+from apps.notion import databases
 
 from .forms import ContactForm
 
@@ -16,11 +15,7 @@ def home(request: HttpRequest):
 
 
 class CreateContactView(View):
-    notion = Client(auth=settings.NOTION["integration_token"])
-    contacts_db = Database(
-        notion,
-        settings.NOTION["databases"]["Contacts"]["id"],
-    )
+    contacts_db = databases["Contacts"]
 
     def post(self, request: HttpRequest):
         form = ContactForm(request.POST)

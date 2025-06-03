@@ -5,15 +5,20 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('home', '0001_initial'),
+        ("home", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='contact',
-            name='id',
-            field=models.CharField(default=lib.shortid.shortid, editable=False, max_length=6, primary_key=True, serialize=False),
+            model_name="contact",
+            name="id",
+            field=models.CharField(
+                default=lib.shortid.shortid,
+                editable=False,
+                max_length=6,
+                primary_key=True,
+                serialize=False,
+            ),
         ),
     ]

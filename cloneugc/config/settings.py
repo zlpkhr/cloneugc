@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     "apps.studio",
     "apps.account",
     "apps.home",
+    "apps.notion",
 ]
 
 MIDDLEWARE = [
