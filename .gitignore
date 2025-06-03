@@ -4,4 +4,4 @@
 __pycache__/
 staticfiles/
 node_modules/
-assets/dist/
+dist/

@@ -5,7 +5,7 @@ __pycache__/
 .ruff_cache/
 staticfiles/
 node_modules/
-assets/dist/
+dist/
 deploy/
 infra/
 .github/
