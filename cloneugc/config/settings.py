@@ -243,4 +243,9 @@ OPENAI_API_KEY = getsecretkey("openai-api-key")
 
 # Notion
 
-NOTION_INTEGRATION_TOKEN = getsecretkey("notion-integration-token")
+NOTION = {
+    "integration_token": getsecretkey("notion-integration-token"),
+    "databases": {
+        "Contacts": "20707fb27d48806f8958d3a0309876a0",
+    },
+}

@@ -12,3 +12,11 @@ class Email:
 
     def serialize(self):
         return {"email": self.value}
+
+
+class RichText:
+    def __init__(self, value: str):
+        self.value = value
+
+    def serialize(self):
+        return {"rich_text": [{"text": {"content": self.value}}]}
