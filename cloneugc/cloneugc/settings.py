@@ -70,7 +70,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.booth",
     "apps.studio",
-    "accounts",
+    "apps.accounts",
     "apps.home",
 ]
 
