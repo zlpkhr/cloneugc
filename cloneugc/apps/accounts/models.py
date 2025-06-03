@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
 from django.db import models
-from shortid import shortid
+from lib.shortid import shortid
 
 
 class Account(models.Model):

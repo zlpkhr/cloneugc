@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.cache import cache
 from django.db import models
-from shortid import shortid
+from lib.shortid import shortid
 
 
 class Creator(models.Model):

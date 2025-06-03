@@ -6,7 +6,7 @@ import requests
 from celery import shared_task
 from django.conf import settings
 from django.core.files.base import ContentFile
-from shortid import shortid
+from lib.shortid import shortid
 
 from .models import Ugc
 
