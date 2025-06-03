@@ -8,20 +8,17 @@ RUN bun install --frozen-lockfile
 COPY . .
 RUN bun run build
 
-
 FROM python:3.13-slim
 
-COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /uvx /bin/
 
 WORKDIR /cloneugc
 
-ENV UV_CACHE_DIR=/root/.cache/uv
-
 COPY pyproject.toml uv.lock ./
-RUN --mount=type=cache,target=${UV_CACHE_DIR} uv sync --frozen --no-dev --no-install-project --compile-bytecode
+RUN uv sync --frozen --no-dev --no-install-project --compile
 
 COPY . .
-RUN --mount=type=cache,target=${UV_CACHE_DIR} uv sync --frozen --no-dev --no-editable --compile-bytecode
+RUN uv sync --frozen --no-dev --no-editable --compile
 
 COPY --from=assets /cloneugc/static/dist ./static/dist
 
@@ -29,4 +26,4 @@ RUN uv run --no-sync manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "--timeout", "180", "cloneugc.wsgi:application"]
+CMD ["uv", "run", "--no-sync", "gunicorn", "--bind", "0.0.0.0:8000", "cloneugc.wsgi:application"]
