@@ -1,12 +1,8 @@
 .DS_Store
-.git/
 .gitignore
-.env
 .venv/
 __pycache__/
 .ruff_cache/
-node_modules/
 staticfiles/
-infra/
-deploy/
-docker-compose.yaml
+node_modules/
+static/dist/
