@@ -19,12 +19,6 @@ class Creator(models.Model):
         editable=False,
     )
     name = models.CharField(max_length=64)
-    tags = ArrayField(
-        models.CharField(max_length=64),
-        blank=True,
-        default=list,
-        help_text="Comma separated; leave blank if none.",
-    )
     language = models.CharField(
         max_length=2,
         choices=LANGUAGE_CHOICES,

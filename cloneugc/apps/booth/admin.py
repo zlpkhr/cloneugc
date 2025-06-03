@@ -12,7 +12,6 @@ class CreatorAdmin(admin.ModelAdmin):
         "id",
         "name",
         "language",
-        "tags",
         "created_at",
         "updated_at",
     )
@@ -24,7 +23,6 @@ class CreatorAdmin(admin.ModelAdmin):
     search_fields = (
         "id",
         "name",
-        "tags",
     )
     readonly_fields = (
         "id",
