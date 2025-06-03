@@ -239,3 +239,8 @@ FAL_API_KEY = getsecretkey("fal-api-key")
 # OpenAI
 
 OPENAI_API_KEY = getsecretkey("openai-api-key")
+
+
+# Notion
+
+NOTION_INTEGRATION_TOKEN = getsecretkey("notion-integration-token")
