@@ -25,5 +25,5 @@ urlpatterns = [
     path("booth/", include("apps.booth.urls")),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("", include("home.urls")),
+    path("", include("apps.home.urls")),
 ]

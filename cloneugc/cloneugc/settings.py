@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     "apps.booth",
     "studio",
     "accounts",
-    "home",
+    "apps.home",
 ]
 
 MIDDLEWARE = [

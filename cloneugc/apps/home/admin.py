@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from home.models import Contact
+from .models import Contact
 
 admin.site.register(Contact)
