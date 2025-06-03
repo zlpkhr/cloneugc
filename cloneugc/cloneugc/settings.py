@@ -16,7 +16,7 @@ from socket import gethostbyname, gethostname
 
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
-from pkg.secretkey import getsecretkey
+from lib.secretkey import getsecretkey
 
 load_dotenv()
 

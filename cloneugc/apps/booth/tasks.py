@@ -7,7 +7,6 @@ import requests
 from celery import shared_task
 from django.conf import settings
 from django.core.files.storage import default_storage
-
 from shortid import shortid
 
 from .models import Creator
