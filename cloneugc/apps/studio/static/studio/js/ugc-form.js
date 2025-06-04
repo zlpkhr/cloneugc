@@ -52,7 +52,9 @@ import { prepareScript } from "studio/prepare-script";
 }
 
 {
-  const previewSpeechTrigger = document.querySelector("#preview-speech-trigger");
+  const previewSpeechTrigger = document.querySelector(
+    "#preview-speech-trigger",
+  );
   const scriptEl = document.querySelector("#script");
   const creatorInput = document.querySelector("#creator-input");
 
