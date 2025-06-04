@@ -62,7 +62,7 @@ def prepare_script(request: HttpRequest):
 @csrf_exempt
 @require_POST
 @login_required
-def preview_audio(request: HttpRequest):
+def preview_speech(request: HttpRequest):
     payload = json.loads(request.body)
 
     creator_id = payload.get("creatorId")

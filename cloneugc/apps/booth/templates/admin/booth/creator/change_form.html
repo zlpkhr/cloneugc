@@ -4,21 +4,21 @@
 
 {% block extrahead %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'admin/booth/creator/preview-audio.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/booth/creator/preview-speech.css' %}">
     <script type="importmap">
         {
             "imports": {
-                "studio/preview-audio": "{% static 'studio/js/preview-audio.js' %}"
+                "studio/preview-speech": "{% static 'studio/js/preview-speech.js' %}"
             }
         }
     </script>
-    <script type="module" src="{% static 'admin/booth/creator/preview-audio.js' %}"></script>
+    <script type="module" src="{% static 'admin/booth/creator/preview-speech.js' %}"></script>
 {% endblock %}
 
 {% block object-tools-items %}
     <li>
-        <button id="preview-audio" class="preview-audio-button" data-creator-id="{{ original.id }}"
-            data-language="{{ original.language }}">Preview Audio</button>
+        <button id="preview-speech" class="preview-speech-button" data-creator-id="{{ original.id }}"
+            data-language="{{ original.language }}">Preview Speech</button>
     </li>
     {{ block.super }}
 {% endblock %}

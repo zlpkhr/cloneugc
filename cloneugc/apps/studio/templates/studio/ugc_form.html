@@ -7,7 +7,7 @@
   <script type="importmap">
     {
       "imports": {
-        "studio/preview-audio": "{% static 'studio/js/preview-audio.js' %}",
+        "studio/preview-speech": "{% static 'studio/js/preview-speech.js' %}",
         "studio/prepare-script": "{% static 'studio/js/prepare-script.js' %}"
       }
     }
@@ -42,7 +42,7 @@
             </label>
             <div class="flex items-center gap-2">
               <button id="prepare-script-trigger" type="button" class="button-surface">Prepare Script</button>
-              <button id="preview-audio-trigger" type="button" class="button-surface">Preview Audio</button>
+              <button id="preview-speech-trigger" type="button" class="button-surface">Preview Speech</button>
             </div>
           </div>
           <textarea id="script" name="script" class="form-textarea mt-4 w-full min-h-64" required></textarea>

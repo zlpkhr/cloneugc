@@ -1,4 +1,4 @@
-import { previewAudio } from "studio/preview-audio";
+import { previewSpeech } from "studio/preview-speech";
 import { prepareScript } from "studio/prepare-script";
 
 {
@@ -52,29 +52,28 @@ import { prepareScript } from "studio/prepare-script";
 }
 
 {
-  const previewAudioTrigger = document.querySelector("#preview-audio-trigger");
+  const previewSpeechTrigger = document.querySelector("#preview-speech-trigger");
   const scriptEl = document.querySelector("#script");
   const creatorInput = document.querySelector("#creator-input");
 
-  previewAudioTrigger.addEventListener("click", async () => {
-    previewAudioTrigger.disabled = true;
+  previewSpeechTrigger.addEventListener("click", async () => {
+    previewSpeechTrigger.disabled = true;
 
     try {
-      const blob = await previewAudio(creatorInput.value, scriptEl.value);
-
+      const blob = await previewSpeech(creatorInput.value, scriptEl.value);
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
-
-      audio.play();
 
       audio.addEventListener("ended", () => {
         URL.revokeObjectURL(url);
       });
+
+      audio.play();
     } catch (error) {
-      console.error("Failed to preview audio:", error);
-      alert("Failed to preview the audio. Try again or contact support.");
+      console.error("Failed to preview speech:", error);
+      alert("Failed to preview the speech. Try again or contact support.");
     } finally {
-      previewAudioTrigger.disabled = false;
+      previewSpeechTrigger.disabled = false;
     }
   });
 }

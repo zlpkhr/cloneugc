@@ -1,5 +1,5 @@
-export async function previewAudio(creatorId, text) {
-  const res = await fetch("/studio/preview-audio/", {
+export async function previewSpeech(creatorId, text) {
+  const res = await fetch("/studio/preview-speech/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,11 +13,11 @@ export async function previewAudio(creatorId, text) {
 
       throw new AggregateError(
         data.errors,
-        "Preview audio request has failed.",
+        "Preview speech request has failed.",
       );
     }
 
-    throw new Error("Preview audio request has failed.");
+    throw new Error("Preview speech request has failed.");
   }
 
   return res.blob();
