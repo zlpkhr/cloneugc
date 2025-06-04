@@ -8,6 +8,8 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from lib.shortid import shortid
 
+from apps.voicecloner import default_voicecloner
+
 from .models import Ugc
 
 logger = logging.getLogger(__name__)
@@ -22,30 +24,8 @@ def create_ugc_video(ugc_id: str):
     if not ugc.creator.cartesia_voice_id:
         raise Exception(f"UGC {ugc_id} has no Cartesia voice ID")
 
-    tts_resp = requests.post(
-        "https://api.cartesia.ai/tts/bytes",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {settings.CARTESIA_API_KEY}",
-            "Cartesia-Version": "2025-04-16",
-        },
-        json={
-            "model_id": "sonic-2",
-            "transcript": ugc.script,
-            "voice": {
-                "mode": "id",
-                "id": ugc.creator.cartesia_voice_id,
-            },
-            "output_format": {
-                "container": "mp3",
-                "bit_rate": 128000,
-                "sample_rate": 44100,
-            },
-        },
-        timeout=60,
-    )
-    tts_resp.raise_for_status()
-    ugc.audio.save(f"{ugc.id}.mp3", ContentFile(tts_resp.content))
+    tts_resp = default_voicecloner.tts(ugc.creator.cartesia_voice_id, ugc.script)
+    ugc.audio.save(f"{ugc.id}.mp3", ContentFile(tts_resp))
     logger.info("Saved audio")
     ugc.save()
 

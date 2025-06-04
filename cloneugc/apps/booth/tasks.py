@@ -3,11 +3,11 @@ import os
 import subprocess
 import tempfile
 
-import requests
 from celery import shared_task
-from django.conf import settings
 from django.core.files.storage import default_storage
 from lib.shortid import shortid
+
+from apps.voicecloner import default_voicecloner
 
 from .models import Creator
 
@@ -166,60 +166,18 @@ def create_voice_clone(creator_id: str):
         )
         raise Exception(f"FFmpeg audio extraction failed: {err_msg}")
 
-    url = "https://api.cartesia.ai/voices/clone"
-    headers = {
-        "Cartesia-Version": "2025-04-16",
-        "Authorization": f"Bearer {settings.CARTESIA_API_KEY}",
-    }
     name = f"{creator.name} ({creator.id})"
     language = creator.language
 
     with open(audio_path, "rb") as audio_file:
-        files = {"clip": (f"{creator.id}.mp3", audio_file, "audio/mpeg")}
-        data = {
-            "name": name,
-            "language": language,
-        }
-        response = requests.post(url, data=data, files=files, headers=headers)
+        voice_id = default_voicecloner.clone_voice(name, language, audio_file.read())
 
     if os.path.exists(audio_path):
         os.remove(audio_path)
         logger.debug(f"Removed temporary audio file {audio_path}")
 
-    response.raise_for_status()
-
-    result = response.json()
-    voice_id = result.get("id")
-    if voice_id:
-        creator.cartesia_voice_id = voice_id
-        creator.save()
-        logger.info(
-            f"Voice clone created and saved for creator {creator.name} ({creator.id}), voice id: {voice_id}"
-        )
-        return result
-    else:
-        raise Exception(
-            f"Voice clone API succeeded but no id returned for creator {creator.name} ({creator.id})"
-        )
-
-
-@shared_task(acks_late=True)
-def delete_cartesia_voice(voice_id: str):
-    """
-    Deletes a Cartesia voice by its ID using the Cartesia API.
-    Logs any errors that occur.
-    """
-    url = f"https://api.cartesia.ai/voices/{voice_id}"
-    headers = {
-        "Cartesia-Version": "2025-04-16",
-        "Authorization": f"Bearer {settings.CARTESIA_API_KEY}",
-    }
-    try:
-        response = requests.delete(url, headers=headers)
-        response.raise_for_status()
-        logger.info(f"Successfully deleted Cartesia voice {voice_id}")
-    except Exception as e:
-        logger.error(f"Failed to delete Cartesia voice {voice_id}: {e}")
-        if hasattr(e, "response") and e.response is not None:
-            logger.error(f"Response content: {e.response.text}")
-        return None
+    creator.cartesia_voice_id = voice_id
+    creator.save()
+    logger.info(
+        f"Voice clone created and saved for creator {creator.name} ({creator.id}), voice id: {voice_id}"
+    )

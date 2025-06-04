@@ -41,13 +41,6 @@ class Creator(models.Model):
 
     video_mp4_upload_to = "booth/creators/videos"
 
-    def delete(self, *args, **kwargs):
-        if self.cartesia_voice_id:
-            from .tasks import delete_cartesia_voice  # Lazy import
-
-            delete_cartesia_voice.delay(self.cartesia_voice_id)
-        super().delete(*args, **kwargs)
-
     @property
     def public_video_url(self):
         cache_key = f"creator_public_video_url_{self.id}"

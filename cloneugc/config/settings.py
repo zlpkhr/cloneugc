@@ -228,11 +228,6 @@ CACHES = {
 CELERY_BROKER_URL = os.getenv("REDIS_URL")
 
 
-# Cartesia
-
-CARTESIA_API_KEY = getsecretkey("cartesia-api-key")
-
-
 # Fal
 
 FAL_API_KEY = getsecretkey("fal-api-key")
