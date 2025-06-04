@@ -10,6 +10,9 @@ def material_symbols(request):
                     "share",
                     "check_circle",
                     "person_add",
+                    "pause",
+                    "voice_selection",
+                    "mic"
                 ]
             )
         )
