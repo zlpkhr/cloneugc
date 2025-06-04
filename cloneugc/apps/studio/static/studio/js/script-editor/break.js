@@ -1,6 +1,6 @@
 import {
-  mergeAttributes,
   Node,
+  mergeAttributes,
 } from "https://cdn.jsdelivr.net/npm/@tiptap/core@2.12.0/+esm";
 
 function parseTime(value) {
@@ -90,7 +90,7 @@ const Break = Node.create({
       mergeAttributes(HTMLAttributes, {
         "data-type": this.name,
         class:
-          "rounded-sm bg-stone-100 px-px font-medium text-black outline-1 outline-black/20",
+          "rounded-sm bg-stone-100 px-px font-medium text-black outline-1 outline-black/20 [&:is(.ProseMirror-selectednode)]:outline-2 [&:is(.ProseMirror-selectednode)]:outline-pink-800",
       }),
       formatTime(node.attrs.time),
     ];
