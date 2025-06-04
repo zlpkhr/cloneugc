@@ -12,6 +12,7 @@
       }
     }
   </script>
+  <script type="module" src="{% static 'studio/js/script-editor.js' %}"></script>
   <script type="module" src="{% static 'studio/js/ugc-form.js' %}"></script>
 {% endblock %}
 
@@ -46,6 +47,7 @@
             </div>
           </div>
           <textarea id="script" name="script" class="form-textarea mt-4 w-full min-h-64" required></textarea>
+          <div id="script-editor" class="mt-4"></div>
           <p class="text-base text-stone-500 mt-2">
             Add punctuation where appropriate. Use “-” to indicate pauses, and use “dot” instead of “.” in URLs. Use two question marks for questions, avoid using quotation marks, and put a space before a question mark.
           </p>
