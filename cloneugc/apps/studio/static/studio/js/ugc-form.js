@@ -1,4 +1,5 @@
 import { previewAudio } from "studio/preview-audio";
+import { prepareScript } from "studio/prepare-script";
 
 {
   const creatorInput = document.querySelector("#creator-input");
@@ -23,7 +24,7 @@ import { previewAudio } from "studio/preview-audio";
 
 {
   const prepareScriptTrigger = document.querySelector(
-    "#prepare-script-trigger",
+    "#prepare-script-trigger"
   );
   const scriptEl = document.querySelector("#script");
 
@@ -31,28 +32,15 @@ import { previewAudio } from "studio/preview-audio";
     scriptEl.disabled = true;
     prepareScriptTrigger.disabled = true;
 
+    if (scriptEl.value.length === 0) {
+      alert("Enter a script first.");
+      return;
+    }
+
     try {
-      if (scriptEl.value.length === 0) {
-        alert("Enter a script first.");
-        return;
-      }
+      const preparedScript = await prepareScript(scriptEl.value);
 
-      const res = await fetch("/studio/prepare-script/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ script: scriptEl.value }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Prepare script request failed.", {
-          cause: res,
-        });
-      }
-
-      const data = await res.json();
-      scriptEl.value = data.preparedScript;
+      scriptEl.value = preparedScript;
     } catch (error) {
       console.error("Failed to prepare script:", error);
       alert("Failed to prepare the script. Try again or contact support.");

@@ -5,14 +5,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_POST
 from django.views.generic.edit import CreateView
 
 from apps.booth.models import Creator
 from apps.voicecloner import default_voicecloner
 
 from .ai import format_sonic_text
-from .forms import PreviewAudioForm, UgcForm
+from .forms import UgcForm
 from .models import Ugc
 from .tasks import create_ugc_video
 
