@@ -60,16 +60,24 @@ def prepare_script(request: HttpRequest):
 
 
 @csrf_exempt
-@require_GET
+@require_POST
 @login_required
 def preview_audio(request: HttpRequest):
-    form = PreviewAudioForm(request.GET)
+    payload = json.loads(request.body)
 
-    if not form.is_valid():
-        return JsonResponse({"errors": form.errors}, status=422)
+    creator_id = payload.get("creatorId")
+    text = payload.get("text")
 
-    creator_id = form.cleaned_data["creator_id"]
-    text = form.cleaned_data["text"]
+    validation_errs = []
+
+    if not creator_id:
+        validation_errs.append("Creator ID is required.")
+
+    if not text:
+        validation_errs.append("Text is required.")
+
+    if validation_errs:
+        return JsonResponse({"errors": validation_errs}, status=422)
 
     try:
         creator = Creator.objects.get(id=creator_id)
