@@ -11,7 +11,6 @@ from django.views.generic.edit import CreateView
 from apps.booth.models import Creator
 from apps.voicecloner import default_voicecloner
 
-from .ai import format_sonic_text
 from .forms import UgcForm
 from .models import Ugc
 from .tasks import create_ugc_video
@@ -54,7 +53,7 @@ def prepare_script(request: HttpRequest):
     if len(script) == 0:
         return JsonResponse({"error": "A script is required."}, status=422)
 
-    prepared_script = format_sonic_text(script)
+    prepared_script = default_voicecloner.format_text(script)
 
     return JsonResponse({"preparedScript": prepared_script})
 

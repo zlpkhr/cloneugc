@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "apps.account",
     "apps.home",
     "apps.notion",
+    "apps.llm",
     "apps.voicecloner",
 ]
 
@@ -233,10 +234,16 @@ CELERY_BROKER_URL = os.getenv("REDIS_URL")
 FAL_API_KEY = getsecretkey("fal-api-key")
 
 
-# OpenAI
+# LLM
 
-OPENAI_API_KEY = getsecretkey("openai-api-key")
-
+LLM = {
+    "default": {
+        "provider": "openai",
+        "options": {
+            "api_key": getsecretkey("openai-api-key"),
+        },
+    },
+}
 
 # Notion
 
@@ -257,6 +264,7 @@ VOICE_CLONERS = {
         "provider": "cartesia",
         "options": {
             "api_key": getsecretkey("cartesia-api-key"),
+            "llm": "apps.llm.default_llm",
         },
     },
 }
