@@ -10,7 +10,7 @@ new Editor({
   element: document.querySelector("#script-editor"),
   extensions: [Document, Paragraph, Text, Break, Spell, History],
   content:
-    '<p>Start typing your script here... Use <spell>Cmd+Shift+S</spell> for spell mode and <span data-type="break" data-time="500ms"></span> Cmd+Shift+B for breaks.</p>',
+    '<p>Start typing your script here... Use <span data-type="spell">Cmd+Shift+S</span> for spell mode and <span data-type="break" data-time="500ms"></span> Cmd+Shift+B for breaks.</p>',
   onCreate: ({ editor }) => {
     const textarea = document.querySelector("#script");
     textarea.value = editor.getText();
