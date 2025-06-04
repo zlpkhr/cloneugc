@@ -68,10 +68,10 @@ const Break = Node.create({
   addAttributes() {
     return {
       time: {
-        parseHTML: (element) => parseTime(element.getAttribute("time")),
+        parseHTML: (element) => parseTime(element.getAttribute("data-time")),
         renderHTML: (attributes) => {
           return {
-            time: serializeTime(attributes.time),
+            "data-time": serializeTime(attributes.time),
           };
         },
       },
@@ -80,14 +80,15 @@ const Break = Node.create({
   parseHTML() {
     return [
       {
-        tag: "break",
+        tag: `span[data-type="${this.name}"]`,
       },
     ];
   },
   renderHTML({ node, HTMLAttributes }) {
     return [
-      "break",
+      "span",
       mergeAttributes(HTMLAttributes, {
+        "data-type": this.name,
         class:
           "rounded-sm bg-stone-100 px-px font-medium text-black outline-1 outline-black/20",
       }),
