@@ -13,7 +13,7 @@ export async function previewAudio(creatorId, text) {
 
       throw new AggregateError(
         data.errors,
-        "Preview audio request has failed."
+        "Preview audio request has failed.",
       );
     }
 
