@@ -22,18 +22,9 @@ const Spell = Mark.create({
       0,
     ];
   },
-  addCommands() {
-    return {
-      toggleSpell:
-        () =>
-        ({ commands }) => {
-          return commands.toggleMark(this.name);
-        },
-    };
-  },
   addKeyboardShortcuts() {
     return {
-      "Mod-Shift-s": () => this.editor.commands.toggleSpell(),
+      "Mod-Shift-s": () => this.editor.commands.toggleMark(this.name),
     };
   },
 });
