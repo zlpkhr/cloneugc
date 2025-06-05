@@ -8,6 +8,10 @@
     {
       "imports": {
         "@tiptap/core": "https://cdn.jsdelivr.net/npm/@tiptap/core@2.12.0/+esm",
+        "@tiptap/extension-document": "https://cdn.jsdelivr.net/npm/@tiptap/extension-document@2.12.0/+esm",
+        "@tiptap/extension-history": "https://cdn.jsdelivr.net/npm/@tiptap/extension-history@2.12.0/+esm",
+        "@tiptap/extension-paragraph": "https://cdn.jsdelivr.net/npm/@tiptap/extension-paragraph@2.12.0/+esm",
+        "@tiptap/extension-text": "https://cdn.jsdelivr.net/npm/@tiptap/extension-text@2.12.0/+esm",
         "studio/preview-speech": "{% static 'studio/js/preview-speech.js' %}",
         "studio/prepare-script": "{% static 'studio/js/prepare-script.js' %}",
         "studio/script-editor/break": "{% static 'studio/js/script-editor/break.js' %}",
@@ -49,7 +53,7 @@
               <button id="preview-speech-trigger" type="button" class="button-surface">Preview Speech</button>
             </div>
           </div>
-          <textarea id="script" name="script" class="form-textarea mt-4 w-full min-h-64" required></textarea>
+          <textarea name="script" hidden required></textarea>
           <div id="script-editor" class="mt-4"></div>
           <p class="text-base text-stone-500 mt-2">
             Add punctuation where appropriate. Use “-” to indicate pauses, and use “dot” instead of “.” in URLs. Use two question marks for questions, avoid using quotation marks, and put a space before a question mark.

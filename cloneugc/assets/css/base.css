@@ -19,28 +19,6 @@
     user-select: none;
   }
 
-  .form-textarea {
-    background-color: var(--color-white);
-    border: 1px solid --alpha(var(--color-black) / 20%);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-xs);
-    font-size: var(--text-lg);
-    font-weight: 500;
-    line-height: var(--text-lg--line-height);
-    padding: --spacing(3);
-
-    &:focus {
-      outline-color: var(--color-pink-700);
-    }
-
-    &:disabled {
-      background-color: var(--color-stone-100);
-      border-color: --alpha(var(--color-black) / 10%);
-      color: var(--color-stone-500);
-      box-shadow: none;
-    }
-  }
-
   .button {
     background-color: var(--color-pink-700);
     color: var(--color-white);
@@ -98,6 +76,8 @@
   }
 }
 
+@custom-variant content-editable (&[contenteditable="true"]);
+@custom-variant content-noneditable (&[contenteditable="false"]);
 @custom-variant tp-node-selected (&.ProseMirror-selectednode);
 
 .material-symbols-rounded {

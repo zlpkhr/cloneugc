@@ -1,10 +1,8 @@
-import {
-  Mark,
-  mergeAttributes,
-} from "https://cdn.jsdelivr.net/npm/@tiptap/core@2.12.0/+esm";
+import { Mark, mergeAttributes } from "@tiptap/core";
 
 const Spell = Mark.create({
   name: "spell",
+  exitable: true,
   parseHTML() {
     return [
       {

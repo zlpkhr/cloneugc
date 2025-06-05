@@ -1,23 +1,21 @@
-import { Editor } from "https://cdn.jsdelivr.net/npm/@tiptap/core@2.12.0/+esm";
-import Document from "https://cdn.jsdelivr.net/npm/@tiptap/extension-document@2.12.0/+esm";
-import History from "https://cdn.jsdelivr.net/npm/@tiptap/extension-history@2.12.0/+esm";
-import Paragraph from "https://cdn.jsdelivr.net/npm/@tiptap/extension-paragraph@2.12.0/+esm";
-import Text from "https://cdn.jsdelivr.net/npm/@tiptap/extension-text@2.12.0/+esm";
+import { Editor } from "@tiptap/core";
+import Document from "@tiptap/extension-document";
+import History from "@tiptap/extension-history";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
 import Break from "studio/script-editor/break";
 import Spell from "studio/script-editor/spell";
 
 new Editor({
   element: document.querySelector("#script-editor"),
-  extensions: [Document, Paragraph, Text, Break, Spell, History],
-  content:
-    '<p>Start typing your script here... Use <span data-type="spell">Cmd+Shift+S</span> for spell mode and <span data-type="break" data-duration="0.5">0.5s</span> Cmd+Shift+B for breaks.</p>',
-  onCreate: ({ editor }) => {
-    const textarea = document.querySelector("#script");
-    textarea.value = editor.getText();
+  extensions: [Document, Text, Paragraph, Break, Spell, History],
+  editorProps: {
+    attributes: {
+      class:
+        "bg-white border border-black/20 rounded-md text-lg font-medium p-3 focus:outline-pink-700 content-noneditable:bg-stone-100 content-noneditable:text-stone-500",
+    },
   },
   onUpdate: ({ editor }) => {
-    console.log(editor.getHTML())
-    const textarea = document.querySelector("#script");
-    textarea.value = editor.getText();
+    console.log(editor.getHTML());
   },
 });
