@@ -112,9 +112,12 @@ class Cartesia(VoiceCloner):
         return re.sub(r"(?<!\?)\?(?!\?)", "??", text)
 
     def insert_breaks(self, text: str) -> str:
-        # Insert <break /> after exclamation marks at the end of sentences, but not if at end of text
-        time = round(random.uniform(0.1, 0.3), 2)
-        return re.sub(r"!(?=[\s\n](?!$))", rf'! <break time="{time}s" />', text)
+        # Insert <break /> after exclamation marks at the end of sentences, but not if at end of text,
+        # and only if there is not already a <break ...> tag after the exclamation mark.
+        time = round(random.uniform(100, 300))
+        # Match ! that is not followed by optional whitespace and a <break
+        pattern = r"!(?=[\s\n](?!<break\b)(?!$))"
+        return re.sub(pattern, rf'! <break time="{time}ms" />', text)
 
 
 providers = {

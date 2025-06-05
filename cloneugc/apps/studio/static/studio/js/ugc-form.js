@@ -38,13 +38,36 @@ prepareScriptTrigger.addEventListener("click", async () => {
 
   if (scriptEl.value.length === 0) {
     alert("Enter a script first.");
+    scriptEl.disabled = false;
+    prepareScriptTrigger.disabled = false;
     return;
   }
 
   try {
     const preparedScript = await prepareScript(scriptEl.value);
 
-    scriptEl.value = preparedScript;
+    function convertScriptToHTML(script) {
+      return (
+        "<p>" +
+        script
+          .replace(/<break time=\"(\d+)ms\" \/>/g, (match, ms) => {
+            let seconds = (parseInt(ms, 10) / 1000)
+              .toFixed(1)
+              .replace(/\.0$/, "");
+            return `<span data-duration="${seconds}" data-type="break">${seconds}s</span>`;
+          })
+          .replace(/<spell>(.*?)<\/spell>/g, (match, content) => {
+            return `<span data-type="spell">${content}</span>`;
+          })
+          .replace(/\"/g, '"')
+          .replace(/^"|"$/g, "") +
+        "</p>"
+      );
+    }
+
+    const outputHTML = convertScriptToHTML(preparedScript);
+
+    editor.commands.setContent(outputHTML);
   } catch (error) {
     console.error("Failed to prepare script:", error);
     alert("Failed to prepare the script. Try again or contact support.");

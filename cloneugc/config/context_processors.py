@@ -12,7 +12,7 @@ def material_symbols(request):
                     "person_add",
                     "pause",
                     "voice_selection",
-                    "mic"
+                    "mic",
                 ]
             )
         )
