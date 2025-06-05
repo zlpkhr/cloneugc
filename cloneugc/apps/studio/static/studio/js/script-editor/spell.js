@@ -1,4 +1,5 @@
 import { Mark, mergeAttributes } from "@tiptap/core";
+import Text from "@tiptap/extension-text";
 
 const Spell = Mark.create({
   name: "spell",
@@ -24,6 +25,14 @@ const Spell = Mark.create({
     return {
       "Mod-Shift-s": () => this.editor.commands.toggleMark(this.name),
     };
+  },
+});
+
+export const ScriptText = Text.extend({
+  renderText({ node }) {
+    const hasSpellMark = node.marks.some((mark) => mark.type.name === "spell");
+
+    return hasSpellMark ? `<spell>${node.text}</spell>` : node.text;
   },
 });
 

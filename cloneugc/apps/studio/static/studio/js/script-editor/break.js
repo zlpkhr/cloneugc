@@ -37,6 +37,9 @@ const Break = Node.create({
       },
     ];
   },
+  renderText({ node }) {
+    return `<break time="${toTime(node.attrs.duration)}" />`;
+  },
   addCommands() {
     return {
       insertBreak:
@@ -96,4 +99,12 @@ function formatDuration(value) {
   }
 
   return value.toFixed(1) + "s";
+}
+
+function toTime(duration) {
+  if (duration < 1) {
+    return Math.round(duration * 1000) + "ms";
+  }
+
+  return Math.round(duration) + "s";
 }
