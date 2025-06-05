@@ -30,33 +30,29 @@ for (const video of creatorVideos) {
   });
 }
 
-{
-  const prepareScriptTrigger = document.querySelector(
-    "#prepare-script-trigger",
-  );
+const prepareScriptTrigger = document.querySelector("#prepare-script-trigger");
 
-  prepareScriptTrigger.addEventListener("click", async () => {
-    scriptEl.disabled = true;
-    prepareScriptTrigger.disabled = true;
+prepareScriptTrigger.addEventListener("click", async () => {
+  scriptEl.disabled = true;
+  prepareScriptTrigger.disabled = true;
 
-    if (scriptEl.value.length === 0) {
-      alert("Enter a script first.");
-      return;
-    }
+  if (scriptEl.value.length === 0) {
+    alert("Enter a script first.");
+    return;
+  }
 
-    try {
-      const preparedScript = await prepareScript(scriptEl.value);
+  try {
+    const preparedScript = await prepareScript(scriptEl.value);
 
-      scriptEl.value = preparedScript;
-    } catch (error) {
-      console.error("Failed to prepare script:", error);
-      alert("Failed to prepare the script. Try again or contact support.");
-    } finally {
-      scriptEl.disabled = false;
-      prepareScriptTrigger.disabled = false;
-    }
-  });
-}
+    scriptEl.value = preparedScript;
+  } catch (error) {
+    console.error("Failed to prepare script:", error);
+    alert("Failed to prepare the script. Try again or contact support.");
+  } finally {
+    scriptEl.disabled = false;
+    prepareScriptTrigger.disabled = false;
+  }
+});
 
 const previewSpeechTrigger = document.querySelector("#preview-speech-trigger");
 
