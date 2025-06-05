@@ -1,81 +1,34 @@
-import {
-  Node,
-  mergeAttributes,
-} from "https://cdn.jsdelivr.net/npm/@tiptap/core@2.12.0/+esm";
-
-function parseTime(value) {
-  if (typeof value !== "string") {
-    throw new Error("Time value must be a string.");
-  }
-
-  const match = value.match(/^(\d+)(ms|s)$/);
-
-  if (!match) {
-    throw new Error("Invalid time value.");
-  }
-
-  const number = parseFloat(match.at(1));
-  const unit = match.at(2);
-
-  if (isNaN(number)) {
-    throw new Error("Invalid time value.");
-  }
-
-  if (unit === "ms") {
-    return number / 1000;
-  }
-
-  return number;
-}
-
-function serializeTime(time) {
-  if (time < 1) {
-    return Math.round(time * 1000) + "ms";
-  }
-
-  return Math.round(time) + "s";
-}
-
-function isValidTime(time) {
-  if (isNaN(time)) {
-    return false;
-  }
-
-  if (time < 0) {
-    return false;
-  }
-
-  if (time > 10) {
-    return false;
-  }
-
-  return true;
-}
-
-function formatTime(time) {
-  if (Number.isInteger(time)) {
-    return time + "s";
-  }
-
-  return time.toFixed(1) + "s";
-}
+import { Node, mergeAttributes } from "@tiptap/core";
 
 const Break = Node.create({
   name: "break",
-  group: "inline",
   inline: true,
+  group: "inline",
   atom: true,
   addAttributes() {
     return {
-      time: {
-        parseHTML: (element) => parseTime(element.getAttribute("data-time")),
-        renderHTML: (attributes) => {
+      duration: {
+        renderHTML(attributes) {
           return {
-            "data-time": serializeTime(attributes.time),
+            "data-duration": attributes.duration,
           };
+        },
+        parseHTML(element) {
+          return parseFloat(element.getAttribute("data-duration"));
         },
       },
     };
+  },
+  renderHTML({ HTMLAttributes, node }) {
+    return [
+      "span",
+      mergeAttributes(HTMLAttributes, {
+        "data-type": this.name,
+        class:
+          "rounded-sm bg-stone-100 px-px font-medium text-black outline-1 outline-black/20 tp-node-selected:outline-2 tp-node-selected:outline-pink-800",
+      }),
+      formatDuration(node.attrs.duration),
+    ];
   },
   parseHTML() {
     return [
@@ -84,28 +37,14 @@ const Break = Node.create({
       },
     ];
   },
-  renderHTML({ node, HTMLAttributes }) {
-    return [
-      "span",
-      mergeAttributes(HTMLAttributes, {
-        "data-type": this.name,
-        class:
-          "rounded-sm bg-stone-100 px-px font-medium text-black outline-1 outline-black/20 [&:is(.ProseMirror-selectednode)]:outline-2 [&:is(.ProseMirror-selectednode)]:outline-pink-800",
-      }),
-      formatTime(node.attrs.time),
-    ];
-  },
-  renderText({ node }) {
-    return `<break time="${serializeTime(node.attrs.time)}" />`;
-  },
   addCommands() {
     return {
       insertBreak:
-        (time) =>
+        (duration) =>
         ({ commands }) => {
           return commands.insertContent({
             type: this.name,
-            attrs: { time },
+            attrs: { duration },
           });
         },
     };
@@ -113,20 +52,20 @@ const Break = Node.create({
   addKeyboardShortcuts() {
     return {
       "Mod-Shift-b": () => {
-        const input = prompt("Break duration (0.1 to 10):", "1");
+        const input = prompt("Break duration (0.1 to 10 seconds):", "1");
 
         if (!input) {
           return true; // Prevent browser's default shortcut
         }
 
-        const time = parseFloat(input.trim());
+        const duration = parseFloat(input.trim());
 
-        if (!isValidTime(time)) {
-          alert("Invalid time value.");
+        if (!isValidDuration(duration)) {
+          alert("Invalid duration.");
           return true;
         }
 
-        this.editor.commands.insertBreak(time);
+        this.editor.commands.insertBreak(duration);
         return true;
       },
     };
@@ -134,3 +73,27 @@ const Break = Node.create({
 });
 
 export default Break;
+
+function isValidDuration(value) {
+  if (isNaN(value)) {
+    return false;
+  }
+
+  if (value < 0) {
+    return false;
+  }
+
+  if (value > 10) {
+    return false;
+  }
+
+  return true;
+}
+
+function formatDuration(value) {
+  if (Number.isInteger(value)) {
+    return value + "s";
+  }
+
+  return value.toFixed(1) + "s";
+}
