@@ -1,7 +1,7 @@
 class Actor < ApplicationRecord
   has_one_attached :clip
 
-  enum gender: { male: "male", female: "female" }
+  enum gender: { male: "Male", female: "Female" }
   enum ethnicity: {
     asian: "Asian",
     black: "Black",
