@@ -1,3 +1,5 @@
+require "open3"
+
 class NormalizeActorClipJob < ApplicationJob
   queue_as :default
 
@@ -22,16 +24,17 @@ class NormalizeActorClipJob < ApplicationJob
 
       command = build_normalize_command(original_path, processed_path)
 
-      success = system(command)
+      stdout, stderr, status = Open3.capture3(command)
+      Rails.logger.debug { "ffmpeg output for Actor##{actor.id}:\nSTDOUT:\n#{stdout}\nSTDERR:\n#{stderr}" }
 
-      if success && File.exist?(processed_path)
+      if status.success? && File.exist?(processed_path)
         actor.clip.attach(
           io: File.open(processed_path),
           filename: normalized_filename,
           content_type: "video/mp4"
         )
       else
-        Rails.logger.error "ffmpeg command failed for Actor #{actor.id}"
+        Rails.logger.error { "ffmpeg command failed for Actor##{actor.id}:\nSTDOUT:\n#{stdout}\nSTDERR:\n#{stderr}" }
       end
     end
   end
