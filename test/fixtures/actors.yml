@@ -1,0 +1,24 @@
+valid_male:
+  gender: male
+  ethnicity: asian
+  age_group: young_adult
+
+valid_female:
+  gender: female
+  ethnicity: black
+  age_group: middle_aged
+
+invalid_gender:
+  gender: other
+  ethnicity: white
+  age_group: senior
+
+invalid_ethnicity:
+  gender: male
+  ethnicity: martian
+  age_group: young_adult
+
+invalid_age_group:
+  gender: female
+  ethnicity: hispanic
+  age_group: child 

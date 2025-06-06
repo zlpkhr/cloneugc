@@ -1,0 +1,24 @@
+valid_male_clip:
+  name: clip
+  record: valid_male (Actor)
+  blob: azamat_mp4_blob
+
+valid_female_clip:
+  name: clip
+  record: valid_female (Actor)
+  blob: azamat_mp4_blob
+
+invalid_gender_clip:
+  name: clip
+  record: invalid_gender (Actor)
+  blob: azamat_mp4_blob
+
+invalid_ethnicity_clip:
+  name: clip
+  record: invalid_ethnicity (Actor)
+  blob: azamat_mp4_blob
+
+invalid_age_group_clip:
+  name: clip
+  record: invalid_age_group (Actor)
+  blob: azamat_mp4_blob

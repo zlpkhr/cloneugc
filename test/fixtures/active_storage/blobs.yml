@@ -1,0 +1,1 @@
+azamat_mp4_blob: <%= ActiveStorage::FixtureSet.blob filename: "azamat.mp4", service_name: "test_fixtures" %>

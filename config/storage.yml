@@ -11,6 +11,10 @@ amazon_dev:
   region: eu-west-3
   bucket: cloneugc-dev-20250605093742417300000001
 
+test_fixtures:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage_fixtures") %>
+
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
