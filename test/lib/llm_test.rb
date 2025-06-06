@@ -1,9 +1,8 @@
-require_relative "../../lib/llm"
-require_relative "../../lib/secret_manager"
+require "test_helper"
 
-class LLMTest < ActiveSupport::TestCase
+class LlmTest < ActiveSupport::TestCase
   def setup
-    @secrets = ::SecretManager::Providers::AWS.new(
+    @secrets = SecretManager::Providers::AWS.new(
       region: "us-east-1"
     )
   end
@@ -13,7 +12,7 @@ class LLMTest < ActiveSupport::TestCase
     prompt = "Extract person attributes from the image."
     schema = { "type" => "object" }
     expected_result = { "name" => "John Doe", "age" => 30 }
-    mock = ::LLM::Providers::Mock.new(
+    mock = Llm::Providers::Mock.new(
       "analyze_image" => {
         [ image_url, prompt, schema ] => expected_result
       }
@@ -26,7 +25,7 @@ class LLMTest < ActiveSupport::TestCase
     image_url = "http://example.com/image.jpg"
     prompt = "Extract person attributes from the image."
     schema = { "type" => "object" }
-    mock = ::LLM::Providers::Mock.new(
+    mock = Llm::Providers::Mock.new(
       "analyze_image" => {
         [ image_url, prompt, schema ] => { "name" => "John Doe", "age" => 30 }
       }
@@ -41,12 +40,12 @@ class LLMTest < ActiveSupport::TestCase
     prompt = "Extract person attributes from the image."
     schema = JSON.parse(File.read(File.join(__dir__, "../fixtures/files/person_attributes.json")))
     expected_result = { "gender" => "male", "ethnicity" => "asian", "age_group" => "young_adult" }
-    mock_provider = ::LLM::Providers::Mock.new(
+    mock_provider = Llm::Providers::Mock.new(
       "analyze_image" => {
         [ image_url, prompt, schema ] => expected_result
       }
     )
-    llm = ::LLM.new(mock_provider)
+    llm = Llm.new(mock_provider)
     result = llm.extract_person_attributes(image_url)
     assert_equal expected_result, result
   end
@@ -57,7 +56,7 @@ class LLMTest < ActiveSupport::TestCase
     prompt = "Extract person attributes from the image."
     schema = JSON.parse(File.read(File.join(__dir__, "../fixtures/files/person_attributes.json")))
 
-    provider = ::LLM::Providers::OpenAI.new(api_key)
+    provider = Llm::Providers::Openai.new(api_key)
     result = provider.analyze_image(image_url, prompt, schema)
 
     assert_includes schema["schema"]["properties"]["gender"]["enum"], result["gender"]
