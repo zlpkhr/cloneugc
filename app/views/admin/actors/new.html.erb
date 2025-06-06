@@ -1,4 +1,4 @@
 <%= form_with model: @actor, url: admin_actors_path, local: true do |form| %>
-  <%= form.file_field :clip, direct_upload: true %>
+  <%= form.file_field :clip, direct_upload: true, accept: "video/*" %>
   <%= form.submit "Create Actor" %>
 <% end %>

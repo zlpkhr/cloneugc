@@ -20,4 +20,14 @@ class Admin::ActorsControllerTest < ActionDispatch::IntegrationTest
       }
     end
   end
+
+  test "should not create actor with incorrect content type" do
+    assert_no_difference("Actor.count") do
+      post admin_actors_url, params: {
+        actor: {
+          clip: fixture_file_upload(Rails.root.join("test/fixtures/files/simona.jpg"), "image/jpeg")
+        }
+      }
+    end
+  end
 end
