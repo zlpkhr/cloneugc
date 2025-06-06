@@ -1,0 +1,2 @@
+module Admin::ActorsHelper
+end

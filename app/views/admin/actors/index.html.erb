@@ -1,0 +1,10 @@
+<h1 class="font-bold text-4xl mb-8">Actors</h1>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <% @actors.each do |actor| %>
+    <% if actor.clip.attached? %>
+      <%= video_tag url_for(actor.clip), controls: true, class: "w-48 aspect-[9/16] object-cover rounded" %>
+    <% else %>
+      <div class="w-full h-48 flex items-center justify-center bg-gray-200 rounded text-gray-500">No clip</div>
+    <% end %>
+  <% end %>
+</div>
