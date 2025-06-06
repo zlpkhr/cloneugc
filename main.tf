@@ -26,6 +26,10 @@ resource "aws_s3_bucket" "dev_bucket" {
   bucket_prefix = "cloneugc-dev-"
 }
 
+output "dev_bucket_name" {
+  value = aws_s3_bucket.dev_bucket.bucket
+}
+
 resource "aws_s3_bucket_cors_configuration" "dev_bucket" {
   provider = aws.eu-west-3
   bucket   = aws_s3_bucket.dev_bucket.bucket
@@ -36,8 +40,4 @@ resource "aws_s3_bucket_cors_configuration" "dev_bucket" {
     allowed_origins = ["*"]
     max_age_seconds = 3600
   }
-}
-
-output "dev_bucket_name" {
-  value = aws_s3_bucket.dev_bucket.bucket
 }
