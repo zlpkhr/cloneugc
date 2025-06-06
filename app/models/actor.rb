@@ -1,6 +1,20 @@
 class Actor < ApplicationRecord
   has_one_attached :clip
 
+  enum gender: { male: "male", female: "female" }
+  enum ethnicity: {
+    asian: "Asian",
+    black: "Black",
+    white: "White",
+    hispanic: "Hispanic",
+    middle_eastern: "Middle Eastern"
+  }
+  enum age_group: {
+    young_adult: "Young Adult",
+    middle_aged: "Middle Aged",
+    senior: "Senior"
+  }
+
   validates :clip,
     attached: true,
     content_type: { with: /\Avideo\/.*\z/ },
