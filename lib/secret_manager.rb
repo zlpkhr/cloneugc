@@ -1,18 +1,7 @@
 require "aws-sdk-secretsmanager"
 
-# A collection of providers for fetching secrets.
-#
-# ## Usage
-#   # For AWS:
-#   # SECRET_MANAGER = SecretManager::Providers::AWS.new(region: "us-east-1")
-#
-#   # For testing with the mock provider:
-#   # SECRET_MANAGER = SecretManager::Providers::Mock.new(
-#   #   secrets: { "my/test/secret" => "super_secret_value" }
-#   # )
 module SecretManager
   module Providers
-    # AWS Secrets Manager provider.
     class AWS
       def initialize(options)
         @logger = options[:logger]
@@ -34,7 +23,6 @@ module SecretManager
       end
     end
 
-    # Mock provider for testing.
     class Mock
       def initialize(options)
         @secrets = options[:secrets] || {}
