@@ -1,42 +1,28 @@
 require "aws-sdk-secretsmanager"
 
-# A simple client for fetching secrets from different providers.
+# A collection of providers for fetching secrets.
 #
 # ## Usage
+#   # For AWS:
+#   # SECRET_MANAGER = SecretManager::Providers::AWS.new(region: "us-east-1")
 #
-#   # In a Rails initializer (e.g., config/initializers/secret_manager.rb)
-#
-#   # For development/production with AWS
-#   provider = SecretManager::Providers::AWS.new(region: ENV.fetch('AWS_REGION', 'us-east-1'))
-#   SECRET_MANAGER = SecretManager.new(provider)
-#
-#   # For testing with the Mock provider
-#   # provider = SecretManager::Providers::Mock.new(
-#   #   secrets: { 'my/test/secret' => 'super_secret_value' }
+#   # For testing with the mock provider:
+#   # SECRET_MANAGER = SecretManager::Providers::Mock.new(
+#   #   secrets: { "my/test/secret" => "super_secret_value" }
 #   # )
-#   # SECRET_MANAGER = SecretManager.new(provider)
-#
-class SecretManager
-  attr_reader :provider
-
-  def initialize(provider)
-    @provider = provider
-  end
-
-  # Fetches a secret's value as a plaintext string.
-  def get_plaintext(secret_name)
-    provider.get_plaintext(secret_name)
-  end
-
-  # --- Providers ---
+module SecretManager
   module Providers
     # AWS Secrets Manager provider.
     class AWS
       def initialize(options)
-        region = options[:region]
-        raise ArgumentError, "AWS region is required." unless region
-        @aws_client = ::Aws::SecretsManager::Client.new(region: region)
         @logger = options[:logger]
+        @aws_client = options[:client]
+
+        if @aws_client.nil?
+          region = options[:region]
+          raise ArgumentError, "Either a region or an AWS client must be provided." unless region
+          @aws_client = ::Aws::SecretsManager::Client.new(region: region)
+        end
       end
 
       def get_plaintext(secret_name)
