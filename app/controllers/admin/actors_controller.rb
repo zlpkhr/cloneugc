@@ -10,6 +10,7 @@ class Admin::ActorsController < ApplicationController
   def create
     @actor = Actor.new(actor_params)
     if @actor.save
+      NormalizeActorClipJob.perform_later(@actor.id)
       redirect_to admin_actors_path, notice: "Actor created successfully"
     else
       render :new
