@@ -44,6 +44,8 @@ gem "thruster", require: false
 
 gem "aws-sdk-s3", require: false
 
+gem "aws-sdk-secretsmanager"
+
 gem "active_storage_validations"
 
 group :development, :test do
