@@ -22,3 +22,8 @@ invalid_age_group_clip:
   name: clip
   record: invalid_age_group (Actor)
   blob: azamat_mp4_blob
+
+azamat_clip:
+  name: clip
+  record: azamat (Actor)
+  blob: azamat_mp4_blob_s3

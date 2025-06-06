@@ -21,4 +21,8 @@ invalid_ethnicity:
 invalid_age_group:
   gender: female
   ethnicity: hispanic
-  age_group: child 
+  age_group: child
+
+azamat: {}
+
+azamat_no_clip: {}

@@ -33,6 +33,7 @@ class NormalizeActorClipJob < ApplicationJob
           filename: normalized_filename,
           content_type: "video/mp4"
         )
+        ExtractActorAttributesJob.perform_later(actor.id)
       else
         Rails.logger.error { "ffmpeg command failed for Actor##{actor.id}:\nSTDOUT:\n#{stdout}\nSTDERR:\n#{stderr}" }
       end
