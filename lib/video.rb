@@ -19,15 +19,15 @@ class Video
 
   private
 
-  def metadata
-    @metadata ||= begin
-      command = "ffprobe -v quiet -print_format json -show_format #{Shellwords.escape(path)}"
-      stdout, _stderr, status = Open3.capture3(command)
-      status.success? ? JSON.parse(stdout) : {}
+    def metadata
+      @metadata ||= begin
+        command = "ffprobe -v quiet -print_format json -show_format #{Shellwords.escape(path)}"
+        stdout, _stderr, status = Open3.capture3(command)
+        status.success? ? JSON.parse(stdout) : {}
+      end
     end
-  end
 
-  def major_brand
-    metadata.dig("format", "tags", "major_brand").to_s.strip
-  end
+    def major_brand
+      metadata.dig("format", "tags", "major_brand").to_s.strip
+    end
 end

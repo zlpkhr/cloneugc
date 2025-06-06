@@ -39,20 +39,20 @@ class Llm::Providers::Openai
 
   private
 
-  def aggregate_output_text(response)
-    texts = []
+    def aggregate_output_text(response)
+      texts = []
 
-    outputs = response.dig("output") || []
-    outputs.each do |output|
-      if output["type"] == "message"
-        output["content"].each do |content|
-          if content["type"] == "output_text"
-            texts << content["text"]
+      outputs = response.dig("output") || []
+      outputs.each do |output|
+        if output["type"] == "message"
+          output["content"].each do |content|
+            if content["type"] == "output_text"
+              texts << content["text"]
+            end
           end
         end
       end
-    end
 
-    texts.join
-  end
+      texts.join
+    end
 end

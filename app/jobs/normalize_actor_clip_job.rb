@@ -41,7 +41,7 @@ class NormalizeActorClipJob < ApplicationJob
 
   private
 
-  def build_normalize_command(input_path, output_path)
-    "ffmpeg -y -i #{Shellwords.escape(input_path)} -preset fast -crf 23 -c:v libx264 -c:a aac -movflags +faststart #{Shellwords.escape(output_path)}"
-  end
+    def build_normalize_command(input_path, output_path)
+      "ffmpeg -y -i #{Shellwords.escape(input_path)} -preset fast -crf 23 -c:v libx264 -c:a aac -movflags +faststart #{Shellwords.escape(output_path)}"
+    end
 end

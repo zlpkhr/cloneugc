@@ -19,7 +19,7 @@ class Admin::ActorsController < ApplicationController
 
   private
 
-  def actor_params
-    params.require(:actor).permit(:clip)
-  end
+    def actor_params
+      params.require(:actor).permit(:clip)
+    end
 end
