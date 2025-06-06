@@ -1,5 +1,4 @@
 require "test_helper"
-require "secret_manager"
 require "aws-sdk-secretsmanager"
 
 class SecretManagerTest < ActiveSupport::TestCase
