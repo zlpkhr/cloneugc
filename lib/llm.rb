@@ -17,7 +17,7 @@ end
 module LLM::Providers
   class OpenAI
     def initialize(api_key)
-      @oai_client = OpenAI::Client.new(access_token: api_key)
+      @oai_client = ::OpenAI::Client.new(access_token: api_key)
     end
 
     def analyze_image(image_url, prompt, schema)
@@ -35,7 +35,7 @@ module LLM::Providers
             content: [
               {
                 type: "input_image",
-                image_url:
+                image_url: image_url
               },
               {
                 type: "input_text",
