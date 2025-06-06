@@ -1,0 +1,26 @@
+{
+  "name": "person_attributes",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "gender": {
+        "type": "string",
+        "enum": ["male", "female"],
+        "description": "The gender of the person."
+      },
+      "ethnicity": {
+        "type": "string",
+        "enum": ["asian", "black", "white", "hispanic", "middle_eastern"],
+        "description": "The ethnicity of the person."
+      },
+      "age_group": {
+        "type": "string",
+        "enum": ["young_adult", "middle_aged", "senior"],
+        "description": "The age group of the person."
+      }
+    },
+    "required": ["gender", "ethnicity", "age_group"],
+    "additionalProperties": false
+  }
+}
