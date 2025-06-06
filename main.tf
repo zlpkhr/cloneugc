@@ -26,6 +26,18 @@ resource "aws_s3_bucket" "dev_bucket" {
   bucket_prefix = "cloneugc-dev-"
 }
 
+resource "aws_s3_bucket_cors_configuration" "dev_bucket" {
+  provider = aws.eu-west-3
+  bucket   = aws_s3_bucket.dev_bucket.bucket
+
+  cors_rule {
+    allowed_headers = ["Content-Type", "Content-MD5", "Content-Disposition"]
+    allowed_methods = ["PUT"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3600
+  }
+}
+
 output "dev_bucket_name" {
   value = aws_s3_bucket.dev_bucket.bucket
 }
